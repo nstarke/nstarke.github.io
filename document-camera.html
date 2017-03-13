@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html style="width:100%; height:100%;">
+  <head>
+    <title>Document Camera</title>
+  </head>
+  <body onload="loader();" style="width:100%; height:100%;">
+		<video autoplay style="width:100%; height:100%;"></video>
+
+		<script>
+			var errorCallback = function(e) {
+			};
+
+			// Not showing vendor prefixes.
+			function loader(){
+
+				navigator.getUserMedia({video: true, audio: false}, function(localMediaStream) {
+					var video = document.querySelector('video');
+					video.src = window.URL.createObjectURL(localMediaStream);
+					// Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+					// See crbug.com/110938.
+					video.onloadedmetadata = function(e) {
+						// Ready to go. Do some stuff.
+					};
+				}, errorCallback);
+			}
+		</script>
+  </body>
+</html>
