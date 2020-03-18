@@ -1,0 +1,42 @@
+# StarkeBlog
+
+## Blog Posts
+
+* [Linksys EA4500 Device Firmware Decryption](0033-linksys-ea4500-device-firmware-decryption.html)
+* [Dialup Connections in Linux with 56k Modems - Raspberry Pi](0032-dialup-connections-on-linux-raspberry-pi.html)
+* [Buffer Overflow in pppd - CVE-2020-8597](0031-buffer-overflow-in-pppd-cve-2020-8597.html)
+* [Building and Running OMVF in QEMU](0030-building-and-running-omvf-in-qemu.html)
+* [Car Hacking with ScanTool Ecusim 2000](0029-car-hacking-with-ecusim-2000.html)
+* [Netgear Signed TLS Private Key Disclosure](0028-netgear-signed-tls-private-key-disclosure.html)
+* [Python MAC Address Stress Test Script](0027-python-mac-address-stress-test.html)
+* [Resize Ghidra for High DPI Screens](0026-resize-ghidra-for-high-dpi-screens.html)
+* [Rsync Auth Flow Written in Python](0025-rsync-auth-flow-in-python.html)
+* [Change MAC Address Permanently with Ethtool](0024-ethtool-change-mac-address-permanently.html)
+* [YardStick One Setup](0023-yardstick-one-setup.html)
+* [Cisco IOS GDB RSP Debugger Script for PowerPC Models](0022-cisco-ios-gdb-rsp-debugger-script-powerpc.html)
+* [Python Find Information Scripts](0021-python-find-information-scripts.html)
+* [Reversing Raw Binary Firmware Images in Ghidra - Cisco IOS](0020-reversing-raw-binary-firmware-in-ghidra-cisco-ios.html)
+* [How to Extract Netgear CHK Firmware](0019-netgear-extract-chk-firmware.html)
+* [JScrambler Review](0018-jscrambler-review.html)
+* [Dell Precision 7510 BIOS Problems](0017-dell-precision-bios-problem.html)
+* [Connect two XEN VMs via Virtual Serial Cable](0016-connect-two-xen-vms-using-virtual-serial-cable.html)
+* [Windows Process Token Operations](0015-windows-process-operations.html)
+* [Setup Debian PowerPC VM in QEMU](0014-create-debian-powerpc-vm-in-qemu.html)
+* [Setup ARMEL Reverse Engineering Lab in QEMU](0013-setup-armel-reverse-engineering-lab.html)
+* [NodeJS Slowloris Implementation](0012-nodejs-slowloris-implementation.html)
+* [WeMo SOAP Calls Writeup](0011-wemo-soap-calls-writeup.html)
+* [Exploiting JWT in NodeJS](0010-exploit-jwt-nodejs.html)
+* [D-Link DCS 930l IP Camera Writeup](0009-dlink-dcs-930l-writeup.html)
+* [Find all Strings in Source Code with Egrep](0008-find-all-strings-in-source-code.html)
+* [How to Make a Production Android App Debuggable](0007-how-to-make-production-android-app-debuggable.html)
+* [Iowa House Video Segment Grabber](0006-iowa-house-video-grabber-script.html)
+* [Search for Regex with Regex](0005-search-for-regex-with-regex.html)
+* [CSharp Security Vulnerability Egrep Cheatsheet](0004-csharp-security-vulnerability-egrep-cheatsheet.html)
+* [Python Security Vulnerability Egrep Cheatsheet](0003-python-security-vulnerability-egrep-cheatsheet.html)
+* [NodeJS Security Vulnerability Egrep CheatSheet](0002-nodejs-security-vulnerability-egrep-cheatsheet.html)
+* [PHP Security Vulnerability Egrep Cheatsheet](0001-php-security-vulnerability-egrep-cheatsheet.html)
+
+## Contact
+
+* [https://github.com/nstarke](https://github.com/nstarke)
+* [https://twitter.com/nstarke](https://twitter.com/nstarke)

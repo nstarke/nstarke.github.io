@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0032-dialup-connections-on-linux-raspberry-pi.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="dial-up-connections-on-linux">Dial Up Connections on Linux</h1>
+<p>In this tutorial we will detail how to connect two linux hosts via 56k modems.  To do this we will use the following components:</p>
+<ul>
+<li>Two Raspberry Pi's 4 ($35-$55 / each)</li>
+<li>Two Conexant 56k Modems ( <a href="https://www.amazon.com/gp/product/B008RZTJC0/">https://www.amazon.com/gp/product/B008RZTJC0/</a> | $17-$20 / each)</li>
+<li>a RJ-11 splitter( <a href="https://www.amazon.com/Splitter-Duplex-line-Telephone-Adapter/dp/B07WNDZT6Y">https://www.amazon.com/Splitter-Duplex-line-Telephone-Adapter/dp/B07WNDZT6Y</a> | $8-$12)</li>
+<li>A Linksys SPA-2102 ( search ebay for <code>linksys SPA-2102</code> on ebay | $18-$25 )</li>
+<li>Two RJ-11 cables ( should come with the modems )</li>
+</ul>
+<h2 id="wiring-up">Wiring up</h2>
+<p>We need to configure our gear.</p>
+<ul>
+<li>Plug one USB Modem into each Pi</li>
+<li>Plug one end of the RJ-11 cable into each modem</li>
+<li>Plug the other end into the RJ-11 splitter</li>
+<li>Plug the RJ-11 splitter into the SPA-2102</li>
+</ul>
+<h2 id="hardware-configuration">Hardware Configuration</h2>
+<p>The SPA-2102 serves as a &quot;dial-tone generator&quot; for the modems; that is to say the modem RJ-11 lines need voltage and the SPA-2102 supplies that voltage.  <strong>You cannot plug the modems directly into each other.</strong> The modems lack the ability to generate the current necessary for establishing commmunications between themselves.</p>
+<h2 id="software-configuration">Software configuration</h2>
+<p>The modems will show up on the Pis as serial interfaces.  Run <code>dmesg</code> to see more information:</p>
+<pre class="hljs"><code><div>[    1.238294] usb 1-1.4: new full-speed USB device number 3 using xhci_hcd                               
+[    1.390434] usb 1-1.4: New USB device found, idVendor=0572, idProduct=1340, bcdDevice= 1.00            
+[    1.390478] usb 1-1.4: New USB device strings: Mfr=1, Product=2, SerialNumber=3                        
+[    1.390510] usb 1-1.4: Product: USB Modem                                                              
+[    1.390534] usb 1-1.4: Manufacturer: Conexant                                                          
+[    1.390557] usb 1-1.4: SerialNumber: 12345678 
+</div></code></pre>
+<p>On my Pis the modem appeared at <code>/dev/ttyACM0</code>, but your mileage may vary.  We will need to use PPP as the IP layer between the two modems.  We will need to create a &quot;connect&quot; script to pass to pppd so it knows how to handle the modem serial interface.  You can see generic instructions on how to do so here: <a href="http://tldp.org/HOWTO/PPP-HOWTO/x1188.html">http://tldp.org/HOWTO/PPP-HOWTO/x1188.html</a>.</p>
+<p>The connect script I used for the client (connection initiator):</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/sh</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># This is part 2 of the ppp-on script. It will perform the connection</span>
+<span class="hljs-comment"># protocol for the desired connection.</span>
+<span class="hljs-comment">#</span>
+/usr/sbin/chat -v                                                 \
+        TIMEOUT         3                               \
+        ABORT           <span class="hljs-string">'\nBUSY\r'</span>                      \
+        ABORT           <span class="hljs-string">'\nNO ANSWER\r'</span>                 \
+        ABORT           <span class="hljs-string">'\nRINGING\r\n\r\nRINGING\r'</span>    \
+        <span class="hljs-string">''</span>              \rAT                            \
+        <span class="hljs-string">'OK-+++\c-OK'</span>   ATH0                            \
+        TIMEOUT         30                              \
+        OK              ATD \
+        CONNECT         <span class="hljs-string">''</span>                              \
+
+</div></code></pre>
+<p>The connect script I used for the server (connection receiver):</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/sh</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># This is part 2 of the ppp-on script. It will perform the connection</span>
+<span class="hljs-comment"># protocol for the desired connection.</span>
+<span class="hljs-comment">#</span>
+/usr/sbin/chat -v                                                 \
+        TIMEOUT         3                               \
+        ABORT           <span class="hljs-string">'\nBUSY\r'</span>                      \
+        ABORT           <span class="hljs-string">'\nNO ANSWER\r'</span>                 \
+        ABORT           <span class="hljs-string">'\nRINGING\r\n\r\nRINGING\r'</span>    \
+        <span class="hljs-string">''</span>              \rAT                            \
+        <span class="hljs-string">'OK-+++\c-OK'</span>   ATH0                            \
+        TIMEOUT         30                              \
+        OK              ATA                  \
+        CONNECT         <span class="hljs-string">''</span>                              \
+
+</div></code></pre>
+<p>The difference between these two scripts is the second to last line: <code>OK      ATA</code> on the receiver versus <code>OK      ATD</code> on the intiator.</p>
+<p>Copy those scripts onto each Pi as <code>chat.sh</code>.  Make the <code>chat.sh</code> executable using <code>chmod +x chat.sh</code> and then you will be able to run the following commands as root:</p>
+<p>Intiator</p>
+<pre class="hljs"><code><div>pppd /dev/ttyACM0 9600 noauth <span class="hljs-built_in">local</span> lock defaultroute debug nodetach 172.16.1.1:172.16.1.2 ms-dns 8.8.8.8 connect ./chat.sh
+</div></code></pre>
+<p>Receiver:</p>
+<pre class="hljs"><code><div>pppd noauth <span class="hljs-built_in">local</span> lock defaultroute debug nodetach /dev/ttyACM0 connect ./chat.sh
+</div></code></pre>
+<p>The path prefix to the <code>chat.sh</code> binary seems important, so you will need the <code>./</code> in front of <code>chat.sh</code> when you use it in the <code>pppd</code> command</p>
+<p>You should see the ppp connection establish successfully, though it might take up to a minute for the IP link to come up.</p>
+<h2 id="looking-under-the-hood-at-the-modem-connection">Looking under the hood at the modem connection</h2>
+<p>It is possible to send &quot;modem commands&quot; directy to the modem.  A list of semi-standardized commands is available here: <a href="https://en.wikipedia.org/wiki/Hayes_command_set">https://en.wikipedia.org/wiki/Hayes_command_set</a></p>
+<p>If you desire to write commands directly to the modem, I recommend using the <code>cu</code> utility. Install with:</p>
+<pre class="hljs"><code><div>apt install cu
+</div></code></pre>
+<p>You can then establish AT communications sessions with:</p>
+<p>Client:</p>
+<pre class="hljs"><code><div>cu -l /dev/ttyACM0
+Connected.
+ATD
+CONNECT 9600
+
+</div></code></pre>
+<p>Server:</p>
+<pre class="hljs"><code><div>cu -l /dev/ttyACM0
+Connected.
+ATA
+CONNECT 9600
+</div></code></pre>
+<p>Where <code>ATD</code> is the &quot;AT&quot; command run on the client and <code>ATA</code> is the &quot;AT&quot; command run on the server.</p>
+<p>Once you have an &quot;AT&quot; connection established, any input from one terminal will be displayed in the opposite terminal. This is the basis for IP communication over 56k modem.</p>
+<p>To exit cu, from the cu prompt run:</p>
+<pre class="hljs"><code><div>~.
+</div></code></pre>
+<h2 id="why-would-anyone-want-to-do-this">Why would anyone want to do this</h2>
+<p>Fax machines are still commonly used, these techniques could be used to fuzz fax modem connections.</p>
+<p><a href="https://nstarke.github.io/">Back</a></p>
+
+</body>
+</html>
