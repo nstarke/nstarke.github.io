@@ -2,8 +2,9 @@
 
 ## Blog Posts
 
+* [Linksys EA4500 v1.0 Writeup](0035-linksys-ea4500-v1.0-writeup.html)
 * [Linksys WRT54G v3.1 Writeup](0034-linksys-wrt54g-v3.1-writeup.html)
-* [Linksys EA4500 Device Firmware Decryption](0033-linksys-ea4500-device-firmware-decryption.html)
+* [Linksys EA4500 v3.0 Device Firmware Decryption](0033-linksys-ea4500-device-firmware-decryption.html)
 * [Dialup Connections in Linux with 56k Modems - Raspberry Pi](0032-dialup-connections-on-linux-raspberry-pi.html)
 * [Buffer Overflow in pppd - CVE-2020-8597](0031-buffer-overflow-in-pppd-cve-2020-8597.html)
 * [Building and Running OMVF in QEMU](0030-building-and-running-omvf-in-qemu.html)
