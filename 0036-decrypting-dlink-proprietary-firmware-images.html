@@ -412,7 +412,6 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 <p>Next I take a look at the binaries on the filesystem.  One catches my eye: <code>/bin/imgdecrypt</code>. We could also have found this by grepping for <code>/etc_ro/public.pem</code>.</p>
 <p>We load this into Ghidra and take a look:</p>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">decrypt_firmare</span><span class="hljs-params">(<span class="hljs-keyword">int</span> param_1,undefined4 *param_2)</span>
-
 </span>{
   <span class="hljs-keyword">int</span> iVar1;
   <span class="hljs-keyword">char</span> *local_20;

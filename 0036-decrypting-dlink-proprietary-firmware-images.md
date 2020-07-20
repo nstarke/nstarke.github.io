@@ -61,7 +61,6 @@ We load this into Ghidra and take a look:
 
 ```c
 int decrypt_firmare(int param_1,undefined4 *param_2)
-
 {
   int iVar1;
   char *local_20;
