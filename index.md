@@ -25,10 +25,10 @@
 * [Connect two XEN VMs via Virtual Serial Cable](0016-connect-two-xen-vms-using-virtual-serial-cable.html) - _January 5, 2018_
 * [Windows Process Token Operations](0015-windows-process-operations.html) - _December 31, 2017_
 * [Setup Debian PowerPC VM in QEMU](0014-create-debian-powerpc-vm-in-qemu.html) - _May 31, 2017_
-* [Setup ARMEL Reverse Engineering Lab in QEMU](0013-setup-armel-reverse-engineering-lab.html) - _ May 31, 2017_
+* [Setup ARMEL Reverse Engineering Lab in QEMU](0013-setup-armel-reverse-engineering-lab.html) - _May 31, 2017_
 * [NodeJS Slowloris Implementation](0012-nodejs-slowloris-implementation.html) - _March 23, 2017_
 * [WeMo SOAP Calls Writeup](0011-wemo-soap-calls-writeup.html) - _September 11, 2016_
-* [Exploiting JWT in NodeJS](0010-exploit-jwt-nodejs.html) -_August 8, 2016_
+* [Exploiting JWT in NodeJS](0010-exploit-jwt-nodejs.html) - _August 8, 2016_
 * [D-Link DCS 930l IP Camera Writeup](0009-dlink-dcs-930l-writeup.html) - _April 25, 2016_
 * [Find all Strings in Source Code with Egrep](0008-find-all-strings-in-source-code.html) - _April 19, 2016_
 * [How to Make a Production Android App Debuggable](0007-how-to-make-production-android-app-debuggable.html) - _April 19, 2016_
