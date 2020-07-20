@@ -1,5 +1,7 @@
 # A script to grab Iowa House Sessions and concatenate them together
 
+Published: March 22, 2016
+
 ```bash
 #!/bin/bash
 # Example of Base URL: http://sg001-vod.sliq.net/00285-vod/_definst_/2016/03/House%20in%20Session_2016-03-22-13.58.50_2461_2.mp4

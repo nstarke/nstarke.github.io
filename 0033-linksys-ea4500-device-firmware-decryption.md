@@ -1,5 +1,7 @@
 # Linksys EA4500 v3.0 Firmware Decryption
 
+Published: March 24, 2020
+
 The first thing I wanted to do was to update the firmware for the device.
 [https://www.linksys.com/us/support-article?articleNum=148385](https://www.linksys.com/us/support-article?articleNum=148385) offers the latest version of the firmware, which is `3.1.7` as of this writing.  
 

@@ -1,5 +1,7 @@
 # Setting up an ARMEL Reverse Engineering / Debug Lab in QEMU
 
+Published: May 31, 2017
+
 I recently came across a tutorial on ARM Reverse Engineering [https://azeria-labs.com/writing-arm-assembly-part-1/](https://azeria-labs.com/writing-arm-assembly-part-1/).
 
 However, this tutorial seems to recommend using a Raspberry Pi for following along with the tutorial.  I decided I wanted to be able to work through the tutorial using a virtual machine, so I built a QEMU VM of the ARMEL architecture.  This is the same architecture that the Raspberry Pi is based off of.

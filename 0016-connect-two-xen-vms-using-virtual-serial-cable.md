@@ -1,5 +1,7 @@
 # Xen - Connect two VMs via Virtual Serial Port
 
+Published: January 5, 2018
+
 I have recently been working on debugging The Windows kernel.  
 
 For the version of Windows I am using (7 professional / 32-bit), the easiest way to debug the kernel is via serial port.

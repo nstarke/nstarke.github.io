@@ -1,5 +1,7 @@
 # Reversing Raw Binary Firmware Files in Ghidra
 
+Published: August 24, 2019
+
 This brief tutorial will show you how to go about analyzing a raw binary firmware image in Ghidra.
 
 ## Prep work in Binwalk

@@ -1,4 +1,7 @@
 # Create Debian PowerPC32 VM Under QEMU
+
+Published: May 31, 2017
+
 I have a collection of QEMU VMs for different CPU Architectures.  In an attempt to fill in some gaps on architectures I lacked VMs for, I decided to spin up a PowerPC32 VM under QEMU.  I chose Debian-PowerPC as the OS.
 
 ## Gathering Resources

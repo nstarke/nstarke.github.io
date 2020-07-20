@@ -1,5 +1,7 @@
 # Extract Netgear .chk Firmware
 
+Published: May 12, 2019
+
 I recently ran into a situation where `binwalk -M -e $FIRMWARE` failed me.  This was for a Netgear firmware image that ended in a `.chk`extension.
 
 The firmware file name was `R7960P-V1.0.1.34_1.0.20.chk`.

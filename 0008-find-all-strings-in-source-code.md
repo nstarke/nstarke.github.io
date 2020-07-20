@@ -1,5 +1,7 @@
 # How to find all strings and comments in source code
 
+Published: April 19, 2016
+
 ## Strings
 
 One of the most useful commands I've developed for reviewing source is a command to extract all strings from a

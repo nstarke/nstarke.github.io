@@ -1,5 +1,7 @@
 # NodeJS Slowloris Implementation
 
+Published: March 23, 2017
+
 This is an example Slowloris attack implemented in NodeJS.
 
 ```javascript

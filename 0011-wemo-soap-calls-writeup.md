@@ -1,5 +1,7 @@
 # SOAP Calls for UPnP Services in WeMo Devices
 
+Published: September 11, 2016
+
 ### Note: this write up doesn't contain any vulnerabilties or exploits!
 
 I was recently taking a look at a few WeMo embedded devices.  WeMo Devices are IoT contraptions like light switches, space heaters, and coffee machines that are network enabled. I examined the "Holmes Smart Heater". Both had port 41953 open, which is a common port for UPnP services. I decided to dig a little deeper and figure out a way to interact with the SOAP services which UPnP relies on in order to hunt for bugs.  My goal was to retrieve sensitive information, such as the WiFi password, from the device.  

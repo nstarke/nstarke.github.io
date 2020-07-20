@@ -1,5 +1,7 @@
 # Rsync Protocol Auth Flow in Python
 
+Published: Nov 27, 2019
+
 This is an implementation of the authentication flow in the rsync protocol.
 
 ```python

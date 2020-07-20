@@ -1,5 +1,7 @@
 # Netgear Signed TLS Cert Private Key Disclosure
 
+Published January 19, 2020
+
 ## Overview
 
 There are at least two valid, signed TLS certificates that are bundled with publicly available Netgear device firmware.

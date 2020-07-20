@@ -1,5 +1,7 @@
 # JScrambler Review
 
+Published: May 5, 2019
+
 I've recently been working on JavaScript Obfuscation.  I've read as much as I can from the internet about options and capabilities.  It is clear there is one winner out of all the offerings available.
 
 JScrambler ([https://jscrambler.com/](https://jscambler.com)) is a paid product featuring JavaScript Obfuscation capabilities. When it comes to obfuscating JavaScript, it is the gold standard.

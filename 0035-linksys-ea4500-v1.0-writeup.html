@@ -366,6 +366,7 @@ code {
     });
   </script>
 <h1 id="linksys-ea4500-v10-write-up">Linksys EA4500 v1.0 Write Up</h1>
+<p>Published: March 24, 2020</p>
 <p><strong>tl;dr: I was not able to identify any command injection vulnerabilities that might let me take control of the router.</strong></p>
 <h2 id="firmware">Firmware</h2>
 <p>The firmware is available <a href="https://downloads.linksys.com/downloads/firmware/FW_EA4500_2.1.42.183584_prod.img">here</a>.  The support page for this product is <a href="https://www.linksys.com/us/support-article?articleNum=148385">here</a>.  The latest firmware build for hardware version 1.0 is <code>2.1.42</code> which was released <code>9/19/2017</code>.  According to <a href="https://www.linksys.com/us/support-article?articleNum=291976">here</a> this device was EOL'd in May 2014.</p>
@@ -378,7 +379,7 @@ code {
         sleep(<span class="hljs-number">1</span>);
     }
 </div></code></pre>
-<p>Unfortunately CGI does not take the <code>$REMOTE_ADDR</code> environment variable from the HTTP <code>Host</code> header, otherwise we might be able to exploit this!</p>
+<p>Unfortunately CGI does not take the <code>$REMOTE_ADDR</code> or the <code>REMOTE_PORT</code> environment variable from the HTTP <code>Host</code> header, otherwise we might be able to exploit this!</p>
 <p>Since this binary is not going to get us where we need to be, I decide to check out the web root on the firmware filesystem.  The webroot is at <code>/www</code>, but all the interesting things are at <code>/www/ui/cgi/</code>:</p>
 <pre class="hljs"><code><div>$ ls -l /www/ui/cgi/
 bootloader_info.cgi*  get_counter_info.cgi*  getstinfo.cgi*  jcgi.cgi*  localize.cgi*  qos_info.cgi*  speedtest_info.cgi*  sysinfo.cgi*  usbinfo.cgi*
@@ -488,6 +489,5 @@ archiveFile:<span class="hljs-built_in">close</span>()
 <p><img src="images/0035-imports.png" alt="&quot;Imports&quot;" title="Imports"></p>
 <p>Combined with the lack of a telnet daemon, command injection is not the best approach to penetrating this device.  Looking for memory corruption bugs in the <code>jnap</code> binary would most likely be more fruitful, but then you have the problem of trying to write an exploit for a device that you don't have 1) a shell on and 2) a compiler toolchain for.  It's not impossible, just very diffficult.</p>
 
-<a href="https://nstarke.github.io/">Back</a>
 </body>
 </html>

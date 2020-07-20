@@ -1,5 +1,7 @@
 # Resize Ghidra for High DPI screens
 
+Published: January 12, 2020
+
 If you run Ghidra on a high DPI screen, you will probably find the GUI to be scaled down so small to be almost of no use.  
 
 There is a setting that you can adjust to scale the Ghidra GUI:

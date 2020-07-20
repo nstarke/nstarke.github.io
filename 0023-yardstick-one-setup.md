@@ -1,5 +1,7 @@
 # Yardstick One Setup
 
+Published: September 21, 2020
+
 A few years ago I bought a YardStick One from Great Scott Gadgets ([https://greatscottgadgets.com/yardstickone/](https://greatscottgadgets.com/yardstickone/)).
 
 YardStick One works with a software suite called `rfcat` ([https://github.com/atlas0fd00m/rfcat](https://github.com/atlas0fd00m/rfcat)). I needed to update the bootloader firmware for my YardStick One to work with recent versions of `rfcat`.

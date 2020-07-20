@@ -366,6 +366,7 @@ code {
     });
   </script>
 <h1 id="soap-calls-for-upnp-services-in-wemo-devices">SOAP Calls for UPnP Services in WeMo Devices</h1>
+<p>Published: September 11, 2016</p>
 <h3 id="note-this-write-up-doesnt-contain-any-vulnerabilties-or-exploits">Note: this write up doesn't contain any vulnerabilties or exploits!</h3>
 <p>I was recently taking a look at a few WeMo embedded devices.  WeMo Devices are IoT contraptions like light switches, space heaters, and coffee machines that are network enabled. I examined the &quot;Holmes Smart Heater&quot;. Both had port 41953 open, which is a common port for UPnP services. I decided to dig a little deeper and figure out a way to interact with the SOAP services which UPnP relies on in order to hunt for bugs.  My goal was to retrieve sensitive information, such as the WiFi password, from the device.</p>
 <p>Using <a href="https://github.com/0x90/miranda-upnp">Miranda</a>'s MSEARCH (which comes preinstalled on Kali Linux), I was able to discover the <code>setup.xml</code> file for the service I was examining.  This file will always be XML, but the actual file name can change.  Another way to discover this initial entry point is to examine the network traffic with WireShark.  The MSEARCH HTTP requests are easy to spot.</p>

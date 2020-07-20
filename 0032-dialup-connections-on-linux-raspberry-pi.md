@@ -1,5 +1,7 @@
 # Dial Up Connections on Linux
 
+Published: March 14, 2020
+
 In this tutorial we will detail how to connect two linux hosts via 56k modems.  To do this we will use the following components:
 
 * Two Raspberry Pi's 4 ($35-$55 / each)

@@ -1,5 +1,7 @@
 # Linksys EA4500 v1.0 Write Up
 
+Published: March 24, 2020
+
 **tl;dr: I was not able to identify any command injection vulnerabilities that might let me take control of the router.**
 
 ## Firmware

@@ -1,5 +1,7 @@
 # Cisco IOS GDB RSP Debugger Script for PowerPC-based models
 
+Published: September 2, 2019
+
 This is a GDB remote debugging protocol implementation for debugging PowerPC-based Cisco IOS models.
 
 The original MIPS version is available here: [https://github.com/klsecservices/ios_mips_gdb]( github.com/klsecservices/ios_mips_gdb)

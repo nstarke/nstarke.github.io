@@ -1,5 +1,7 @@
 # How to make a Release Android App debuggable
 
+Published: April 19, 2016
+
 Let's say you want to access the application shared preferences in /data/data/com.mypackage.  
 You could try to run `adb shell` and then `run-as com.mypackage` 
 ( or `adb shell run-as com.mypackge ls /data/data/com.mypackage/shared_prefs`), 

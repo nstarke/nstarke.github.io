@@ -366,6 +366,7 @@ code {
     });
   </script>
 <h1 id="linksys-wrt54g---v31">Linksys WRT54G - v3.1</h1>
+<p>Published: March 24, 2020</p>
 <p>This write up will go over how I found an exploited a command injection vulnerability in a <code>Linksys WRT54G</code> Small Office / Home Office router.</p>
 <p>I downloaded the firmware for <code>Linksys WRT54G</code> version <code>3.1</code> from here:</p>
 <p><a href="https://downloads.linksys.com/downloads/firmware/1224638367382/FW_WRT54Gv4_4.21.5.000_20120220.bin">https://downloads.linksys.com/downloads/firmware/1224638367382/FW_WRT54Gv4_4.21.5.000_20120220.bin</a></p>
@@ -436,6 +437,6 @@ Content-Type: <span class="hljs-built_in">application</span>/octet-stream
 <pre class="hljs"><code><div>alert http any any -&gt; $HOME_NET any (msg:&quot;ET EXPLOIT Linksys WRT54G Version 3.1 Command Injection Attempt&quot;; flow:established,to_server; content:&quot;POST&quot;; http_method; content:&quot;Authorization|3a 20|Basic|20|&quot;; http_header; content:&quot;/apply.cgi&quot;; http_uri; depth:10; content:&quot;change_action=gozila_cgi&quot;; http_client_body; fast_pattern; content:&quot;submit_type=language&quot;; http_client_body; content:&quot;&amp;ui_language=&quot;; http_client_body; pcre:&quot;/^[(?:\x60|%60)(?:\x27|%27)]/PR&quot;; classtype:attempted-admin; sid:1; rev:1;)
 </div></code></pre>
 <p>Thanks to <a href="https://twitter.com/zoomequipd">@zoomequipd</a> for the rules.</p>
-<a href="https://nstarke.github.io">Back</a>
+
 </body>
 </html>

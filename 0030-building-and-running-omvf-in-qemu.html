@@ -366,6 +366,7 @@ code {
     });
   </script>
 <h1 id="building-and-running-ovmf-in-qemu">Building and Running OVMF in Qemu</h1>
+<p>Published: February 25, 2020</p>
 <p>I built EDK2 and OVMF from source using the instructions here: <a href="https://github.com/tianocore/tianocore.github.io/wiki/How-to-run-OVMF">https://github.com/tianocore/tianocore.github.io/wiki/How-to-run-OVMF</a></p>
 <p>The instructions are helpful in getting the build tooling configured to build edk2, but I consistently ran into a problem when I built the <code>DEBUG</code> version of OVMF. I would run:</p>
 <pre class="hljs"><code><div>$ qemu-system-x86_64 -bios ../edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd

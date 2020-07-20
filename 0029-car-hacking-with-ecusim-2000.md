@@ -1,5 +1,7 @@
 # Car hacking with ScanTool ECUSim 2000
 
+Published: February 22, 2020
+
 An upcoming project has me looking at car hacking at the moment.  I watched a great video ( [https://www.youtube.com/watch?v=nvxN5G21aBQ](https://www.youtube.com/watch?v=nvxN5G21aBQ) ) which caught me up to speed on the fundamentals.  There are a few other videos out there on introductory car hacking, but they all seem to revolve around the virtual can interface provided by `vcan`. I decided I didn't want to test virtually because then I wouldn't know how to work with the actual connection hardware.  At the same time, being a beginner, I DID NOT want to plug into my personal vehicle's ODB2 port.
 
 I was looking for something between `vcan` and a real car.  A little googling led me to the ScanTools ECUSim 2000:

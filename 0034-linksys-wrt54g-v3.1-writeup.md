@@ -1,5 +1,7 @@
 # Linksys WRT54G - v3.1
 
+Published: March 24, 2020
+
 This write up will go over how I found an exploited a command injection vulnerability in a `Linksys WRT54G` Small Office / Home Office router.
 
 I downloaded the firmware for `Linksys WRT54G` version `3.1` from here:

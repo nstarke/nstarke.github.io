@@ -1,5 +1,7 @@
 # Change MAC Address Permanently
 
+Published: September 21, 2019
+
 It is well know that through the `ip` and `ifconfig` commands it is possible to change a MAC address temporarily, meaning the change will not persist across host reboots.
 
 But what if you would like to change your MAC address in a more permanent fashion? Is there a way to, through software, permanently change your network interface card's MAC address?

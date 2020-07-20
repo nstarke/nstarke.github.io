@@ -1,5 +1,7 @@
 # Python Find Information Scripts
 
+Published: August 29, 2019
+
 I developed two scripts for finding information in binary files.  
 
 The first one measures the string entropy and displays the results:

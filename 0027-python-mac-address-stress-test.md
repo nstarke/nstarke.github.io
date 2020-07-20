@@ -1,5 +1,7 @@
 # Python MAC Address Stress Test Script
 
+Published: January 16, 2020
+
 This is a script that will fill up a MAC Address Table on a switch very quickly.  Useful for testing stressed switch scenarios.
 
 ```python

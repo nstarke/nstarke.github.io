@@ -1,5 +1,7 @@
 # Dell Precision 7510 System Failure after Monitor turns off in Ubuntu 16.04 / 17.10 / 18.04
 
+Published: May 3, 2019
+
 I have been experiencing a problem with my Dell Precision 7510 laptop. 
 When using Ubuntu, configured to turn the monitor off after n minutes, the computer would become unresponsive if I let it stay "asleep" for longer than a few minutes.  
 At this point, when I tried to wake the laptop up by pressing a key or moving the mouse, the computer wouldn't respond at all.  The only option was to restart the computer using a hard stop (pressing the power key for 5 seconds).

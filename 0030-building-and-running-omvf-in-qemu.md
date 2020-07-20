@@ -1,5 +1,7 @@
 # Building and Running OVMF in Qemu
 
+Published: February 25, 2020
+
 I built EDK2 and OVMF from source using the instructions here: [https://github.com/tianocore/tianocore.github.io/wiki/How-to-run-OVMF](https://github.com/tianocore/tianocore.github.io/wiki/How-to-run-OVMF)
 
 The instructions are helpful in getting the build tooling configured to build edk2, but I consistently ran into a problem when I built the `DEBUG` version of OVMF. I would run:
