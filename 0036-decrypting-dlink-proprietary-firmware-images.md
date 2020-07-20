@@ -165,3 +165,5 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 ```
 
 Now we can extract using `binwalk -eM ./tmp/.firmware.orig`.
+
+[Back](https://nstarke.github.io/)

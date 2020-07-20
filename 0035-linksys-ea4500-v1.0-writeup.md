@@ -175,4 +175,6 @@ The usage of a scripting language (lua) to handle most of the dynamic web interf
 
 !["Imports"](images/0035-imports.png "Imports")
 
-Combined with the lack of a telnet daemon, command injection is not the best approach to penetrating this device.  Looking for memory corruption bugs in the `jnap` binary would most likely be more fruitful, but then you have the problem of trying to write an exploit for a device that you don't have 1) a shell on and 2) a compiler toolchain for.  It's not impossible, just very diffficult. 
+Combined with the lack of a telnet daemon, command injection is not the best approach to penetrating this device.  Looking for memory corruption bugs in the `jnap` binary would most likely be more fruitful, but then you have the problem of trying to write an exploit for a device that you don't have 1) a shell on and 2) a compiler toolchain for.  It's not impossible, just very difficult. 
+
+[Back](https://nstarke.github.io/)
