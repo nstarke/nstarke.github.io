@@ -89,4 +89,27 @@ Now I can start the reverse engineering process.
 
 It's also worth noting that although we can decrypt the firmware for reverse engineering, we cannot encrypt our own firmware to upload to the device.  That integrity checking is mostly what the firmware decryption is in place for - to prevent malicious actors from uploading a modified firmware version.  Because the private key is kept private, it is not possible to encrypt custom firmware. Also, my bet is that the `3.1.7` firmware has checks in place to prevent unencrypted firmware from being flashed onto the device, meaning it is probably not possible to downgrade from `3.1.7`.
 
+**Update:** Here is `/etc/keydata`:
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
+
+mQENBFZM/2EBCADOq3bG1vDkWZkMFynSoCSsz0iD5DtD7igVJ/GizWn/oD/fNGld
+WX3D6VInykkcWPQf+CAmvxzGNEJGISBOd7x2Hcr3c1Yf/HMdTWwSzjRbfxj1lThf
+DBv9JPBmZ8YYywK3N3dBh4s+m33pOqZxvoOAcR1cCJSECt8L0AV+BwI+1XnhUERy
+nYt1BKCkh5MRhuYLFCqIcjFQxScfHEiCZFnuo7XPjSv4kFqdt8W+dxH4hh+ieFFw
+m4lfeVKHR8GG+K1lFhAjVAiIKp49iY0tlgGqkARo5nIRyIW0KVOyZ+ikc0/M97LN
+XIpf9u16jUb0xigjBt2njMm2bxc/3vsm92JrABEBAAG0KWxpbmtzeXMgPGxpbmtz
+eXMtdG9vbC1zdXBwb3J0QGJlbGtpbi5jb20+iQE4BBMBAgAiBQJWTP9hAhsvBgsJ
+CAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRB5cFSk6+K7j6pyCAC2DUoKbXyb5ZZs
+bFTVdctM9DhYGEegXG68yQoHSk9GAeCXkpHHG6iRy2Jf1AJVFttKGx243Y6ewoGe
+UUYyCg/v0p3ZxuWUjJpjeULNQZDXhD+xHIIYLBjb92bXHLIWcR+QTuKVHHWJSjtu
+kD0yMPtcYKcxfO+r5OZTi0agQdvQZLVicQg09bkMdXg4+9QrOnMkjN85kD1zQSPt
+Lov+M245NHtOJ80IZ5PI7bhMS/NY1uShWhBYfIMYlBmyYOse8uJaMMh3P3tBvE5O
+qYNh9564Iq1f2Rpg3fmAJriwPrBMsEenOWLS8dt8EiLDM5DxKDoo6l6NwYNZ6sWM
+O0q6JsIP
+=svmk
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
 [Back](https://nstarke.github.io/)
