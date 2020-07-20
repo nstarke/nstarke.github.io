@@ -163,10 +163,3 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 ```
 
 Now we can extract using `binwalk -eM ./tmp/.firmware.orig`.
-
-You can verify the key by running the following `openssl` command:
-
-```
-$ openssl aes-256-cbc -K C05FBF1936C99429CE2A0781F08D6AD8 -d -in ~/DIR3040A1_FW111B02.bin -out DIR3040A1_FW111B02.decrypted.bin.bak 
-```
-Note the capital `K` for `key bytes in hex`.

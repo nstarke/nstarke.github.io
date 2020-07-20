@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>decrypting-dlink-proprietary-firmware-images.md</title>
+<title>0036-decrypting-dlink-proprietary-firmware-images.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -496,10 +496,6 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 160           0xA0            LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 23079360 bytes    
 </div></code></pre>
 <p>Now we can extract using <code>binwalk -eM ./tmp/.firmware.orig</code>.</p>
-<p>You can verify the key by running the following <code>openssl</code> command:</p>
-<pre class="hljs"><code><div>$ openssl aes-256-cbc -K C05FBF1936C99429CE2A0781F08D6AD8 -d -in ~/DIR3040A1_FW111B02.bin -out DIR3040A1_FW111B02.decrypted.bin.bak 
-</div></code></pre>
-<p>Note the capital <code>K</code> for <code>key bytes in hex</code>.</p>
-<a href="https://nstarke.github.io/">Back</a>
+
 </body>
 </html>
