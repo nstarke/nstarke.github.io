@@ -1,6 +1,6 @@
 # Netgear Signed TLS Cert Private Key Disclosure
 
-Published January 19, 2020
+Published: January 19, 2020
 
 ## Overview
 
