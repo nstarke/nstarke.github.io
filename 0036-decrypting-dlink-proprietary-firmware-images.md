@@ -1,5 +1,7 @@
 # Decrypting DLINK Proprietary Firmware Images
 
+Published: July 19th, 2020
+
 The DIR-3040 models of DLINK routers feature encrypted firmware images in the most recent versions of the firmware. [https://support.dlink.com/ProductInfo.aspx?m=DIR-3040-US](https://support.dlink.com/ProductInfo.aspx?m=DIR-3040-US) details the firmware images available for this product.  
 
 * `1.11B02` - [ftp://ftp2.dlink.com/PRODUCTS/DIR-3040/REVA/DIR-3040_REVA_FIRMWARE_v1.11B02.zip](ftp://ftp2.dlink.com/PRODUCTS/DIR-3040/REVA/DIR-3040_REVA_FIRMWARE_v1.11B02.zip)
