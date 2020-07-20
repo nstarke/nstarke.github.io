@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>decrypting-dlink-proprietary-firmware-images.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="decrypting-dlink-proprietary-firmware-images">Decrypting DLINK Proprietary Firmware Images</h1>
+<p>The DIR-3040 models of DLINK routers feature encrypted firmware images in the most recent versions of the firmware. <a href="https://support.dlink.com/ProductInfo.aspx?m=DIR-3040-US">https://support.dlink.com/ProductInfo.aspx?m=DIR-3040-US</a> details the firmware images available for this product.</p>
+<ul>
+<li><code>1.11B02</code> - <a href="ftp://ftp2.dlink.com/PRODUCTS/DIR-3040/REVA/DIR-3040_REVA_FIRMWARE_v1.11B02.zip">ftp://ftp2.dlink.com/PRODUCTS/DIR-3040/REVA/DIR-3040_REVA_FIRMWARE_v1.11B02.zip</a></li>
+<li><code>1.02B03</code> - <a href="ftp://ftp2.dlink.com/PRODUCTS/DIR-3040/REVA/DIR-3040_REVA_FIRMWARE_v1.02B03.zip">ftp://ftp2.dlink.com/PRODUCTS/DIR-3040/REVA/DIR-3040_REVA_FIRMWARE_v1.02B03.zip</a></li>
+</ul>
+<p>Unzipping the first reveals two files:</p>
+<ul>
+<li><code>DIR-3040_REVA_RELEASE_NOTES_v1.11B02.pdf</code></li>
+<li><code>DIR3040A1_FW111B02.bin</code></li>
+</ul>
+<p>Running binwalk on <code>DIR3040A1_FW111B02.bin</code> reveals:</p>
+<pre class="hljs"><code><div>$ binwalk DIR3040A1_FW111B02.bin 
+DECIMAL       HEXADECIMAL     DESCRIPTION 
+--------------------------------------------------------------------------------                                                                                                                                                                                                    
+</div></code></pre>
+<p>The lack of binwalk output almost surely means the firmware file is encrypted.</p>
+<p>Unzipping the older firmware image reveals three files:</p>
+<ul>
+<li><code>DIR-3040_REVA_RELEASE_NOTES_v1.02B03.pdf</code></li>
+<li><code>DIR3040A1_FW102B03.bin</code></li>
+<li><code>DIR3040A1_FW102B03_uncrypted.bin</code></li>
+</ul>
+<p>The last file ends with <code>uncrypted.bin</code>, which was my clue this version of the firmware image was not encrypted.  Running binwalk on this file reveals:</p>
+<pre class="hljs"><code><div>$ binwalk DIR3040A1_FW102B03_uncrypted.bin 
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             uImage header, header size: 64 bytes, header CRC: 0xDFA42E6F, created: 2019-09-18 07:16:48, image size: 17637193 bytes, Data Address: 0x81001000, Entry Point: 0x816357A0, data CRC: 0xAD066126, OS: Linux, CPU: MIPS, image type: OS Kernel Image, compression type: lzma, image name: &quot;Linux Kernel Image&quot;
+160           0xA0            LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 23062976 bytes
+8476944       0x815910        MySQL ISAM compressed data file Version 4
+</div></code></pre>
+<p>Bingo, a uImage header and accompanying filesystem.  We can extract this using <code>binwalk -eM DIR3040A1_FW102B03_uncrypted.bin</code>.</p>
+<p>Looking at the filesystem, the first thing I did is look for certificates:</p>
+<pre class="hljs"><code><div>./etc_ro/public.pem
+./etc_ro/cacert.pem
+./etc_ro/mydlink/client-ca.crt.pem
+./etc_ro/mosquitto/ssl/clientcrt.pem
+./etc_ro/mosquitto/ssl/cacrt.pem
+./etc_ro/mosquitto/ssl/cakey.pem
+./etc_ro/mosquitto/ssl/servercrt.pem
+./etc_ro/mosquitto/ssl/serverkey.pem
+./etc_ro/mosquitto/ssl/clientkey.pem 
+</div></code></pre>
+<p>Next I take a look at the binaries on the filesystem.  One catches my eye: <code>/bin/imgdecrypt</code>. We could also have found this by grepping for <code>/etc_ro/public.pem</code>.</p>
+<p>We load this into Ghidra and take a look:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">decrypt_firmare</span><span class="hljs-params">(<span class="hljs-keyword">int</span> param_1,undefined4 *param_2)</span>
+
+</span>{
+  <span class="hljs-keyword">int</span> iVar1;
+  <span class="hljs-keyword">char</span> *local_20;
+  <span class="hljs-keyword">int</span> local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  local_18 = <span class="hljs-number">0x33323130</span>;
+  local_14 = <span class="hljs-number">0x37363534</span>;
+  local_10 = <span class="hljs-number">0x42413938</span>;
+  local_c = <span class="hljs-number">0x46454443</span>;
+  local_20 = <span class="hljs-string">"/etc_ro/public.pem"</span>;
+  <span class="hljs-keyword">if</span> (param_1 &lt; <span class="hljs-number">2</span>) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s &lt;sourceFile&gt;\r\n"</span>,*param_2);
+    iVar1 = <span class="hljs-number">-1</span>;
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span> &lt; param_1) {
+      local_20 = (<span class="hljs-keyword">char</span> *)param_2[<span class="hljs-number">2</span>];
+    }
+    iVar1 = FUN_004021ac(local_20,<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">if</span> (iVar1 == <span class="hljs-number">0</span>) {
+      FUN_004025a4(&amp;local_18);
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"key:"</span>);
+      local_1c = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">while</span> (local_1c &lt; <span class="hljs-number">0x10</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%02X"</span>,(<span class="hljs-keyword">int</span>)*(<span class="hljs-keyword">char</span> *)((<span class="hljs-keyword">int</span>)&amp;local_18 + local_1c) &amp; <span class="hljs-number">0xff</span>);
+        local_1c = local_1c + <span class="hljs-number">1</span>;
+      }
+      <span class="hljs-built_in">puts</span>(<span class="hljs-string">"\r"</span>);
+      iVar1 = FUN_00401770(param_2[<span class="hljs-number">1</span>],<span class="hljs-string">"/tmp/.firmware.orig"</span>,&amp;local_18);
+      <span class="hljs-keyword">if</span> (iVar1 == <span class="hljs-number">0</span>) {
+        unlink((<span class="hljs-keyword">char</span> *)param_2[<span class="hljs-number">1</span>]);
+        rename(<span class="hljs-string">"/tmp/.firmware.orig"</span>,(<span class="hljs-keyword">char</span> *)param_2[<span class="hljs-number">1</span>]);
+      }
+      RSA_free(DAT_00413220);
+    }
+    <span class="hljs-keyword">else</span> {
+      iVar1 = <span class="hljs-number">-1</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> iVar1;
+}
+</div></code></pre>
+<p>This function is responsible for decrypting the firmware.  There is some sort of key derived from the local stack variables that is not straightforward to reverse.  So instead of spending hours trying to figure out exactly what the code that produces the key does, why don't we just try to run the binary passing it our firmware image we want to decrypt?</p>
+<pre class="hljs"><code><div>$ file bin/imgdecrypt                                                   
+bin/imgdecrypt: ELF 32-bit LSB executable, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped 
+</div></code></pre>
+<p>So we are working with a MIPSel binary.  We can emulate this using <code>qemu-mipsel-static</code>.  Copy that binary into the firmware filesystem at <code>/usr/bin</code>:</p>
+<pre class="hljs"><code><div>$ cp $(which qemu-mipsel-static) ./usr/bin
+</div></code></pre>
+<p>You will also need to mount <code>/proc</code>, <code>/dev</code>, and <code>/sys</code> in the firmware filesystem root in order to for the <code>imgdecrypt</code> binary to run successfully:</p>
+<pre class="hljs"><code><div>#!/bin/bash
+mount -t proc /proc proc/
+mount --rbind /sys sys/
+mount --rbind /dev/ dev/  
+</div></code></pre>
+<p>Copy the firmware image you want to decrypt into the firmware filesystem root.  In this case that file is <code>DIR3040A1_FW111B02.bin</code></p>
+<p>Next let's launch into a shell so that we can call the <code>imgdecrypt</code> binary:</p>
+<pre class="hljs"><code><div>$ sudo chroot . qemu-mipsel-static /bin/sh
+BusyBox v1.22.1 (2019-09-18 14:32:32 CST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+/ # 
+</div></code></pre>
+<p>Run the <code>imgdecrypt</code> binary against the firmware image file:</p>
+<pre class="hljs"><code><div>/ # /bin/imgdecrypt DIR3040A1_FW111B02.bin
+key:C05FBF1936C99429CE2A0781F08D6AD8
+</div></code></pre>
+<p>Not only does it output the key to decrypt the firmware file image, but it also places the decrypted version in <code>/tmp/.firmware.orig</code>.</p>
+<pre class="hljs"><code><div>$ ls -a tmp                                                             
+.  
+..  
+.firmware.orig 
+</div></code></pre>
+<p>We can then run binwalk over the <code>.firmware.orig</code> file:</p>
+<pre class="hljs"><code><div>$ binwalk ./tmp/.firmware.orig
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             uImage header, header size: 64 bytes, header CRC: 0x339E3A96, created: 2020-05-09 03:35:18, image size: 17644523 bytes, Data Address: 0x81001000, Entry Point: 0x81637600, data CRC: 0x5C75FC87, OS: Linux, CPU: MIPS, image type: OS Kernel Image, compression type: lzma, image name: &quot;Linux Kernel Image&quot;
+160           0xA0            LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 23079360 bytes    
+</div></code></pre>
+<p>Now we can extract using <code>binwalk -eM ./tmp/.firmware.orig</code>.</p>
+<p>You can verify the key by running the following <code>openssl</code> command:</p>
+<pre class="hljs"><code><div>$ openssl aes-256-cbc -K C05FBF1936C99429CE2A0781F08D6AD8 -d -in ~/DIR3040A1_FW111B02.bin -out DIR3040A1_FW111B02.decrypted.bin.bak 
+</div></code></pre>
+<p>Note the capital <code>K</code> for <code>key bytes in hex</code>.</p>
+<a href="https://nstarke.github.io/">Back</a>
+</body>
+</html>
