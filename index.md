@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Decrypting DLINK Proprietary Firmware Images](0036-decrypting-dlink-proprietary-firmware-images.html)
 * [Linksys EA4500 v1.0 Writeup](0035-linksys-ea4500-v1.0-writeup.html)
 * [Linksys WRT54G v3.1 Writeup](0034-linksys-wrt54g-v3.1-writeup.html)
 * [Linksys EA4500 v3.0 Device Firmware Decryption](0033-linksys-ea4500-device-firmware-decryption.html)
