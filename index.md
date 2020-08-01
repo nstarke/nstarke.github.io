@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Modifying BIOS using RU.EFI](0037-modifying-bios-using-ru-efi.html) - _August 1, 2020_
 * [Decrypting DLINK Proprietary Firmware Images](0036-decrypting-dlink-proprietary-firmware-images.html) - _July 19, 2020_
 * [Linksys EA4500 v1.0 Writeup](0035-linksys-ea4500-v1.0-writeup.html) - _March 24, 2020_
 * [Linksys WRT54G v3.1 Writeup](0034-linksys-wrt54g-v3.1-writeup.html) - _March 24, 2020_
