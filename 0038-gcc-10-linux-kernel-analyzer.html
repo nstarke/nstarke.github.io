@@ -376,7 +376,7 @@ code {
 <p>In GCC 10.2.0, this is line 8187 of <code>gcc/tree.c</code>:</p>
 <pre class="hljs"><code><div>error (<span class="hljs-string">"arrays of functions are not meaningful"</span>);
 </div></code></pre>
-<p>Comment this line out and then compile GCC. For better instructions on compiling GCC, check this out: <a href="https://solarianprogrammer.com/2016/10/07/building-gcc-ubuntu-linux/">https://solarianprogrammer.com/2016/10/07/building-gcc-ubuntu-linux/</a>.  Note that if you set a unique <code>--program-suffix</code> it will make using your new GCC alongside your system installed gcc.  I chose <code>-10.2</code> for convenience.</p>
+<p>Comment this line out and then compile GCC. For better instructions on compiling GCC, check this out: <a href="https://solarianprogrammer.com/2016/10/07/building-gcc-ubuntu-linux/">https://solarianprogrammer.com/2016/10/07/building-gcc-ubuntu-linux/</a>.  Note that if you set a unique <code>--program-suffix</code> it will make using your new GCC alongside your system installed gcc easier.  I chose <code>-10.2</code> for convenience.</p>
 <p>Once you've compiled GCC, you'll need to modify the kernel Makefile to point to your newly compiled GCC installation. Or, you can use the CROSS_COMPILE environment variable.  If you're changing the Makefile, you will need to change this line:</p>
 <pre class="hljs"><code><div>CC              = $(CROSS_COMPILE)gcc
 </div></code></pre>
@@ -401,7 +401,7 @@ code {
 <p>When you run the kernel compilation process using make, the analyzer output will be on stderr.  I just redirected all stderr output from the <code>make</code> process to a <code>analyzer.log</code> file:</p>
 <pre class="hljs"><code><div>make -j 2&gt; analyzer.log
 </div></code></pre>
-<p>After the kernel <code>make</code> process completes, you should have a decent amount of <code>analyzer.log</code> content to review.  Happy bug hunting!</p>
+<p>After the kernel <code>make</code> process completes, you should have a decent amount of <code>analyzer.log</code> content to review. Just a side note that the kernel itself may not boot successfully. Happy bug hunting!</p>
 <p><a href="https://nstarke.github.io">Back</a></p>
 
 </body>
