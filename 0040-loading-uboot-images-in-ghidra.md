@@ -93,7 +93,7 @@ Create a new Ghidra Project and import `u-boot.body`.  This will not be recogniz
 
 Next set the language to MIPS Big Endian Default:
 
-![Ghidra Language Set](images/0040/0040-ghidra-language-set.png "Ghidra Language Set")
+![Ghidra Language Set](images/0040/0040-ghidra-language-select.png "Ghidra Language Set")
 
 After that you will need to set the load address. We know this value from the binwalk output, which parses the U-Boot header for the information.  The correct value here is `0x80010000` - search the binwalk output above for this value if you are confused as to where it came from.
 

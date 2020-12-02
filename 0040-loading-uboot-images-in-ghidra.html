@@ -366,6 +366,7 @@ code {
     });
   </script>
 <h1 id="loading-das-u-boot-images-in-ghidra">Loading Das U-Boot Images in Ghidra</h1>
+<p>Published: December 1, 2020</p>
 <h2 id="background">Background</h2>
 <p>I recently saw <a href="https://twitter.com/SecurityJon/status/1333806851067142144">a tweet</a> that struck my curiosity.  The background on this is that the TP-Link <code>WA701Nv2</code> Series WiFi Access Point / Router uses Das U-Boot as a bootloader and also has an &quot;escape sequence&quot; that breaks into the U-Boot shell during the boot cycle.  According to the tweet, that &quot;escape sequence&quot; is the string <code>tpl</code>, entered in right after the <code>Autobooting in ...</code> prompt.  See the tweet for a photo.  Read the whole thread <a href="https://twitter.com/SecurityJon/status/1333806750722560005">here</a></p>
 <p>As part of the twitter thread, the original researcher and author <a href="https://twitter.com/securityjon">@SecurityJon</a> published a link to the firmware for the router he was looking at - <a href="https://static.tp-link.com/resources/software/TL-WA701ND_V2_130528.zip">https://static.tp-link.com/resources/software/TL-WA701ND_V2_130528.zip</a> in his tweet <a href="https://twitter.com/SecurityJon/status/1333830677062684674">here</a>. _Warning: I had to navigate through TP-Link's support pages to actually download the firmware, the direct link showed me a screen that said:</p>
@@ -431,7 +432,7 @@ Sub items Errors: 1
 <p>This is the point where we need to fire up Ghidra.</p>
 <p>Create a new Ghidra Project and import <code>u-boot.body</code>.  This will not be recognized as any specific type of binary, so the binary format option will be set to <code>Raw Binary</code>. This is because legacy U-Boot images allowed arbitrary executable data after the header.</p>
 <p>Next set the language to MIPS Big Endian Default:</p>
-<p><img src="images/0040/0040-ghidra-language-set.png" alt="Ghidra Language Set" title="Ghidra Language Set"></p>
+<p><img src="images/0040/0040-ghidra-language-select.png" alt="Ghidra Language Set" title="Ghidra Language Set"></p>
 <p>After that you will need to set the load address. We know this value from the binwalk output, which parses the U-Boot header for the information.  The correct value here is <code>0x80010000</code> - search the binwalk output above for this value if you are confused as to where it came from.</p>
 <p><img src="images/0040/0040-ghidra-offset.png" alt="Ghidra Offset" title="Ghidra Offset"></p>
 <p>The next thing I did was search for strings.  I had to set the length down to 3 in order to catch the string <code>tpl</code>:</p>
