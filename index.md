@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Loading Das U-Boot Images in Ghidra](0040-loading-uboot-images-in-ghidra.html) - _December 1st, 2020_
 * [ONN Laptop BIOS Exploration](0039-onn-laptop-bios-exploration.html) - _November 26th, 2020_
 * [Compiling the Linux Kernel with GCC 10 for static analysis](0038-gcc-10-linux-kernel-analyzer.html) - _October 15, 2020_
 * [Modifying BIOS using RU.EFI](0037-modifying-bios-using-ru-efi.html) - _August 1, 2020_

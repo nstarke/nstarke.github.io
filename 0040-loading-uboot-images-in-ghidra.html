@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0040-loading-uboot-images-in-ghidra.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="loading-das-u-boot-images-in-ghidra">Loading Das U-Boot Images in Ghidra</h1>
+<h2 id="background">Background</h2>
+<p>I recently saw <a href="https://twitter.com/SecurityJon/status/1333806851067142144">a tweet</a> that struck my curiosity.  The background on this is that the TP-Link <code>WA701Nv2</code> Series WiFi Access Point / Router uses Das U-Boot as a bootloader and also has an &quot;escape sequence&quot; that breaks into the U-Boot shell during the boot cycle.  According to the tweet, that &quot;escape sequence&quot; is the string <code>tpl</code>, entered in right after the <code>Autobooting in ...</code> prompt.  See the tweet for a photo.  Read the whole thread <a href="https://twitter.com/SecurityJon/status/1333806750722560005">here</a></p>
+<p>As part of the twitter thread, the original researcher and author <a href="https://twitter.com/securityjon">@SecurityJon</a> published a link to the firmware for the router he was looking at - <a href="https://static.tp-link.com/resources/software/TL-WA701ND_V2_130528.zip">https://static.tp-link.com/resources/software/TL-WA701ND_V2_130528.zip</a> in his tweet <a href="https://twitter.com/SecurityJon/status/1333830677062684674">here</a>. _Warning: I had to navigate through TP-Link's support pages to actually download the firmware, the direct link showed me a screen that said:</p>
+<blockquote>
+<p>Please go to TP-Link Offical Website to get products, software and services for your region.</p>
+</blockquote>
+<p>The firmware is the third version from the top at this webpage: <a href="https://www.tp-link.com/us/support/download/tl-wa701nd/#Firmware">https://www.tp-link.com/us/support/download/tl-wa701nd/#Firmware</a></p>
+<h2 id="extacting-the-u-boot-bootloader-from-the-firmware-image">Extacting the U-Boot Bootloader from the firmware image</h2>
+<p>Once I downloaded the firmware image, I unziped <code>TL-WA701ND_V2_130528.zip</code> which contains <code>wa701nv2_en_3_16_6_up_boot(130528).bin</code>.</p>
+<p>Running <a href="https://github.com/refirmlabs/binwalk">binwalk</a> on the extracted <code>.bin</code> file resulted in this output:</p>
+<pre class="hljs"><code><div>$ binwalk wa701nv2_en_3_16_6_up_boot\(130528\).bin 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             TP-Link firmware header, firmware version: 0.-17687.3, image version: &quot;&quot;, product ID: 0x0, product version: 117506050, kernel load address: 0x0, kernel entry point: 0x80002000, kernel offset: 4063744, kernel length: 512, rootfs offset: 891601, rootfs length: 1048576, bootloader offset: 2883584, bootloader length: 0
+14160         0x3750          U-Boot version string, &quot;U-Boot 1.1.4 (May 28 2013 - 11:35:30)&quot;
+14208         0x3780          CRC32 polynomial table, big endian
+15504         0x3C90          uImage header, header size: 64 bytes, header CRC: 0xFCDBAA10, created: 2013-05-28 03:35:31, image size: 32793 bytes, Data Address: 0x80010000, Entry Point: 0x80010000, data CRC: 0xB9564E5B, OS: Linux, CPU: MIPS, image type: Firmware Image, compression type: lzma, image name: &quot;u-boot image&quot;
+15568         0x3CD0          LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 93704 bytes
+131584        0x20200         TP-Link firmware header, firmware version: 0.0.3, image version: &quot;&quot;, product ID: 0x0, product version: 117506050, kernel load address: 0x0, kernel entry point: 0x80002000, kernel offset: 3932160, kernel length: 512, rootfs offset: 891601, rootfs length: 1048576, bootloader offset: 2883584, bootloader length: 0
+132096        0x20400         LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 2580580 bytes
+1180160       0x120200        Squashfs filesystem, little endian, version 4.0, compression:lzma, size: 2649889 bytes, 585 inodes, blocksize: 131072 bytes, created: 2013-05-28 03:45:22
+</div></code></pre>
+<p>Really the only thing I was interested in is this line:</p>
+<pre class="hljs"><code><div>15504         0x3C90          uImage header, header size: 64 bytes, header CRC: 0xFCDBAA10, created: 2013-05-28 03:35:31, image size: 32793 bytes, Data Address: 0x80010000, Entry Point: 0x80010000, data CRC: 0xB9564E5B, OS: Linux, CPU: MIPS, image type: Firmware Image, compression type: lzma, image name: &quot;u-boot image&quot;
+</div></code></pre>
+<p>Usually in these SoHo routers the bootloader is contained within the firmware image, and this instance was no different.  I ran the following <code>dd</code> command to carve out the bootloader:</p>
+<pre class="hljs"><code><div>$ dd if=wa701nv2_en_3_16_6_up_boot\(130528\).bin of=u-boot.bin bs=1 skip=15504 count=$((131584 - 15504))
+</div></code></pre>
+<p>If you are wondering where I got <code>131584</code> from, its the next location in the binwalk output of anything meaningful. Even if we carve out extra data, it won't matter.</p>
+<p>So now I run binwalk on <code>u-boot.bin</code> and we see basically the same result:</p>
+<pre class="hljs"><code><div>DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             uImage header, header size: 64 bytes, header CRC: 0xFCDBAA10, created: 2013-05-28 03:35:31, image size: 32793 bytes, Data Address: 0x80010000, Entry Point: 0x80010000, data CRC: 0xB9564E5B, OS: Linux, CPU: MIPS, image type: Firmware Image, compression type: lzma, image name: &quot;u-boot image&quot;
+64            0x40            LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, uncompressed size: 93704 bytes
+</div></code></pre>
+<p>This tells me that 64 bytes after the legacy U-Boot header (normally called a uImage) is a lzma-compressed blob.  So lets carve out that compressed blob:</p>
+<pre class="hljs"><code><div>$ dd if=u-boot.bin of=u-boot.body.lzma bs=64 skip=1
+</div></code></pre>
+<p>Next we use <code>7z</code> to extract the lzma-compressed data:</p>
+<pre class="hljs"><code><div>$ 7z x u-boot.body.lzma 
+
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,8 CPUs Intel(R) Xeon(R) CPU E5-2660 v2 @ 2.20GHz (306E4),ASM,AES-NI)
+
+Scanning the drive for archives:
+1 file, 116016 bytes (114 KiB)
+
+Extracting archive: u-boot.body.lzma
+--
+Path = u-boot.body.lzma
+Type = lzma
+
+ERROR: There are some data after the end of the payload data : u-boot.body
+
+Sub items Errors: 1
+
+Archives with Errors: 1
+
+Sub items Errors: 1
+</div></code></pre>
+<p>The error <code>ERROR: There are some data after the end of the payload data : u-boot.body</code> simply means we carved out too much data when using <code>dd</code> to create <code>u-boot.bin</code>.  It does not prevent us from proceeding though.  At this point we should have a file named <code>u-boot.body</code>.</p>
+<p>This is the point where we need to fire up Ghidra.</p>
+<p>Create a new Ghidra Project and import <code>u-boot.body</code>.  This will not be recognized as any specific type of binary, so the binary format option will be set to <code>Raw Binary</code>. This is because legacy U-Boot images allowed arbitrary executable data after the header.</p>
+<p>Next set the language to MIPS Big Endian Default:</p>
+<p><img src="images/0040/0040-ghidra-language-set.png" alt="Ghidra Language Set" title="Ghidra Language Set"></p>
+<p>After that you will need to set the load address. We know this value from the binwalk output, which parses the U-Boot header for the information.  The correct value here is <code>0x80010000</code> - search the binwalk output above for this value if you are confused as to where it came from.</p>
+<p><img src="images/0040/0040-ghidra-offset.png" alt="Ghidra Offset" title="Ghidra Offset"></p>
+<p>The next thing I did was search for strings.  I had to set the length down to 3 in order to catch the string <code>tpl</code>:</p>
+<p><img src="images/0040/0040-ghidra-string-set.png" alt="Ghidra String Set" title="Ghidra String Set"></p>
+<p>After that I filtered for <code>tpl</code>:</p>
+<p><img src="images/0040/0040-string-search-result.png" alt="Ghidra String Filter" title="Ghidra Image Filter"></p>
+<p>Double clicking on the string search result takes me to the location in the disassembler that the string search found the string at.  This is address <code>0x800256bc</code>.  We can apply the data type <code>string</code> to the <code>tpl</code> characters by select the four bytes at this address, right clicking on the green selection, and navigating to <code>Data-&gt;string</code>.  Afterwards, your selection should look like this:</p>
+<p><img src="images/0040/0040-ghidra-address-stringified.png" alt="Ghidra Stringified" title="Ghidra Address Stringifed"></p>
+<p>Next we right click on <code>s_tpl_800256bc</code> and select <code>References-&gt;Show References to s_tpl_800256bc</code> at the bottom of the context-menu. You should see a screen like this:</p>
+<p><img src="images/0040/0040-ghidra-references.png" alt="Ghidra References" title="Ghidra References"></p>
+<p>There should only be one reference, so I double clicked on it and was greeted with the following disassembly:</p>
+<p><img src="images/0040/0040-ghidra-disassembly.png" alt="Ghidra Disassembly" title="Ghidra Disassembly"></p>
+<p>And with that we have found the location in Ghidra where the &quot;escape sequence&quot; code exists!</p>
+<p><a href="https://nstarke.github.io/">Back</a></p>
+
+</body>
+</html>
