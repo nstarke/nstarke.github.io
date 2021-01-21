@@ -386,7 +386,7 @@ $ sudo apt install gcc-4.9-arm-linux-gnueabihf
 <pre class="hljs"><code><div>$ git clone https://github.com/u-boot/u-boot.git
 $ git checkout v2015.01
 $ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make Bananapi_defconfig
-$ make
+$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make
 </div></code></pre>
 <p>At the end of the compilation process, a few binaries should be dropped on the filesystem.</p>
 <pre class="hljs"><code><div>$ file {u-boot,u-boot.bin}

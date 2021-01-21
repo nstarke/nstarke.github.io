@@ -33,7 +33,7 @@ Then to compile u-boot:
 $ git clone https://github.com/u-boot/u-boot.git
 $ git checkout v2015.01
 $ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make Bananapi_defconfig
-$ make
+$ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make
 ```
 
 At the end of the compilation process, a few binaries should be dropped on the filesystem.
