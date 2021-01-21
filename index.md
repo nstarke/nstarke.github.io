@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Netgear Bootloader Analysis - Part 2](0042-netgear-bootloader-analysis-part-2.html) - _January 20th, 2021_
 * [Netgear Bootloader Analysis](0041-netgear-bootloader-analysis.html) - _January 18th, 2021_
 * [Loading Das U-Boot Images in Ghidra](0040-loading-uboot-images-in-ghidra.html) - _December 1st, 2020_
 * [ONN Laptop BIOS Exploration](0039-onn-laptop-bios-exploration.html) - _November 26th, 2020_
