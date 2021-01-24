@@ -1,6 +1,6 @@
 # How to Execute Raw U-Boot Bootloader Binary with QEMU
 
-Published January 24, 2021
+Published: January 24, 2021
 
 When working with U-Boot images, it might be desireable to execute an image in QEMU.  If you have compiled U-Boot yourself, you will notice there are two different "types" of u-boot images compiled:
 
