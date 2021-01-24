@@ -1,5 +1,7 @@
 # Netgear Bootloader Analysis: Part 2
 
+Published: January 20, 2021
+
 This is the second part of my analysis on the bootloader for the Netgear Nighthawk R9000 (x10) router.
 
 ## Static Comparison
