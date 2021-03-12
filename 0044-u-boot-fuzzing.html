@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0044-u-boot-fuzzing.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="u-boot-fuzzing">U-Boot Fuzzing</h1>
+<p>Published: March 12, 2021</p>
+<p>I recently read some novel research into using AFL to fuzz the Grub2 Boot Loader [1].  Something I was not aware of before reading that article was that grub2 has an emulation mode that allows it to run as an elf binary. I decided to investigate whether or not these techniques could apply to the U-boot bootloader.  U-Boot, it turns out, also has an ELF emulation mode. All of my testing was against the <code>v2021.01</code> tag.</p>
+<p>The hope was to find memory corruption bugs that might allow an attacker to bypass secure boot.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>My fuzz testing did not produce any meaningful crashing test cases against a &quot;real&quot; (virtualized) U-Boot instance.  This may have been because my test corpus was limited, as well as the fact that I could only execute one command at a time before the U-Boot emulated process exited.  The methodology is presented here in case anyone wants to perform similar testing, perhaps on a different input corpus.</p>
+<h2 id="patching-u-boot">Patching U-Boot</h2>
+<p>I developed a small patch that will exit out of the U-Boot runtime after a command is run.</p>
+<pre class="hljs"><code><div>diff --git a/common/cli_hush.c b/common/cli_hush.c
+index 66995c255b..c05bad819e 100644
+<span class="hljs-comment">--- a/common/cli_hush.c</span>
+<span class="hljs-comment">+++ b/common/cli_hush.c</span>
+<span class="hljs-meta">@@ -84,6 +84,7 @@</span>
+ #include &lt;cli.h&gt;
+ #include &lt;cli_hush.h&gt;
+ #include &lt;command.h&gt;        /* find_cmd */
+<span class="hljs-addition">+#include &lt;os.h&gt;</span>
+ #ifndef CONFIG_SYS_PROMPT_HUSH_PS2
+ #define CONFIG_SYS_PROMPT_HUSH_PS2     "&gt; "
+ #endif
+@@ -3218,6 +3219,10 @@ static int parse_stream_outer(struct in_str *inp, int flag)
+                        }
+                        if (code == -1)
+                            flag_repeat = 0;
+<span class="hljs-addition">+</span>
+<span class="hljs-addition">+            if (code &gt;= 0 ){</span>
+<span class="hljs-addition">+                os_exit(0);</span>
+<span class="hljs-addition">+            }</span>
+ #endif
+                } else {
+                        if (ctx.old_flag != 0) {
+</div></code></pre>
+<p>I also added <code>CONFIG_BOOTDELAY=0</code> to the U-Boot config file located at <code>.config</code>.  This will shorten the execution time of the U-Boot emulation by skipping the U-Boot autoboot countdown before each boot.</p>
+<p>Once I had the patch developed, I built U-Boot for the sandbox environment:</p>
+<pre class="hljs"><code><div>$ make sandbox_defconfig
+$ make
+</div></code></pre>
+<p>This generates an executable elf file named <code>u-boot</code> in the U-Boot source tree root. It is possible to send commands to the emulated U-Boot environment on stdin, provided there is a space character preceeding the command:</p>
+<pre class="hljs"><code><div>echo &quot; echo test&quot; | ./u-boot
+
+
+U-Boot 2021.01-dirty (Mar 10 2021 - 19:32:21 +0000)
+
+DRAM:  128 MiB
+WDT:   Not found!
+MMC:
+In:    serial
+Out:   serial
+Err:   serial
+SCSI:
+Net:   No ethernet found.
+Hit any key to stop autoboot:  0
+=&gt; echo test
+test
+</div></code></pre>
+<h2 id="developing-afl-input-corpus">Developing AFL Input Corpus</h2>
+<p>At this point I developed a small corpus of U-Boot CLI commands.  I used:</p>
+<pre class="hljs"><code><div> printenv
+ showvar asdf
+ source 0x0
+ md 0 20
+ ls emmc 0:0 /
+ ls nand 0:0 /
+</div></code></pre>
+<p>Each line was saved to a separate file in my AFL input directory.  I then launched the AFL process:</p>
+<pre class="hljs"><code><div>$ afl-fuzz -Q -i ../in -o ../out -M main -- $UBOOT_PATH/u-boot
+</div></code></pre>
+<p>I used AFL++ [2] in qemu mode for this round of fuzzing. I let it run for two days at about 2-3 executions per second. This is obviously very slow, but it is still much faster than trying to manually test.</p>
+<p>After two days AFL was reporting 160 unique crashes, and I needed some way to triage these test cases and validate them against a more &quot;realistic&quot; U-Boot environment.  I developed a few scripts to aid in automating the process.</p>
+<h2 id="processing-results">Processing Results</h2>
+<p>First of all, I needed the ability to run the AFL test cases as scripts within U-Boot. A U-Boot script is a set of U-Boot commands with a header prepended to the commands.  The script can be created using the <code>mkimage</code> executable that is located in the U-Boot source tree folder <code>tools</code>.</p>
+<p>Before we can run <code>mkimage</code> though, we need to remove the colons from the file names generated by AFL.  For example, one of my test cases files was of the form <code>id:000159,sig:11,src:000481,time:150469147,op:arith8,pos:114,val:+26</code>.  The <code>mkimage</code> command does not like file names with colons in them, so I used the <code>rename</code> command to remove the colons [3]:</p>
+<pre class="hljs"><code><div>$ cp out/main/crashes /tmp/fuzzer/crashes
+$ cd /tmp/fuzzer/crashes
+$ rename 's|:|-|g' *
+</div></code></pre>
+<p>Now we can feed out test cases files to the <code>mkimage</code> command and generate U-Boot scripts.  I wrote a small bash script to do this in bulk:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/bash
+</span>
+COUNTER=0
+<span class="hljs-keyword">for</span> FILE <span class="hljs-keyword">in</span> $(ls /tmp/fuzzer/crashes)
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"<span class="hljs-variable">$FILE</span>"</span>
+    <span class="hljs-variable">$UBOOT_PATH</span>/tools/mkimage -A arm -T script -C none -n <span class="hljs-string">"<span class="hljs-variable">$FILE</span>"</span> -d <span class="hljs-string">"/tmp/fuzzer/crashes/<span class="hljs-variable">$FILE</span>"</span> <span class="hljs-string">"<span class="hljs-variable">$COUNTER</span>"</span>.img
+    COUNTER=$((COUNTER+1))
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$COUNTER</span>
+<span class="hljs-keyword">done</span>
+</div></code></pre>
+<p>This script will create <code>.img</code> U-Boot script files for every testcases located in <code>/tmp/fuzzer/crashes</code>.  The <code>.img</code> file will be written to the current working directory.</p>
+<p>In order to make the <code>.img</code> files accessible to the virtualized U-Boot instance, it is necessary to create a virtual SD card that U-Boot can then load the <code>.img</code> scripts from the SD card [4].</p>
+<pre class="hljs"><code><div>$ dd if=/dev/zero of=sd.img bs=4096 count=$((16384*8)
+$ mkfs.vfat sd.img
+$ mount sd.img /mnt -o loop,rw
+</div></code></pre>
+<p>This will create a 512MB virtual SD card.  I mounted the virtual SD card to <code>/mnt</code> and then <code>cd /mnt</code>.  Then I can run the above bash script and it will generate test cases for each of my AFL output files on the virtual SD card.</p>
+<p>The last step is to generate a single script that will run all of the test case scripts.  I wrote a small bash script to do just that:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/bash</span>
+COUNTER=0
+rm runner.txt
+<span class="hljs-keyword">for</span> FILE <span class="hljs-keyword">in</span> $(ls /tmp/fuzzer/crashes)
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"echo <span class="hljs-variable">$COUNTER</span>.img"</span> &gt;&gt; runner.txt
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"fatload mmc 0:0 0x80000000 crashes/<span class="hljs-variable">$COUNTER</span>.img"</span> &gt;&gt; runner.txt
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"source 0x80000000"</span> &gt;&gt; runner.txt
+    COUNTER=$((COUNTER+1))
+<span class="hljs-keyword">done</span>
+<span class="hljs-variable">$UBOOT_PATH</span>/tools/mkimage -A arm -T script -C none -n <span class="hljs-string">"runner"</span> -d runner.txt runner.img
+</div></code></pre>
+<p>This bash script creates a U-Boot script that does three things for each crashing test case U-Boot script file:</p>
+<ol>
+<li>echo out the <code>.img</code> file name that is about to be run.</li>
+<li>uses the <code>fatload</code> U-Boot command to load the current test case U-Boot script from the SD Card into memory.  I chose the memory address <code>0x80000000</code>.</li>
+<li>uses the <code>source</code> U-Boot command to execute the script loaded into memory at address <code>0x80000000</code>.</li>
+</ol>
+<p>When I run this script in <code>/mnt/crashes</code>, it will generate a <code>runner.img</code> U-Boot script that will run all the AFL test-case U-Boot scripts.</p>
+<h2 id="validating-against-a-virtualized-instance">Validating against a Virtualized Instance</h2>
+<p>Now that we have <code>runner.img</code> created, it is time to unmount the virtual SD card and fire up a virtualized instance of U-Boot. I chose the <code>vexpress_ca9x4</code> board and built a secondary instance of U-Boot as my &quot;reference&quot; build.  This board can be built by running the following commands:</p>
+<pre class="hljs"><code><div>$ sudo umount /mnt
+$ make vexpress_ca9x4_defconfig
+$ CROSS_COMPILE=arm-linux-gnueabihf- make
+</div></code></pre>
+<p>We can run the resulting <code>u-boot</code> file in qemu easily:</p>
+<pre class="hljs"><code><div>$ qemu-system-arm -m 1024 -M vexpress-a9 -kernel ./u-boot -nographic -sd ./sd.img
+</div></code></pre>
+<p>Within U-Boot we then use <code>fatload</code> to load <code>runner.img</code> and execute it:</p>
+<pre class="hljs"><code><div>=&gt; fatload mmc 0 0x80000000 crashes/runner.img
+=&gt; source 0x80000000
+</div></code></pre>
+<p>This will execute all tests cases against the virtualized U-Boot instance.</p>
+<h1 id="results">Results</h1>
+<p>While AFL reported 160 crashing test cases, none of the crashes could be triggered from within a virtualized U-Boot instance.  While the crashing test cases could be triggered in Emulation mode, they did not cause crashes or hangs in Virtualized mode.  I tested all crashing and hanging test cases generated by AFL++. This is effectively a negative result.</p>
+<p>Sources:</p>
+<p>[1] <a href="https://sthbrx.github.io/blog/2021/03/04/fuzzing-grub-part-1/">https://sthbrx.github.io/blog/2021/03/04/fuzzing-grub-part-1/</a></p>
+<p>[2] <a href="https://github.com/AFLplusplus/AFLplusplus">https://github.com/AFLplusplus/AFLplusplus</a></p>
+<p>[3] <a href="https://askubuntu.com/questions/227410/replace-all-colons-from-filenames-with-terminal">https://askubuntu.com/questions/227410/replace-all-colons-from-filenames-with-terminal</a></p>
+<p>[4] <a href="https://stackoverflow.com/questions/46239926/booting-kernel-from-sd-in-qemu-arm-with-u-boot">https://stackoverflow.com/questions/46239926/booting-kernel-from-sd-in-qemu-arm-with-u-boot</a></p>
+<p><a href="/">Home</a></p>
+
+</body>
+</html>
