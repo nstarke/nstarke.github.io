@@ -57,7 +57,7 @@ During testing, many different packets were crafted and sent to the device.  Som
 
 ## Time Line
 
-* January 31st, 2021: Notified Vendor of Vulnerability - stated intent to disclose April 1st, 2020.
+* January 31st, 2021: Notified Vendor of Vulnerability - stated intent to disclose April 1st, 2021.
 * February 07, 2021: No response, sent reminder email asking for acknowledgement.
 * February 15, 2021: No response, sent another reminder email asking for acknowledgement.
 * February 21, 2021: No response, sent another reminder email asking for acknowledgement.
@@ -73,5 +73,7 @@ During testing, many different packets were crafted and sent to the device.  Som
 4/1/2021 - Initial Release
 
 4/1/2021 - Updating CVSS Score (thanks @ReverseICS).
+
+4/1/2021 - Fixed typo in anticipated disclosure date (Thanks Mulbrook).
 
 [Back](/)
