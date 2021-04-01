@@ -69,7 +69,9 @@ During testing, many different packets were crafted and sent to the device.  Som
 * April 1, 2021: Public Disclosure
 
 ## Revision History
+
 4/1/2021 - Initial Release
+
 4/1/2021 - Updating CVSS Score (thanks @ReverseICS).
 
 [Back](/)
