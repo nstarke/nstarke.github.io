@@ -2,7 +2,7 @@
 
 Published: April 1, 2021
 
-CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H [6.5]
+CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:N/A:H [6.1]
 
 # Prior Art
 
@@ -67,5 +67,9 @@ During testing, many different packets were crafted and sent to the device.  Som
 * March 24, 2021: Received tweet from @NETGEAR_UKI directing me to their bug bounty program. [https://twitter.com/NETGEAR_UKI/status/1374834049483599872](https://twitter.com/NETGEAR_UKI/status/1374834049483599872)
 * March 24, 2021: Responded saying I cannot disclose through the bug bounty program.  [https://twitter.com/nstarke/status/1374834668177096705](https://twitter.com/nstarke/status/1374834668177096705)
 * April 1, 2021: Public Disclosure
+
+## Revision History
+4/1/2021 - Initial Release
+4/1/2021 - Updating CVSS Score (thanks @ReverseICS).
 
 [Back](/)
