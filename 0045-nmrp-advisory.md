@@ -61,7 +61,7 @@ During testing, many different packets were crafted and sent to the device.  Som
 * February 07, 2021: No response, sent reminder email asking for acknowledgement.
 * February 15, 2021: No response, sent another reminder email asking for acknowledgement.
 * February 21, 2021: No response, sent another reminder email asking for acknowledgement.
-* February 21, 201: Tweeted @NETGEAR to attempt contact. [https://twitter.com/nstarke/status/1363552292729946113](https://twitter.com/nstarke/status/1363552292729946113)
+* February 21, 2021: Tweeted @NETGEAR to attempt contact. [https://twitter.com/nstarke/status/1363552292729946113](https://twitter.com/nstarke/status/1363552292729946113)
 * March 21, 2021: No response, sent another reminder email asking for acknowledgement.
 * March 21, 2021: Tweeted @NETGEAR again to attempt contact. [https://twitter.com/nstarke/status/1373701891801104385](https://twitter.com/nstarke/status/1373701891801104385)
 * March 24, 2021: Received tweet from @NETGEAR_UKI directing me to their bug bounty program. [https://twitter.com/NETGEAR_UKI/status/1374834049483599872](https://twitter.com/NETGEAR_UKI/status/1374834049483599872)
@@ -75,5 +75,7 @@ During testing, many different packets were crafted and sent to the device.  Som
 4/1/2021 - Updating CVSS Score (thanks @ReverseICS).
 
 4/1/2021 - Fixed typo in anticipated disclosure date (Thanks Mulbrook).
+
+4/1/2021 - Fixing another typo in time line (Thanks Mulbrook).
 
 [Back](/)
