@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Kdump and Kexec on Raspberry Pi](/0046-kexec-and-kdump-on-raspberry-pi.html) - _April 2, 2021_
 * [Netgear NMRP Advisory](0045-nmrp-advisory.html) - _April 1, 2021_
 * [U-Boot Fuzzing](0044-u-boot-fuzzing.html) - _March 12, 2021_
 * [How to Execute Raw U-Boot Bootloader Binary with QEMU](0043-qemu-system-execute-raw-binary-u-boot-image.html) - _January 24, 2021_
