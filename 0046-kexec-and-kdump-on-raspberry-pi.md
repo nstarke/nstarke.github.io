@@ -22,6 +22,14 @@ CONFIG_SYSFS=y
 CONFIG_PROC_VMCORE=y
 ```
 
+These flags must be set in the kernel `.config` file.  I usually place them near the bottom, right before the line:
+
+```
+# end of Kernel hacking
+```
+
+The kernel build process might re-order the contents of the `.config` file once you start compiling.
+
 Instructions on building the raspberry pi kernel, including cross compilation, are detailed here: [https://www.raspberrypi.org/documentation/linux/kernel/building.md](https://www.raspberrypi.org/documentation/linux/kernel/building.md).
 
 ## Setup
