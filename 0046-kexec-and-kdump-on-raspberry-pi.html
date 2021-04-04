@@ -384,6 +384,9 @@ CONFIG_PROC_VMCORE=y
 <pre class="hljs"><code><div># end of Kernel hacking
 </div></code></pre>
 <p>The kernel build process might re-order the contents of the <code>.config</code> file once you start compiling.</p>
+<p>On any other model of Raspbery Pi that might have more than one processing core, you will need to make sure SMP is disabled:</p>
+<pre class="hljs"><code><div>CONFIG_SMP=n
+</div></code></pre>
 <p>Instructions on building the raspberry pi kernel, including cross compilation, are detailed here: <a href="https://www.raspberrypi.org/documentation/linux/kernel/building.md">https://www.raspberrypi.org/documentation/linux/kernel/building.md</a>.</p>
 <h2 id="setup">Setup</h2>
 <p>The way kdump works is it uses kexec to launch a new kernel image after the original kernel image panics. It does this without bouncing the operating system through the BIOS and bootloader.  In the second kernel image launched by kexec, <code>/proc/vmcore</code> exists and contains the kernel core dump. <code>/proc/vmcore</code> does not exist until the second kernel load. kdump then copies that core dump to the configured location.  By default, that is <code>/var/crash</code> on the root <code>ext4</code> filesystem, located at <code>/dev/mmcblk0</code>.</p>

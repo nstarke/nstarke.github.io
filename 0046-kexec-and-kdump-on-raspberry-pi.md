@@ -30,6 +30,12 @@ These flags must be set in the kernel `.config` file.  I usually place them near
 
 The kernel build process might re-order the contents of the `.config` file once you start compiling.
 
+On any other model of Raspbery Pi that might have more than one processing core, you will need to make sure SMP is disabled:
+
+```
+CONFIG_SMP=n
+```
+
 Instructions on building the raspberry pi kernel, including cross compilation, are detailed here: [https://www.raspberrypi.org/documentation/linux/kernel/building.md](https://www.raspberrypi.org/documentation/linux/kernel/building.md).
 
 ## Setup
