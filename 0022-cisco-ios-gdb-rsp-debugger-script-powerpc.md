@@ -258,7 +258,7 @@ def OnBreak(command):
     if opcode_to_save is None:
         logger.error('Can\'t set breakpoint at {}. Read error'.format(addr))
         return
-    res = OnWriteMem(addr, '0000000d')
+    res = OnWriteMem(addr, '7fe00008')
     if res:
         breakpoints_count += 1
         breakpoints[addr] = (breakpoints_count, opcode_to_save)

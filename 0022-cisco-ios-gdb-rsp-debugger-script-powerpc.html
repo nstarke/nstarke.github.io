@@ -620,7 +620,7 @@ you can also manually send any GDB RSP command
     <span class="hljs-keyword">if</span> opcode_to_save <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
         logger.error(<span class="hljs-string">'Can\'t set breakpoint at {}. Read error'</span>.format(addr))
         <span class="hljs-keyword">return</span>
-    res = OnWriteMem(addr, <span class="hljs-string">'0000000d'</span>)
+    res = OnWriteMem(addr, <span class="hljs-string">'7fe00008'</span>)
     <span class="hljs-keyword">if</span> res:
         breakpoints_count += <span class="hljs-number">1</span>
         breakpoints[addr] = (breakpoints_count, opcode_to_save)
