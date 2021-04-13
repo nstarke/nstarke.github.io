@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [Ghidra-firmware-utils Windows Adventure](/0047-ghidra-firmware-utils-adventure.html) - _April 13, 2021_
 * [Kdump and Kexec on Raspberry Pi](/0046-kexec-and-kdump-on-raspberry-pi.html) - _April 2, 2021_
 * [Netgear NMRP Advisory](0045-nmrp-advisory.html) - _April 1, 2021_
 * [U-Boot Fuzzing](0044-u-boot-fuzzing.html) - _March 12, 2021_
