@@ -366,6 +366,7 @@ code {
     });
   </script>
 <h1 id="ghidra-firmware-utils-adventure">Ghidra-firmware-utils Adventure</h1>
+<p>Published: April 13, 2021</p>
 <p>I recently revisited the problem of <code>ghidra-firmware-utils</code> ( <a href="https://github.com/al3xtjames/ghidra-firmware-utils">https://github.com/al3xtjames/ghidra-firmware-utils</a> ) not working on Windows.  If you use the default gradle project in the current master branch, you will be greeted with the following error when you try to open a UEFI filesystem:</p>
 <pre class="hljs"><code><div>'byte[] firmware.common.EFIDecompressor.nativeDecompress(byte[])'
 java.lang.UnsatisfiedLinkError: 'byte[] firmware.common.EFIDecompressor.nativeDecompress(byte[])'
@@ -598,6 +599,126 @@ clean.dependsOn <span class="hljs-string">"cleanLibraries"</span>
 </div></code></pre>
 <p>This <code>build.gradle</code> file will compile a 64-bit version of <code>efidecompress.dll</code>.  It is necessary to compile a 64-bit version of the library - a 32-bit version will not work on64-bit systems.</p>
 <p>I'm not sure how to refactor this <code>build.gradle</code> file to work with all architectures so I will create a Github Issue and work with the maintainers to get it in an acceptable state and merged.</p>
+<p>** Update **</p>
+<p>All that needs to be set is the 64-bit compiler for 64-bit platforms. An updated <code>build.gradle</code> is provided below:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Builds a Ghidra Extension for a given Ghidra installation.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// An absolute path to the Ghidra installation directory must be supplied either by setting the</span>
+<span class="hljs-comment">// GHIDRA_INSTALL_DIR environment variable or Gradle project property:</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//     &gt; export GHIDRA_INSTALL_DIR=&lt;Absolute path to Ghidra&gt;</span>
+<span class="hljs-comment">//     &gt; gradle</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//         or</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//     &gt; gradle -PGHIDRA_INSTALL_DIR=&lt;Absolute path to Ghidra&gt;</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Gradle should be invoked from the directory of the project to build.  Please see the</span>
+<span class="hljs-comment">// application.gradle.version property in &lt;GHIDRA_INSTALL_DIR&gt;/Ghidra/application.properties</span>
+<span class="hljs-comment">// for the correction version of Gradle to use for the Ghidra installation you specify.</span>
+
+<span class="hljs-keyword">import</span> org.apache.tools.ant.taskdefs.condition.Os
+
+<span class="hljs-comment">//----------------------START "DO NOT MODIFY" SECTION------------------------------</span>
+<span class="hljs-keyword">def</span> ghidraInstallDir
+
+<span class="hljs-keyword">if</span> (System.env.GHIDRA_INSTALL_DIR) {
+	ghidraInstallDir = System.env.GHIDRA_INSTALL_DIR
+}
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (project.hasProperty(<span class="hljs-string">"GHIDRA_INSTALL_DIR"</span>)) {
+	ghidraInstallDir = project.getProperty(<span class="hljs-string">"GHIDRA_INSTALL_DIR"</span>)
+}
+
+<span class="hljs-keyword">if</span> (ghidraInstallDir) {
+	apply <span class="hljs-string">from:</span> <span class="hljs-keyword">new</span> File(ghidraInstallDir).getCanonicalPath() + <span class="hljs-string">"/support/buildExtension.gradle"</span>
+}
+<span class="hljs-keyword">else</span> {
+	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> GradleException(<span class="hljs-string">"GHIDRA_INSTALL_DIR is not defined!"</span>)
+}
+<span class="hljs-comment">//----------------------END "DO NOT MODIFY" SECTION-------------------------------</span>
+
+apply <span class="hljs-string">plugin:</span> <span class="hljs-string">"c"</span>
+model {
+	platforms {
+        x64 {
+            architecture <span class="hljs-string">"x86_64"</span>
+        }
+    }
+	components {
+		efidecompress(NativeLibrarySpec) {
+			targetPlatform <span class="hljs-string">"x64"</span>
+			sources {
+				c {
+					source {
+						srcDir <span class="hljs-string">"src/efidecompress/c"</span>
+						include <span class="hljs-string">"efidecompress.c"</span>
+					}
+				}
+			}
+
+			binaries.all {
+				cCompiler.args <span class="hljs-string">"-DCONFIG_JNI"</span>
+				<span class="hljs-keyword">if</span> (targetPlatform.operatingSystem.macOsX) {
+					cCompiler.args <span class="hljs-string">"-I"</span>, <span class="hljs-string">"${System.properties['java.home']}/include"</span>
+					cCompiler.args <span class="hljs-string">"-I"</span>, <span class="hljs-string">"${System.properties['java.home']}/include/darwin"</span>
+					cCompiler.args <span class="hljs-string">"-mmacosx-version-min=10.9"</span>
+					linker.args <span class="hljs-string">"-mmacosx-version-min=10.9"</span>
+				} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (targetPlatform.operatingSystem.linux) {
+					cCompiler.args <span class="hljs-string">"-I"</span>, <span class="hljs-string">"${System.properties['java.home']}/include"</span>
+					cCompiler.args <span class="hljs-string">"-I"</span>, <span class="hljs-string">"${System.properties['java.home']}/include/linux"</span>
+					cCompiler.args <span class="hljs-string">"-D_FILE_OFFSET_BITS=64"</span>
+				} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (targetPlatform.operatingSystem.windows) {
+					cCompiler.args <span class="hljs-string">"-I${System.properties['java.home']}\\include"</span>
+					cCompiler.args <span class="hljs-string">"-I${System.properties['java.home']}\\include\\win32"</span>
+				}
+			}
+		}
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	toCopy
+}
+
+dependencies {
+	toCopy <span class="hljs-string">group:</span> <span class="hljs-string">"org.tukaani"</span>, <span class="hljs-string">name:</span> <span class="hljs-string">"xz"</span>, <span class="hljs-string">version:</span> <span class="hljs-string">"1.8"</span>
+}
+
+task copyLibraries(<span class="hljs-string">type:</span> Copy, <span class="hljs-string">dependsOn:</span> <span class="hljs-string">"efidecompressSharedLibrary"</span>) {
+	copy {
+		from configurations.toCopy into <span class="hljs-string">"lib"</span>
+	}
+
+	<span class="hljs-keyword">if</span> (Os.isFamily(Os.FAMILY_MAC)) {
+		from <span class="hljs-string">"$buildDir/libs/efidecompress/shared/libefidecompress.dylib"</span> into <span class="hljs-string">"os/osx64"</span>
+	} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (Os.isFamily(Os.FAMILY_UNIX)) {
+		from <span class="hljs-string">"$buildDir/libs/efidecompress/shared/libefidecompress.so"</span> into <span class="hljs-string">"os/linux64"</span>
+	} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (Os.isFamily(Os.FAMILY_WINDOWS)) {
+		from <span class="hljs-string">"$buildDir/libs/efidecompress/shared/efidecompress.dll"</span> into <span class="hljs-string">"os/win64"</span>
+	}
+}
+
+buildExtension.dependsOn <span class="hljs-string">"copyLibraries"</span>
+
+task cleanLibraries(<span class="hljs-string">type:</span> Delete) {
+	delete fileTree(<span class="hljs-string">"lib"</span>).matching {
+		include <span class="hljs-string">"*.jar"</span>
+	}
+
+	delete fileTree(<span class="hljs-string">"os"</span>).matching {
+		include <span class="hljs-string">"osx64/*.dylib"</span>
+		include <span class="hljs-string">"linux64/*.so"</span>
+		include <span class="hljs-string">"win64/*.dll"</span>
+	}
+}
+
+clean.dependsOn <span class="hljs-string">"cleanLibraries"</span>
+
+</div></code></pre>
 <p><a href="/">Back</a></p>
 
 </body>

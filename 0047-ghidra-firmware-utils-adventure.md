@@ -268,4 +268,128 @@ This `build.gradle` file will compile a 64-bit version of `efidecompress.dll`.  
 
 I'm not sure how to refactor this `build.gradle` file to work with all architectures so I will create a Github Issue and work with the maintainers to get it in an acceptable state and merged.
 
+** Update **
+
+All that needs to be set is the 64-bit compiler for 64-bit platforms. An updated `build.gradle` is provided below:
+
+```groovy
+// Builds a Ghidra Extension for a given Ghidra installation.
+//
+// An absolute path to the Ghidra installation directory must be supplied either by setting the
+// GHIDRA_INSTALL_DIR environment variable or Gradle project property:
+//
+//     > export GHIDRA_INSTALL_DIR=<Absolute path to Ghidra>
+//     > gradle
+//
+//         or
+//
+//     > gradle -PGHIDRA_INSTALL_DIR=<Absolute path to Ghidra>
+//
+// Gradle should be invoked from the directory of the project to build.  Please see the
+// application.gradle.version property in <GHIDRA_INSTALL_DIR>/Ghidra/application.properties
+// for the correction version of Gradle to use for the Ghidra installation you specify.
+
+import org.apache.tools.ant.taskdefs.condition.Os
+
+//----------------------START "DO NOT MODIFY" SECTION------------------------------
+def ghidraInstallDir
+
+if (System.env.GHIDRA_INSTALL_DIR) {
+	ghidraInstallDir = System.env.GHIDRA_INSTALL_DIR
+}
+else if (project.hasProperty("GHIDRA_INSTALL_DIR")) {
+	ghidraInstallDir = project.getProperty("GHIDRA_INSTALL_DIR")
+}
+
+if (ghidraInstallDir) {
+	apply from: new File(ghidraInstallDir).getCanonicalPath() + "/support/buildExtension.gradle"
+}
+else {
+	throw new GradleException("GHIDRA_INSTALL_DIR is not defined!")
+}
+//----------------------END "DO NOT MODIFY" SECTION-------------------------------
+
+apply plugin: "c"
+model {
+	platforms {
+        x64 {
+            architecture "x86_64"
+        }
+    }
+	components {
+		efidecompress(NativeLibrarySpec) {
+			targetPlatform "x64"
+			sources {
+				c {
+					source {
+						srcDir "src/efidecompress/c"
+						include "efidecompress.c"
+					}
+				}
+			}
+
+			binaries.all {
+				cCompiler.args "-DCONFIG_JNI"
+				if (targetPlatform.operatingSystem.macOsX) {
+					cCompiler.args "-I", "${System.properties['java.home']}/include"
+					cCompiler.args "-I", "${System.properties['java.home']}/include/darwin"
+					cCompiler.args "-mmacosx-version-min=10.9"
+					linker.args "-mmacosx-version-min=10.9"
+				} else if (targetPlatform.operatingSystem.linux) {
+					cCompiler.args "-I", "${System.properties['java.home']}/include"
+					cCompiler.args "-I", "${System.properties['java.home']}/include/linux"
+					cCompiler.args "-D_FILE_OFFSET_BITS=64"
+				} else if (targetPlatform.operatingSystem.windows) {
+					cCompiler.args "-I${System.properties['java.home']}\\include"
+					cCompiler.args "-I${System.properties['java.home']}\\include\\win32"
+				}
+			}
+		}
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	toCopy
+}
+
+dependencies {
+	toCopy group: "org.tukaani", name: "xz", version: "1.8"
+}
+
+task copyLibraries(type: Copy, dependsOn: "efidecompressSharedLibrary") {
+	copy {
+		from configurations.toCopy into "lib"
+	}
+
+	if (Os.isFamily(Os.FAMILY_MAC)) {
+		from "$buildDir/libs/efidecompress/shared/libefidecompress.dylib" into "os/osx64"
+	} else if (Os.isFamily(Os.FAMILY_UNIX)) {
+		from "$buildDir/libs/efidecompress/shared/libefidecompress.so" into "os/linux64"
+	} else if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+		from "$buildDir/libs/efidecompress/shared/efidecompress.dll" into "os/win64"
+	}
+}
+
+buildExtension.dependsOn "copyLibraries"
+
+task cleanLibraries(type: Delete) {
+	delete fileTree("lib").matching {
+		include "*.jar"
+	}
+
+	delete fileTree("os").matching {
+		include "osx64/*.dylib"
+		include "linux64/*.so"
+		include "win64/*.dll"
+	}
+}
+
+clean.dependsOn "cleanLibraries"
+
+```
+
 [Back](/)
