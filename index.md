@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [SMM Module and SMI Handler Exploitation Patterns](/0048-smm-module-and-smi-handler-exploitation-patterns.html) - _April 18, 2021_
 * [Ghidra-firmware-utils Windows Adventure](/0047-ghidra-firmware-utils-adventure.html) - _April 13, 2021_
 * [Kdump and Kexec on Raspberry Pi](/0046-kexec-and-kdump-on-raspberry-pi.html) - _April 2, 2021_
 * [Netgear NMRP Advisory](0045-nmrp-advisory.html) - _April 1, 2021_
