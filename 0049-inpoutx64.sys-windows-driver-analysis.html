@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0049-inpoutx64.sys-windows-driver-analysis.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="inpoutx64sys-windows-driver-analysis">Inpoutx64.sys Windows Driver Analysis</h1>
+<p>Published: May 15, 2021</p>
+<h2 id="prior-art">Prior Art</h2>
+<p><a href="https://github.com/namazso/physmem_drivers/blob/master/README.MD">https://github.com/namazso/physmem_drivers/blob/master/README.MD</a> - a list of drivers allowing access to physical memory, this list contains the driver analyzed in this blog post.</p>
+<p><a href="https://gist.github.com/k4nfr3/af970e7facb09195e56f2112e1c9549c">https://gist.github.com/k4nfr3/af970e7facb09195e56f2112e1c9549c</a> - A list of &quot;IOC Vulnerable Drivers&quot;; this list contains the driver analyzed in this blog post.</p>
+<h2 id="meta-data">Meta Data</h2>
+<p>File: <code>C:\Windows\System32\Drivers\inpoutx64.sys</code></p>
+<p>SHA256: <code>f8965fdce668692c3785afa3559159f9a18287bc0d53abb21902895a8ecf221b</code></p>
+<p>SHA1: <code>6afc6b04cf73dd461e4a4956365f25c1f1162387</code></p>
+<p>MD5: <code>9321a61a25c7961d9f36852ecaa86f55</code></p>
+<h2 id="investigation">Investigation</h2>
+<p>I recently analyzed a MSI PRO 10M-060US All-in-one PC.  This is a standard AIO-type PC.  My goal was to identify vulnerabilities in the factory image of the host as well as it's UEFI-based firmware.  One of the first things I did was to run <a href="https://github.com/matterpreter/OffensiveCSharp/tree/master/DriverQuery">DriverQuery</a> against the system.  All of the drivers currently loaded on the system were signed by Intel or Realtek except for one, <code>inpoutx64.sys</code>.</p>
+<p>DriverQuery output:</p>
+<pre class="hljs"><code><div>[...]
+Kernel level port access driver
+    Service Name: inpoutx64
+    Path: C:\Windows\System32\Drivers\inpoutx64.sys
+    Version: 1.2 x64 built by: WinDDK
+    Creation Time (UTC): 3/9/2020 7:03:58 PM
+    Cert Issuer: CN=VeriSign Class 3 Code Signing 2004 CA, OU=Terms of use at https://www.verisign.com/rpa (c)04, OU=VeriSign Trust Network, O=&quot;VeriSign, Inc.&quot;, C=US
+    Signer: CN=Red Fox UK Limited, OU=Development, OU=Digital ID Class 3 - Microsoft Software Validation v2, O=Red Fox UK Limited, L=London, S=London, C=GB
+[...]
+</div></code></pre>
+<p>There wasn't much information available on the <code>Signer</code> (<code>Red Fox UK Limited</code>) and that and the fact that it was the only driver signed by that signer made it stand out to me.  I loaded the Driver in Ghidra and decided to take a look.</p>
+<p>The entry function:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">entry</span><span class="hljs-params">(PDRIVER_OBJECT param_1)</span>
+
+</span>{
+  <span class="hljs-keyword">int</span> iVar1;
+  undefined local_98 [<span class="hljs-number">16</span>];
+  undefined local_88 [<span class="hljs-number">16</span>];
+  undefined local_78 [<span class="hljs-number">8</span>];
+  undefined8 local_70;
+  undefined8 local_68;
+  undefined8 local_60;
+  undefined8 local_58;
+  undefined4 local_50;
+  undefined8 local_48;
+  undefined8 local_40;
+  undefined8 local_38;
+  undefined8 local_30;
+  undefined8 local_28;
+  undefined4 local_20;
+  ulonglong local_18;
+  
+  <span class="hljs-keyword">if</span> (((DAT_00013108 == <span class="hljs-number">0</span>) || (DAT_00013108 == <span class="hljs-number">0x2b992ddfa232</span>)) &amp;&amp;
+     (DAT_00013108 = (_DAT_fffff78000000320 ^ <span class="hljs-number">0x13108</span>) &amp; <span class="hljs-number">0xffffffffffff</span>, DAT_00013108 == <span class="hljs-number">0</span>)) {
+    DAT_00013108 = <span class="hljs-number">0x2b992ddfa232</span>;
+  }
+  DAT_00013100 = ~DAT_00013108;
+  local_18 = DAT_00013108;
+  local_70 = <span class="hljs-number">0x7600650044005c</span>;
+  local_68 = <span class="hljs-number">0x5c006500630069</span>;
+  local_60 = <span class="hljs-number">0x6f0070006e0069</span>;
+  local_58 = <span class="hljs-number">0x36007800740075</span>;
+  local_50 = <span class="hljs-number">0x34</span>;
+  local_48 = <span class="hljs-number">0x73006f0044005c</span>;
+  local_40 = <span class="hljs-number">0x69007600650044</span>;
+  local_38 = <span class="hljs-number">0x5c007300650063</span>;
+  local_30 = <span class="hljs-number">0x6f0070006e0069</span>;
+  local_28 = <span class="hljs-number">0x36007800740075</span>;
+  local_20 = <span class="hljs-number">0x34</span>;
+  RtlInitUnicodeString(local_98,&amp;local_70);
+  RtlInitUnicodeString(local_88,&amp;local_48);
+  iVar1 = IoCreateDevice(param_1,<span class="hljs-number">0</span>,local_98,<span class="hljs-number">0x22</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,local_78);
+  <span class="hljs-keyword">if</span> ((<span class="hljs-number">-1</span> &lt; iVar1) &amp;&amp; (iVar1 = IoCreateSymbolicLink(local_88,local_98), <span class="hljs-number">-1</span> &lt; iVar1)) {
+    param_1-&gt;MajorFunction[<span class="hljs-number">0</span>] = &amp;LAB_00011010;
+    param_1-&gt;MajorFunction[<span class="hljs-number">0xe</span>] = FUN_000112f0;
+    param_1-&gt;DriverUnload = &amp;LAB_00011040;
+  }
+  FUN_00011a00(local_18);
+  <span class="hljs-keyword">return</span>;
+}
+</div></code></pre>
+<p>There are two 16-bit unicode strings denoting the driver device IO path (that is what <code>local_70</code>-<code>local_20</code> are in the above decompiler output).  These two strings are:</p>
+<ul>
+<li><code>\Driver\inpoutx64</code></li>
+<li><code>\DosDevices\inpoutx64</code></li>
+</ul>
+<p>These are then passed to <code>IoCreateDevice</code> to create the Device Object in the <code>entry</code> function. <code>param_1-&gt;MajorFunction[0xe] = FUN_000112f0;</code> defines the <code>IRP_MJ_DEVICE_CONTROL</code> handler function, which is the function responsible for handling IOCTL calls.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FUN_000112f0</span><span class="hljs-params">(undefined8 param_1,PIRP param_2)</span>
+
+</span>{
+  undefined2 uVar1;
+  uint uVar2;
+  uint uVar3;
+  longlong lVar4;
+  undefined8 *puVar5;
+  <span class="hljs-keyword">int</span> iVar6;
+  undefined uVar7;
+  undefined2 uVar8;
+  undefined4 uVar9;
+  <span class="hljs-keyword">int</span> iVar10;
+  ulonglong uVar11;
+  ulonglong uVar12;
+  undefined8 local_38;
+  longlong local_30;
+  longlong local_28;
+  longlong local_20 [<span class="hljs-number">2</span>];
+  
+  lVar4 = *(longlong *)&amp;(param_2-&gt;Tail).field_0x40;
+  uVar2 = *(uint *)(lVar4 + <span class="hljs-number">8</span>);
+  uVar3 = *(uint *)(lVar4 + <span class="hljs-number">0x10</span>);
+  uVar12 = (ulonglong)uVar3;
+  puVar5 = *(undefined8 **)((longlong)&amp;param_2-&gt;AssociatedIrp + <span class="hljs-number">4</span>);
+  iVar10 = <span class="hljs-number">0</span>;
+  iVar6 = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">switch</span>(*(undefined4 *)(lVar4 + <span class="hljs-number">0x18</span>)) {
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c402004</span>:
+    <span class="hljs-keyword">if</span> ((<span class="hljs-number">1</span> &lt; uVar3) &amp;&amp; (uVar2 != <span class="hljs-number">0</span>)) {
+      uVar7 = in(*(undefined2 *)puVar5);
+      *(undefined *)puVar5 = uVar7;
+    }
+    (param_2-&gt;IoStatus).Information = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">goto</span> LAB_000114ac;
+  <span class="hljs-keyword">default</span>:
+    iVar6 = <span class="hljs-number">-0x3fffffff</span>;
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c402008</span>:
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span> &lt; uVar3) {
+      uVar8 = *(undefined2 *)puVar5;
+      uVar7 = *(undefined *)((longlong)puVar5 + <span class="hljs-number">2</span>);
+      (param_2-&gt;IoStatus).Information = <span class="hljs-number">10</span>;
+      out(uVar8,uVar7);
+      <span class="hljs-keyword">goto</span> LAB_000114ac;
+    }
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c40200c</span>:
+    <span class="hljs-keyword">if</span> ((<span class="hljs-number">1</span> &lt; uVar3) &amp;&amp; (<span class="hljs-number">1</span> &lt; uVar2)) {
+      uVar8 = in(*(undefined2 *)puVar5);
+      *(undefined2 *)puVar5 = uVar8;
+    }
+    (param_2-&gt;IoStatus).Information = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">goto</span> LAB_000114ac;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c402010</span>:
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">3</span> &lt; uVar3) {
+      uVar8 = *(undefined2 *)puVar5;
+      uVar1 = *(undefined2 *)((longlong)puVar5 + <span class="hljs-number">2</span>);
+      (param_2-&gt;IoStatus).Information = <span class="hljs-number">10</span>;
+      out(uVar8,uVar1);
+      <span class="hljs-keyword">goto</span> LAB_000114ac;
+    }
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c402014</span>:
+    <span class="hljs-keyword">if</span> ((<span class="hljs-number">3</span> &lt; uVar3) &amp;&amp; (<span class="hljs-number">3</span> &lt; uVar2)) {
+      uVar9 = in(*(undefined2 *)puVar5);
+      *(undefined4 *)puVar5 = uVar9;
+    }
+    (param_2-&gt;IoStatus).Information = <span class="hljs-number">4</span>;
+    <span class="hljs-keyword">goto</span> LAB_000114ac;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c402018</span>:
+    iVar6 = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">7</span> &lt; uVar3) {
+      uVar9 = *(undefined4 *)((longlong)puVar5 + <span class="hljs-number">4</span>);
+      (param_2-&gt;IoStatus).Information = <span class="hljs-number">10</span>;
+      out((short)puVar5,uVar9);
+      <span class="hljs-keyword">goto</span> LAB_000114ac;
+    }
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c40201c</span>:
+    <span class="hljs-keyword">if</span> (uVar3 != <span class="hljs-number">0</span>) {
+      FUN_000116b0(&amp;local_38,puVar5,uVar12);
+      uVar11 = FUN_000110e0(local_28,local_30,local_20,&amp;local_38);
+      iVar10 = (<span class="hljs-keyword">int</span>)uVar11;
+      <span class="hljs-keyword">if</span> (<span class="hljs-number">-1</span> &lt; iVar10) {
+        FUN_000116b0(puVar5,&amp;local_38,uVar12);
+        (param_2-&gt;IoStatus).Information = uVar12;
+      }
+      *(<span class="hljs-keyword">int</span> *)&amp;(param_2-&gt;IoStatus).unlabelled0 = iVar10;
+      <span class="hljs-keyword">goto</span> LAB_000114ac;
+    }
+    <span class="hljs-keyword">goto</span> LAB_0001149a;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">0x9c402020</span>:
+    <span class="hljs-keyword">if</span> (uVar3 != <span class="hljs-number">0</span>) {
+      FUN_000116b0(&amp;local_38,puVar5,uVar12);
+      iVar10 = ZwUnmapViewOfSection(<span class="hljs-number">0xffffffffffffffff</span>,local_20[<span class="hljs-number">0</span>]);
+      ZwClose(local_38);
+      *(<span class="hljs-keyword">int</span> *)&amp;(param_2-&gt;IoStatus).unlabelled0 = iVar10;
+      <span class="hljs-keyword">goto</span> LAB_000114ac;
+    }
+LAB_0001149a:
+    *(undefined4 *)&amp;(param_2-&gt;IoStatus).unlabelled0 = <span class="hljs-number">0xc000000d</span>;
+    <span class="hljs-keyword">goto</span> LAB_000114ac;
+  }
+  iVar10 = iVar6;
+  (param_2-&gt;IoStatus).Information = <span class="hljs-number">0</span>;
+LAB_000114ac:
+  *(<span class="hljs-keyword">int</span> *)&amp;(param_2-&gt;IoStatus).unlabelled0 = iVar10;
+  IofCompleteRequest(param_2,<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">return</span> iVar10;
+}
+</div></code></pre>
+<p>The <code>switch</code> statement operates on the value <code>*(undefined4 *)(stack + 0x18)</code>.  This value is the IOCTL code value specified in User space. The function handles eight different IOCTL codes:</p>
+<ul>
+<li><code>0x9c402004</code></li>
+<li><code>0x9c402008</code></li>
+<li><code>0x9c40200c</code></li>
+<li><code>0x9c402010</code></li>
+<li><code>0x9c402014</code></li>
+<li><code>0x9c402018</code></li>
+<li><code>0x9c40201c</code></li>
+<li><code>0x9c402020</code></li>
+</ul>
+<p>The following IOCTL's are particularly interesting:</p>
+<ul>
+<li><code>0x9c402004</code> - <code>in</code></li>
+<li><code>0x9c402008</code> - <code>out</code></li>
+<li><code>0x9c40200c</code> - <code>in</code></li>
+<li><code>0x9c402010</code> - <code>out</code></li>
+<li><code>0x9c402014</code> - <code>in</code></li>
+</ul>
+<p>Each one of the IOCTL handlers allows input from user space to be passed to the <code>in</code> or <code>out</code> function, which translates to the <code>in</code> and <code>out</code> instructions in Intel assembly.  These functions/instructions allow writing to the processor's IO ports and are only accessible from kernel mode (Ring 0).  According to <a href="https://labs.sentinelone.com/cve-2021-21551-hundreds-of-millions-of-dell-computers-at-risk-due-to-multiple-bios-driver-privilege-escalation-flaws/">Sentinel Labs</a> this capability can be abuse to write arbitrary data to the hard disk at the lowest level.</p>
+<p>They also allowing calling a System Mode Interrupt (SMI) by passing <code>0xb2</code> as the first operand to the <code>out</code> function.</p>
+<p>So it would be really bad if a low privileged user could call these IOCTLs from user space.  This happens to be the case with this particular driver:</p>
+<pre class="hljs"><code><div>4: kd&gt; !drvobj inpoutx64
+Driver object (ffffab0806cf6e20) is for:
+ \Driver\inpoutx64
+
+Driver Extension List: (id , addr)
+
+Device Object list:
+ffffab0806cc6c80  
+4: kd&gt; !devobj ffffab0806cc6c80  
+Device object (ffffab0806cc6c80) is for:
+ inpoutx64 \Driver\inpoutx64 DriverObject ffffab0806cf6e20
+Current Irp 00000000 RefCount 1 Type 00000022 Flags 00000040
+SecurityDescriptor ffffbd07846fe0a0 DevExt 00000000 DevObjExt ffffab0806cc6dd0 
+ExtensionFlags (0x00000800)  DOE_DEFAULT_SD_PRESENT
+Characteristics (0000000000)  
+Device queue is not busy.
+4: kd&gt; !sd ffffbd07846fe0a0 0x1
+-&gt;Revision: 0x1
+-&gt;Sbz1    : 0x0
+-&gt;Control : 0x8814
+            SE_DACL_PRESENT
+            SE_SACL_PRESENT
+            SE_SACL_AUTO_INHERITED
+            SE_SELF_RELATIVE
+-&gt;Owner   : S-1-5-32-544 (Alias: BUILTIN\Administrators)
+-&gt;Group   : S-1-5-18 (Well Known Group: NT AUTHORITY\SYSTEM)
+-&gt;Dacl    : 
+-&gt;Dacl    : -&gt;AclRevision: 0x2
+-&gt;Dacl    : -&gt;Sbz1       : 0x0
+-&gt;Dacl    : -&gt;AclSize    : 0x5c
+-&gt;Dacl    : -&gt;AceCount   : 0x4
+-&gt;Dacl    : -&gt;Sbz2       : 0x0
+-&gt;Dacl    : -&gt;Ace[0]: -&gt;AceType: ACCESS_ALLOWED_ACE_TYPE
+-&gt;Dacl    : -&gt;Ace[0]: -&gt;AceFlags: 0x0
+-&gt;Dacl    : -&gt;Ace[0]: -&gt;AceSize: 0x14
+-&gt;Dacl    : -&gt;Ace[0]: -&gt;Mask : 0x001201bf
+-&gt;Dacl    : -&gt;Ace[0]: -&gt;SID: S-1-1-0 (Well Known Group: localhost\Everyone)
+
+-&gt;Dacl    : -&gt;Ace[1]: -&gt;AceType: ACCESS_ALLOWED_ACE_TYPE
+-&gt;Dacl    : -&gt;Ace[1]: -&gt;AceFlags: 0x0
+-&gt;Dacl    : -&gt;Ace[1]: -&gt;AceSize: 0x14
+-&gt;Dacl    : -&gt;Ace[1]: -&gt;Mask : 0x001f01ff
+-&gt;Dacl    : -&gt;Ace[1]: -&gt;SID: S-1-5-18 (Well Known Group: NT AUTHORITY\SYSTEM)
+
+-&gt;Dacl    : -&gt;Ace[2]: -&gt;AceType: ACCESS_ALLOWED_ACE_TYPE
+-&gt;Dacl    : -&gt;Ace[2]: -&gt;AceFlags: 0x0
+-&gt;Dacl    : -&gt;Ace[2]: -&gt;AceSize: 0x18
+-&gt;Dacl    : -&gt;Ace[2]: -&gt;Mask : 0x001f01ff
+-&gt;Dacl    : -&gt;Ace[2]: -&gt;SID: S-1-5-32-544 (Alias: BUILTIN\Administrators)
+
+-&gt;Dacl    : -&gt;Ace[3]: -&gt;AceType: ACCESS_ALLOWED_ACE_TYPE
+-&gt;Dacl    : -&gt;Ace[3]: -&gt;AceFlags: 0x0
+-&gt;Dacl    : -&gt;Ace[3]: -&gt;AceSize: 0x14
+-&gt;Dacl    : -&gt;Ace[3]: -&gt;Mask : 0x001200a9
+-&gt;Dacl    : -&gt;Ace[3]: -&gt;SID: S-1-5-12 (Well Known Group: NT AUTHORITY\RESTRICTED)
+
+-&gt;Sacl    : 
+-&gt;Sacl    : -&gt;AclRevision: 0x2
+-&gt;Sacl    : -&gt;Sbz1       : 0x0
+-&gt;Sacl    : -&gt;AclSize    : 0x1c
+-&gt;Sacl    : -&gt;AceCount   : 0x1
+-&gt;Sacl    : -&gt;Sbz2       : 0x0
+-&gt;Sacl    : -&gt;Ace[0]: -&gt;AceType: SYSTEM_MANDATORY_LABEL_ACE_TYPE
+-&gt;Sacl    : -&gt;Ace[0]: -&gt;AceFlags: 0x0
+-&gt;Sacl    : -&gt;Ace[0]: -&gt;AceSize: 0x14
+-&gt;Sacl    : -&gt;Ace[0]: -&gt;Mask : 0x00000001
+-&gt;Sacl    : -&gt;Ace[0]: -&gt;SID: S-1-16-4096 (Label: Mandatory Label\Low Mandatory Level)
+</div></code></pre>
+<p>The important line from the above output is <code>-&gt;Dacl    : -&gt;Ace[0]: -&gt;SID: S-1-1-0 (Well Known Group: localhost\Everyone)</code> which means an unprivileged user can call these IOCTLs.</p>
+<p>A scan of one enterprise resulted in 42 hosts of 24,967 hosts having this driver in their environment.</p>
+<h2 id="analysis">Analysis</h2>
+<p>It seems as though this driver could be used to escalate privileges on Window's hosts.  Actually exploiting the issue is complicated by the low level nature of writing to a hard disk at the IO port level, but it is my understanding this is possible. <a href="https://labs.sentinelone.com/cve-2021-21551-hundreds-of-millions-of-dell-computers-at-risk-due-to-multiple-bios-driver-privilege-escalation-flaws/">As Sentinel Labs put it in the aforementioned Blog Post</a>, regarding a similar vulnerability in a different driver:</p>
+<blockquote>
+<p>Another interesting vulnerability in this driver is one that makes it possible to run I/O (IN/OUT) instructions in kernel mode with arbitrary operands (LPE #3 and LPE #4). This is less trivial to exploit and might require using various creative techniques to achieve elevation of privileges.</p>
+</blockquote>
+<blockquote>
+<p>Since IOPL (I/O privilege level) equals to CPL (current privilege level), it is obviously possible to interact with peripheral devices such as the HDD and GPU to either read/write directly to the disk or invoke DMA operations. For example, we could communicate with ATA port IO for directly writing to the disk, then overwrite a binary that is loaded by a privileged process.</p>
+</blockquote>
+<p>The driver does not seem to be exclusive to MSI and appears to be contained in other OEM factory images as well.  As such, I am applying full disclosure to this vulnerability since I do not have the resources to contact each OEM individually, and there appears to be prior art on this driver. Along these lines, without any contact information for <code>Red Fox UK Limted</code>, I did not have the option to contact the driver author either.</p>
+<p>It is not clear to me what legitimate use such a driver would have or why its capabilities would need to be exposed to <code>localhost\Everyone</code>.</p>
+<p>Sources:</p>
+<p><a href="https://labs.sentinelone.com/cve-2021-21551-hundreds-of-millions-of-dell-computers-at-risk-due-to-multiple-bios-driver-privilege-escalation-flaws/">https://labs.sentinelone.com/cve-2021-21551-hundreds-of-millions-of-dell-computers-at-risk-due-to-multiple-bios-driver-privilege-escalation-flaws/</a></p>
+<p><a href="https://posts.specterops.io/methodology-for-static-reverse-engineering-of-windows-kernel-drivers-3115b2efed83">https://posts.specterops.io/methodology-for-static-reverse-engineering-of-windows-kernel-drivers-3115b2efed83</a></p>
+<p><a href="https://gist.github.com/k4nfr3/af970e7facb09195e56f2112e1c9549c">https://gist.github.com/k4nfr3/af970e7facb09195e56f2112e1c9549c</a></p>
+<p><a href="https://github.com/namazso/physmem_drivers/blob/master/README.MD">https://github.com/namazso/physmem_drivers/blob/master/README.MD</a></p>
+<h2 id="nb">NB</h2>
+<p>I am fairly new to the Windows Operating System and its internal components, including Windows Drivers.  If you see anything that is factually incorrect in this article I would love to hear from you: <a href="https://twitter.com/nstarke">@nstarke</a>.</p>
+<p><a href="/">Back</a></p>
+
+</body>
+</html>
