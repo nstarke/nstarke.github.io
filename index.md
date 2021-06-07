@@ -2,7 +2,8 @@
 
 ## Blog Posts
 
-* [Bruteforcing Ghidra File Offsets](0050-bruteforcing-ghidra-file-offsets.html) - _June 6th, 2021_
+* [Firmware Achaeology I: GS110TPv2 / GS108Tv2 Bugs](0051-firmware-archaeology-netgear-gs110tpv2.html) - _June 7, 2021_
+* [Bruteforcing Ghidra File Offsets](0050-bruteforcing-ghidra-file-offsets.html) - _June 6, 2021_
 * [Inpoutx64.sys Windows Driver Analysis](0049-inpoutx64.sys-windows-driver-analysis.html) - _May 15, 2021_
 * [SMM Module and SMI Handler Exploitation Patterns](0048-smm-module-and-smi-handler-exploitation-patterns.html) - _April 18, 2021_
 * [Ghidra-firmware-utils Windows Adventure](0047-ghidra-firmware-utils-adventure.html) - _April 13, 2021_
