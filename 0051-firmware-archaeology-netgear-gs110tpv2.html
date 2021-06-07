@@ -711,7 +711,7 @@ switchdrvr.bin: ELF 32-bit MSB executable, MIPS, MIPS32 version 1 (SYSV), static
 }
 
 </div></code></pre>
-<p>Looks like the help prompt is back function is back! Is the handler function for the help command in this version too? Searching for the string <code>Available Commands</code> again does not return a referenced string, so it looks like the <code>help</code> function handler is not present.</p>
+<p>Looks like the help prompt is back! Is the handler function for the help command in this version too? Searching for the string <code>Available Commands</code> again does not return a referenced string, so it looks like the <code>help</code> function handler is not present.</p>
 <p>Indeed, when I run <code>help</code> on version <code>5.4.2.33</code> I see this no help function output but also no error message indicating an invalid command.</p>
 <p>Alas the devshell still works in the latest version:</p>
 <p><img src="images/0050/devshell-uptime.PNG" alt="Devshell uptime" title="Devshell uptime screenshot"></p>

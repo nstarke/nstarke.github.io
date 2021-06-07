@@ -392,7 +392,7 @@ undefined4 FUN_80365b0c(char *param_1)
 
 ```
 
-Looks like the help prompt is back function is back! Is the handler function for the help command in this version too? Searching for the string `Available Commands` again does not return a referenced string, so it looks like the `help` function handler is not present.
+Looks like the help prompt is back! Is the handler function for the help command in this version too? Searching for the string `Available Commands` again does not return a referenced string, so it looks like the `help` function handler is not present.
 
 Indeed, when I run `help` on version `5.4.2.33` I see this no help function output but also no error message indicating an invalid command.
 
