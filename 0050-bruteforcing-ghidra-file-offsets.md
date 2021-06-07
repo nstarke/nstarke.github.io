@@ -25,7 +25,7 @@ GHIDRA_PROJECTS=$1
 FILENAME=$2
 LANGID=$3
 BASE_ADDR=$4
-TMP_PROJECT_NAME=$RAND
+TMP_PROJECT_NAME=$RANDOM
 CMD="$GHIDRA_HOME/support/analyzeHeadless \"$GHIDRA_PROJECTS\" \"$TMP_PROJECT_NAME\" -import \"$FILENAME\" -postScript CountReferencedStrings.java -processor \"$LANGID\" -deleteProject -loader BinaryLoader -loader-baseAddr \"$BASE_ADDR\" -loader-fileOffset"
 COUNTER=0
 for i in {0..128}

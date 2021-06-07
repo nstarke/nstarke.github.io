@@ -384,7 +384,7 @@ GHIDRA_PROJECTS=<span class="hljs-variable">$1</span>
 FILENAME=<span class="hljs-variable">$2</span>
 LANGID=<span class="hljs-variable">$3</span>
 BASE_ADDR=<span class="hljs-variable">$4</span>
-TMP_PROJECT_NAME=<span class="hljs-variable">$RAND</span>
+TMP_PROJECT_NAME=<span class="hljs-variable">$RANDOM</span>
 CMD=<span class="hljs-string">"<span class="hljs-variable">$GHIDRA_HOME</span>/support/analyzeHeadless \"<span class="hljs-variable">$GHIDRA_PROJECTS</span>\" \"<span class="hljs-variable">$TMP_PROJECT_NAME</span>\" -import \"<span class="hljs-variable">$FILENAME</span>\" -postScript CountReferencedStrings.java -processor \"<span class="hljs-variable">$LANGID</span>\" -deleteProject -loader BinaryLoader -loader-baseAddr \"<span class="hljs-variable">$BASE_ADDR</span>\" -loader-fileOffset"</span>
 COUNTER=0
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..128}
