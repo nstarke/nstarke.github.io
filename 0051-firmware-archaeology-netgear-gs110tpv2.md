@@ -1,4 +1,4 @@
-# Firmware Archeaology I: Netgear GS110TPv2
+# Firmware Archaeology I: Netgear GS110TPv2
 
 Published: June 7, 2021
 
