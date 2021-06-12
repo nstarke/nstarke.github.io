@@ -2,7 +2,7 @@
 
 ## Blog Posts
 
-* [Netgear S8000 Custom Firmware](0052-netgear-s8000-custom-firmware.html)
+* [Netgear S8000 Custom Firmware](0052-netgear-s8000-custom-firmware.html) - _June 12, 2021_
 * [Firmware Achaeology I: GS110TPv2 / GS108Tv2 Bugs](0051-firmware-archaeology-netgear-gs110tpv2.html) - _June 7, 2021_
 * [Bruteforcing Ghidra File Offsets](0050-bruteforcing-ghidra-file-offsets.html) - _June 6, 2021_
 * [Inpoutx64.sys Windows Driver Analysis](0049-inpoutx64.sys-windows-driver-analysis.html) - _May 15, 2021_
