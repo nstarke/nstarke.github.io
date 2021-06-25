@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0053-enumerating-smi-handlers.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="enumerating-smi-handlers">Enumerating SMI Handlers</h1>
+<p>Published: June 25, 2021</p>
+<p>SMI Handlers make interesting targets when auditing UEFI implementations because they execute with the highest privilege level available on the platform (ring -2, System Management Mode).  As an interrupt, they are often small, self contained functions meant to execute quickly.  There have been a <a href="https://github.com/Cr4sh/Aptiocalypsis">few</a> <a href="https://github.com/tandasat/SmmExploit">vulnerabilities</a> found in SMI Handlers.</p>
+<p>This write up will document my technique for enumerating SMI Handlers using Ghidra.  During this write up I will use the following firmware image as an example:</p>
+<p><a href="https://dlcdnets.asus.com/pub/ASUS/nb/UX360CA/UX360CAAS304.zip">https://dlcdnets.asus.com/pub/ASUS/nb/UX360CA/UX360CAAS304.zip</a></p>
+<p>Unzipping this file results in a file named <code>UX360CA-AS.304</code>.  This is a UEFI update capsule.</p>
+<h2 id="ghidra-extensions">Ghidra Extensions</h2>
+<p>There are two ghidra extensions I use for this task:</p>
+<ul>
+<li><a href="https://github.com/DSecurity/efiSeek">EfiSeek</a></li>
+<li><a href="https://github.com/al3xtjames/ghidra-firmware-utils">Ghidra-firmware-utils</a></li>
+</ul>
+<h2 id="efiseek">EfiSeek</h2>
+<p>Efiseek will run as Ghidra Extension as part of the ghidra auto analysis engine.  You do not have to do anything special, once installed, to run this extension.  The extension can be built using <a href="https://gradle.org/releases/">gradle</a> on Linux, MacOS, and Windows. It will run with analyzeHeadless without any problems or modifications.  The primary function EfiSeek provides is the renaming of SmiHandler functions according to UEFI protocol analysis.</p>
+<h2 id="ghidra-firmware-utils">Ghidra-firmware-utils</h2>
+<p>Ghidra-firmware-utils is useful here because it can extract the UEFI filesystem into individual PE32 binaries and maintain the structure of the filesystem hierarchy.  We will use this to enumerate all binaries in a UEFI implementation, analyze them, and then use a custom Ghidra Script (different than a Ghidra Extension) to search for the functions that were renamed by <code>EfiSeek</code>.</p>
+<p>Ghidra-firmware-utils will not run headlessly without a few changes.  I have a small diff provided here that I use to run this extension headlessly.  You will need to apply this diff in order to be able to use <code>analyzeHeadless</code> with Ghidra-firmware-utils:</p>
+<pre class="hljs"><code><div>diff --git a/ghidra_scripts/UEFIHelper.java b/ghidra_scripts/UEFIHelper.java
+index 5d96cc2..07ae7fb 100644
+<span class="hljs-comment">--- a/ghidra_scripts/UEFIHelper.java</span>
+<span class="hljs-comment">+++ b/ghidra_scripts/UEFIHelper.java</span>
+@@ -30,6 +30,7 @@ import ghidra.app.util.bin.format.pe.NTHeader;
+ import ghidra.app.util.bin.format.pe.PeSubsystem;
+ import ghidra.app.util.bin.format.pe.PortableExecutable;
+ import ghidra.app.util.opinion.PeLoader;
+<span class="hljs-addition">+import ghidra.app.plugin.core.analysis.AutoAnalysisManager;</span>
+ import ghidra.app.services.DataTypeManagerService;
+ import ghidra.program.model.address.Address;
+ import ghidra.program.model.data.*;
+@@ -71,7 +72,9 @@ public class UEFIHelper extends GhidraScript {
+        private DataTypeManager loadDataTypeLibrary(String name) throws Duplicat
+eIdException,
+                        IOException {
+                // Check if the data type library was already loaded.
+<span class="hljs-deletion">-               DataTypeManagerService service = state.getTool().getService(Data</span>
+TypeManagerService.class);
+<span class="hljs-addition">+               //DataTypeManagerService service = state.getTool().getService(Da</span>
+taTypeManagerService.class);
+<span class="hljs-addition">+               AutoAnalysisManager aam = AutoAnalysisManager.getAnalysisManager(currentProgram);</span>
+<span class="hljs-addition">+               DataTypeManagerService service = aam.getDataTypeManagerService();</span>
+                DataTypeManager[] managers = service.getDataTypeManagers();
+                for (DataTypeManager manager : managers) {
+                        if (manager.getName().equals(name)) {
+@@ -80,7 +83,7 @@ public class UEFIHelper extends GhidraScript {
+                }
+
+                // Load the data type library from the plugin's data directory.
+<span class="hljs-deletion">-               return service.openArchive(loadDataFile(name), false).getDataTypeManager();</span>
+<span class="hljs-addition">+               return service.openDataTypeArchive(name);</span>
+        }
+
+        /**
+</div></code></pre>
+<p>Additionally, if you wish to compile on Windows, you will need to patch the following diff to successfully build on 64-bit Windows platforms:</p>
+<pre class="hljs"><code><div>diff --git a/build.gradle b/build.gradle
+index 6e52ff8..a0a8b58 100644
+<span class="hljs-comment">--- a/build.gradle</span>
+<span class="hljs-comment">+++ b/build.gradle</span>
+@@ -36,8 +36,14 @@ else {
+
+ apply plugin: "c"
+ model {
+<span class="hljs-addition">+       platforms {</span>
+<span class="hljs-addition">+        x64 {</span>
+<span class="hljs-addition">+            architecture "x86_64"</span>
+<span class="hljs-addition">+        }</span>
+<span class="hljs-addition">+    }</span>
+        components {
+                efidecompress(NativeLibrarySpec) {
+<span class="hljs-addition">+                       targetPlatform "x64"</span>
+                        sources {
+                                c {
+                                        source {
+</div></code></pre>
+<p>The extension can be built using <a href="https://gradle.org/releases/">gradle</a> on Linux, MacOS, and Windows.</p>
+<h2 id="adding-extensions">Adding Extensions</h2>
+<p>Once you have used gradle to compile the two extensions mentioned above, you must add them to the ghidra extension list.  This can be done in the Ghidra Project menu by going to <code>File-&gt;Install Extensions</code></p>
+<p><img src="images/0053/install-extensions.PNG" alt="Install Extensions" title="Install Extensions Screenshot"></p>
+<p>You will then need to restart Ghidra for these extensions to take effect.</p>
+<h2 id="opening-uefi-image">Opening UEFI image</h2>
+<p>Next we will open up the Ghidra CodeBrowser, and import our UEFI image.  When opening the file we downloaded above (<code>UX360CA-AS.304</code>), you will be presented with a <code>Container File</code> Dialog:</p>
+<p><img src="images/0053/container-file.PNG" alt="Container File Dialog" title="Container File Dialog Screenshot"></p>
+<p>Select <code>File system</code> from the list of options.  Ghidra-firmware-utils will then import the UEFI filesystem into Ghidra.</p>
+<p>Some firmware images, especially those pulled directly off chip, will require you select between the Intel File Descriptor format and the UEFI image.  IF you see this option, select <code>UEFI Image</code>.</p>
+<p>Now you will be presented with a list of files:</p>
+<p><img src="images/0053/file-browser.PNG" alt="File Browser" title="File Browser Dialog Screenshot"></p>
+<p>Next we need to batch import the PE32 files from the UEFI image to the ghidra project.  Select the Root node on the File Browser dialog and right click on it.  Navigate to <code>Batch Import</code> in the context menu.</p>
+<p><img src="images/0053/batch-import.PNG" alt="Batch Import" title="Batch Import Dialog Screenshot"></p>
+<p>Deselect <code>PCI Option Rom</code>.  Ghidra can almost never import these for some reason and the failure to import prevents all the other modules from being loaded into ghidra successfully. If you see something like this following image, you have imported the PE32 components of the UEFI image successfully:</p>
+<p><img src="images/0053/batch-import-success.PNG" alt="Batch Import Success" title="Batch Import Success Dialog Screenshot"></p>
+<p>At this point, we need to close out of Ghidra entirely.  We are going to run the headless analyzer over the entire project.</p>
+<h2 id="analyze-headless">Analyze Headless</h2>
+<p>Open up a command prompt and cd into $GHIDRA_INSTALL_DIR/support.  This is the location of the analyzeHeadless scripts.  We want to run this script over our nearly created UEFI image ghidra project.  You will need to know</p>
+<ul>
+<li>The location of your ghidra-projects directory (Usually this is $HOME/ghidra-projects)</li>
+<li>The name of your Ghidra project</li>
+</ul>
+<p>For example:</p>
+<pre class="hljs"><code><div>analyzeHeadless.bat c:\Users\stark\ghidra-projects asus-304 -process -recursive -postScript UEFIHelper.java
+</div></code></pre>
+<p>Where <code>c:\Users\stark\ghidra-projects</code> is the ghidra-project directory, and <code>asus-304</code> is the ghidra project name.  Additioanlly, <code>UEFIHElper.java</code> is the analysis entry point for ghidra-firmware-utils.  State differently, running <code>UEFIHelper.java</code> is how we analyze a given UEFI module using ghidra-firmware-utils.  You can optionally leave off this argument (run the aforementioned command WITHOUT <code>-postScript UEFIHelper.java</code>) if you do not wish to use the ghidra-firmware-utils analysis.  Running both the EfiSeek and ghidra-firmware-utils analysis will result in duplicate protocol bookmarks in the individual binaries, but I find this is not such a big deal.</p>
+<p>This analysis task will take a long time and depends on how big the firmware image is; how many UEFI modules are present.  On this particular UEFI image, the analysis took 2 hours on a 16-core system.</p>
+<p>Once completed, we can begin enumerated SMI Handlers.</p>
+<h2 id="searching-for-handlers">Searching for Handlers</h2>
+<p>After the analysis phase, open up the Ghidra UI and load the project we just analyzed.</p>
+<p>During the analysis phase, EfiSeek should have identified SMI Handler functions based off the UEFI Protocol GUID for SMI Handlers and renamed the functions accordingly.  Thus, if we are able to do a search for function names containing the string <code>SmiHandler</code>, we should be able to list all the functions that handle SMI.  Unfortunately, by default, there is no Ghidra Script that can do a &quot;contains&quot; search on function names.  We must build a script that can do this.  Fortunately, there is an exact match function name script that can be easily modified to do a &quot;contains&quot; search.  I present the &quot;contains&quot; search module here:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* ###
+ * IP: GHIDRA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */</span>
+<span class="hljs-comment">//Opens all programs under a chosen domain folder, scans them for functions</span>
+<span class="hljs-comment">//that contain a user supplied name, and prints info about the match.</span>
+<span class="hljs-comment">//@category FunctionID</span>
+<span class="hljs-keyword">import</span> ghidra.app.script.GhidraScript;
+<span class="hljs-keyword">import</span> ghidra.feature.fid.service.FidService;
+<span class="hljs-keyword">import</span> ghidra.framework.model.DomainFile;
+<span class="hljs-keyword">import</span> ghidra.framework.model.DomainFolder;
+<span class="hljs-keyword">import</span> ghidra.program.database.ProgramContentHandler;
+<span class="hljs-keyword">import</span> ghidra.program.model.listing.*;
+<span class="hljs-keyword">import</span> ghidra.util.Msg;
+<span class="hljs-keyword">import</span> ghidra.util.exception.CancelledException;
+<span class="hljs-keyword">import</span> ghidra.util.exception.VersionException;
+
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FindContainsFunction</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GhidraScript</span> </span>{
+
+	FidService service;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{
+		service = <span class="hljs-keyword">new</span> FidService();
+
+		DomainFolder folder =
+			askProjectFolder(<span class="hljs-string">"Please select a project folder to RECURSIVELY look for a named contains function:"</span>);
+		String name =
+			askString(<span class="hljs-string">"Please enter function name substring"</span>,
+				<span class="hljs-string">"Please enter the function name substring you're looking for:"</span>);
+
+		ArrayList&lt;DomainFile&gt; programs = <span class="hljs-keyword">new</span> ArrayList&lt;DomainFile&gt;();
+		findPrograms(programs, folder);
+		findFunction(programs, name);
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">findFunction</span><span class="hljs-params">(ArrayList&lt;DomainFile&gt; programs, String name)</span> </span>{
+		<span class="hljs-keyword">for</span> (DomainFile domainFile : programs) {
+			<span class="hljs-keyword">if</span> (monitor.isCancelled()) {
+				<span class="hljs-keyword">return</span>;
+			}
+			Program program = <span class="hljs-keyword">null</span>;
+			<span class="hljs-keyword">try</span> {
+				program = (Program) domainFile.getDomainObject(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">false</span>, monitor);
+				FunctionManager functionManager = program.getFunctionManager();
+				FunctionIterator functions = functionManager.getFunctions(<span class="hljs-keyword">true</span>);
+				<span class="hljs-keyword">for</span> (Function function : functions) {
+					<span class="hljs-keyword">if</span> (monitor.isCancelled()) {
+						<span class="hljs-keyword">return</span>;
+					}
+					<span class="hljs-keyword">if</span> (function.getName().contains(name)) {
+						println(<span class="hljs-string">"found "</span> + function.getName() + <span class="hljs-string">" in "</span> + domainFile.getPathname());
+					}
+				}
+			}
+			<span class="hljs-keyword">catch</span> (Exception e) {
+				Msg.warn(<span class="hljs-keyword">this</span>, <span class="hljs-string">"problem looking at "</span> + domainFile.getName(), e);
+			}
+			<span class="hljs-keyword">finally</span> {
+				<span class="hljs-keyword">if</span> (program != <span class="hljs-keyword">null</span>) {
+					program.release(<span class="hljs-keyword">this</span>);
+				}
+			}
+		}
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">findPrograms</span><span class="hljs-params">(ArrayList&lt;DomainFile&gt; programs, DomainFolder folder)</span>
+			<span class="hljs-keyword">throws</span> VersionException, CancelledException, IOException </span>{
+		DomainFile[] files = folder.getFiles();
+		<span class="hljs-keyword">for</span> (DomainFile domainFile : files) {
+			<span class="hljs-keyword">if</span> (monitor.isCancelled()) {
+				<span class="hljs-keyword">return</span>;
+			}
+			<span class="hljs-keyword">if</span> (domainFile.getContentType().equals(ProgramContentHandler.PROGRAM_CONTENT_TYPE)) {
+				programs.add(domainFile);
+			}
+		}
+		DomainFolder[] folders = folder.getFolders();
+		<span class="hljs-keyword">for</span> (DomainFolder domainFolder : folders) {
+			<span class="hljs-keyword">if</span> (monitor.isCancelled()) {
+				<span class="hljs-keyword">return</span>;
+			}
+			findPrograms(programs, domainFolder);
+		}
+	}
+}
+
+</div></code></pre>
+<p>Save this file in your <code>ghidra_scripts</code> directory (usually in <code>$HOME</code>) as <code>FindContainsFunction.java</code>.  The file name is important as it has to match the Class name (<code>FindContainsFunction</code>).</p>
+<p>Now we can run this script in the Ghidra Script manager to enumerate our SmiHandlers.  The console output will write out in the Ghidra console window.</p>
+<p>The script takes two pieces of input.  The first is where in the imported directory tree you would like to do the search.  Everything under your selected entry point will be searched for the string you provide as the second piece of input.  The second piece of input will be compared with all function names in the directory structure, and substring matches will be reported through the console output.</p>
+<p><strong>Script Manager</strong></p>
+<p><img src="images/0053/script-manager.PNG" alt="Script Manager" title="Script Manager Dialog Screenshot"></p>
+<p><strong>Script Input 1</strong></p>
+<p><img src="images/0053/script-input1.PNG" alt="Script Input 1" title="Script Input 1 Screenshot"></p>
+<p><strong>Script Input 2</strong></p>
+<p><img src="images/0053/script-input2.PNG" alt="Script Input 2" title="Script Input 2 Screenshot"></p>
+<p><strong>Script Output</strong></p>
+<p><img src="images/0053/script-output.PNG" alt="Script Output" title="Script Output Screenshot"></p>
+<h2 id="script-output">Script Output</h2>
+<p>This is the script output for this file:</p>
+<pre class="hljs"><code><div>FindContainsFunction.java&gt; Running...
+FindContainsFunction.java&gt; found swSmiHandler37 in /UX360CA-AS.304/Volume 001 - 7dccf422-45f6-4951-a557-cc421da31599/File 000 - WinflashDxeSmi/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler10 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 012 - CpuSpSMI/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler11 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 012 - CpuSpSMI/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler9 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 153 - NvramSmi/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler7 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 156 - PiSmmCommunicationSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler12 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 157 - NbSmi/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler10 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 161 - AcpiModeEnable/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler11 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 161 - AcpiModeEnable/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler7 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 162 - SmramSaveInfoHandlerSmm/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler21 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 166 - PowerMgmtSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler19 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 166 - PowerMgmtSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler18 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 166 - PowerMgmtSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler16 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 166 - PowerMgmtSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler11 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 173 - MicrocodeUpdate/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler9 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 175 - BootScriptHideSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler8 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 175 - BootScriptHideSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler23 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 178 - UsbRtSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler9 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 180 - CmosSmm/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler7 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 181 - FlashSmiSmm/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler20 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 182 - SmmHddSecurity/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler17 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 182 - SmmHddSecurity/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler16 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 182 - SmmHddSecurity/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler21 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 182 - SmmHddSecurity/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler18 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 182 - SmmHddSecurity/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler19 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 182 - SmmHddSecurity/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler6 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 184 - NvmeSmm/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler10 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 185 - SmmPcieSataController/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler10 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 186 - SdioSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler11 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 186 - SdioSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler21 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 187 - SecSMIFlash/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler15 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 188 - SmbiosDmiEdit/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler22 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 189 - SmiFlash/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler4 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 190 - SmmLockBox/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler5 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 192 - TcgSmm/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler31 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 195 - AsusSmiEntry/PE32 Image Section
+FindContainsFunction.java&gt; found swSmiHandler33 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 195 - AsusSmiEntry/PE32 Image Section
+FindContainsFunction.java&gt; found ChildSmiHandler12 in /UX360CA-AS.304/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 002 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 229 - PchSmiDispatcher/PE32 Image Section
+FindContainsFunction.java&gt; Finished!
+</div></code></pre>
+<p><a href="/">Back</a></p>
+
+</body>
+</html>
