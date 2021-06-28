@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [BIOS Disconnect Diffing](0054-bios-disconnect-diffing.html) - _June 27, 2021_
 * [Enumerating SMI Handlers with Ghidra](0053-enumerating-smi-handlers.html) - _June 25, 2021_
 * [Netgear S8000 Custom Firmware](0052-netgear-s8000-custom-firmware.html) - _June 12, 2021_
 * [Firmware Achaeology I: GS110TPv2 / GS108Tv2 Bugs](0051-firmware-archaeology-netgear-gs110tpv2.html) - _June 7, 2021_

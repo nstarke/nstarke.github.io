@@ -1,5 +1,7 @@
 # "BIOS Disconnect" Vulnerability Diffing
 
+Published: June 27, 2021
+
 ## Background
 
 Recently Eclypsium announced the "BIOS Disconnect" vulnerabilities.  These are four previously unknown vulnerabilities in the `BIOSConnect` capability embedded in the UEFI implementation of newer Dell hosts.  Read more about it here:
