@@ -1,5 +1,7 @@
 # ACER Predator Helios 300 Complaint / BIOS Analysis
 
+Published: July 28, 2021
+
 Recently I saw [this hacker news post](https://news.ycombinator.com/item?id=27703014) regarding this [Amazon review](https://www.amazon.com/gp/customer-reviews/RKILN7HFLF4CS/) of an Acer Predator Helios 300 Gaming Laptop.  The complaint in the review is that the Secure Boot settings are disabled by default on Amazon-sold units of this laptop. The latest BIOS image for this laptop can be found here: [https://www.acer.com/ac/en/US/content/support-product/8376](https://www.acer.com/ac/en/US/content/support-product/8376). As of this writing the latest version is `2.02` released 5/21/2021.
 
 What I wanted to learn is whether or not there was a configuration option that would disable the Secure Boot `Enable / Disable` switch in the Firmware UI. If so, how could we circumvent this implementation? 

@@ -2,6 +2,7 @@
 
 ## Blog Posts
 
+* [ACER Predator Helios 300 BIOS Analysis](0055-acer-bios-analysis.html) - _July 28, 2021_
 * [BIOS Disconnect Diffing](0054-bios-disconnect-diffing.html) - _June 27, 2021_
 * [Enumerating SMI Handlers with Ghidra](0053-enumerating-smi-handlers.html) - _June 25, 2021_
 * [Netgear S8000 Custom Firmware](0052-netgear-s8000-custom-firmware.html) - _June 12, 2021_
