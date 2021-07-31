@@ -11,6 +11,7 @@ gem "jekyll-theme-midnight", "~> 0.2.0"
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.15.1"
+  gem "jekyll-include-cache", "~> 0.2.1"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -119,6 +119,8 @@ GEM
     jekyll-github-metadata (2.13.0)
       jekyll (>= 3.4, < 5.0)
       octokit (~> 4.0, != 4.4.0)
+    jekyll-include-cache (0.2.1)
+      jekyll (>= 3.7, < 5.0)
     jekyll-mentions (1.6.0)
       html-pipeline (~> 2.3)
       jekyll (>= 3.7, < 5.0)
@@ -248,6 +250,7 @@ DEPENDENCIES
   github-pages (~> 218)
   jekyll (~> 3.9.0)
   jekyll-feed (~> 0.15.1)
+  jekyll-include-cache (~> 0.2.1)
   jekyll-theme-midnight (~> 0.2.0)
   tzinfo (~> 1.2)
   tzinfo-data
