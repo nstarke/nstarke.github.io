@@ -42,9 +42,9 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
         </div>
         <h1>{{ page.title }}</h1>
-        <h4>{{ page.date | date: "%Y-%m-%d" }}</h4>
-        {{ content }}
+        <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date_to_long_string }}</time>
 
+        {{ content }}
       </section>
       <a href="/">Home</a>
     </div>
