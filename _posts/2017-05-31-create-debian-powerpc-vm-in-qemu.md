@@ -2,7 +2,7 @@
 layout: posts
 title:  "Create Debian PowerPC32 VM Under QEMU"
 date:   2017-05-31 00:00:00 -0600
-categories: ppwerpc reverse-engineering debugging qemu virtualization
+categories: powerpc reverse-engineering debugging qemu virtualization
 author: Nicholas Starke
 ---
 
