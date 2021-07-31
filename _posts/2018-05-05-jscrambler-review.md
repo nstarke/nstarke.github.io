@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "JScrambler Review"
 date:   2018-05-05 00:00:00 -0600
 categories: jscrambler javascript obfuscation

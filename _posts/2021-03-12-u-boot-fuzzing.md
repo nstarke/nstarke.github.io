@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "U-Boot Fuzzing"
 date:   2021-03-12 00:00:00 -0600
 categories: qemu u-boot bootloader fuzzing negative-result

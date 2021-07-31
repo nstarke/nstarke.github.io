@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Reversing Raw Binary Firmware Files in Ghidra"
 date:   2019-08-24 00:00:00 -0600
 categories: binary ghidra reverse-engineering cisco-ios

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Netgear Bootloader Analysis: Part 2"
 date:   2021-01-20 00:00:00 -0600
 categories: netgear u-boot bootloader

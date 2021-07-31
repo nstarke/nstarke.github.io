@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "ACER Predator Helios 300 Complaint / BIOS Analysis"
 date:   2021-07-28 00:00:00 -0600
 categories: acer bios uefi

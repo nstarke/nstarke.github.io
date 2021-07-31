@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Yardstick One Setup"
 date:   2019-09-21 00:00:00 -0600
 categories: sdr yardstick-one

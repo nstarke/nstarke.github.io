@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Change MAC Address Permanently"
 date:   2019-09-21 00:00:00 -0600
 categories: networking mac-address ethtool

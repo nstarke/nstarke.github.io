@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Bruteforcing Ghidra File Offsets"
 date:   2021-06-06 00:00:00 -0600
 categories: ghidra binary address-offset

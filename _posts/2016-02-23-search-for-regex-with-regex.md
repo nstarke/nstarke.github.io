@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Search for Regex with Regex"
 date:   2016-02-23 00:00:00 -0600
 categories: regex security search grep

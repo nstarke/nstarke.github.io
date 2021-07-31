@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "ONN Laptop BIOS Exploration"
 date:   2020-11-26 00:00:00 -0600
 categories: onn walmart bios pdos

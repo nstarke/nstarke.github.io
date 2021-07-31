@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Building and Running OVMF in Qemu"
 date:   2020-02-25 00:00:00 -0600
 categories: qemu ovmf uefi tianocore edk2

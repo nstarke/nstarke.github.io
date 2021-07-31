@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Firmware Archaeology I: Netgear GS110TPv2"
 date:   2021-06-07 00:00:00 -0600
 categories: netgear firmware

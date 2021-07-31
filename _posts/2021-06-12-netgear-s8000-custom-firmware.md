@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Netgear S8000 Custom Firmware"
 date:   2021-06-12 00:00:00 -0600
 categories: netgear firmware s8000

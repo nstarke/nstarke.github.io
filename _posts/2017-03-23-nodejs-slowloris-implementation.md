@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "NodeJS Slowloris Implementation"
 date:   2017-03-23 00:00:00 -0600
 categories: nodejs javascript slowloris

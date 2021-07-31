@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Xen - Connect two VMs via Virtual Serial Port"
 date:   2018-01-05 00:00:00 -0600
 categories: xen serial-port virtualization socat

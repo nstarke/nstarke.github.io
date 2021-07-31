@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Denial of Service in NMRP Protocol"
 date:   2021-04-01 00:00:00 -0600
 categories: netgear u-boot bootloader nmrp proof-of-concept

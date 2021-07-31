@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Rsync Protocol Auth Flow in Python"
 date:   2019-11-27 00:00:00 -0600
 categories: python rsync authentication

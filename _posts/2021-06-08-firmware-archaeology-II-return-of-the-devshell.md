@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Firmware Archaeology II: Return of the Devshell"
 date:   2021-06-08 00:00:00 -0600
 categories: netgear firmware

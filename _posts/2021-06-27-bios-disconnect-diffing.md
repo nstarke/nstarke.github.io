@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "BIOS Disconnect Vulnerability Diffing"
 date:   2021-06-27 00:00:00 -0600
 categories: bios-disconnect dell bios uefi

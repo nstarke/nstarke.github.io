@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Dial Up Connections on Linux"
 date:   2020-03-14 00:00:00 -0600
 categories: dialup raspberry-pi

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "How to Execute Raw U-Boot Bootloader Binary with QEMU"
 date:   2021-01-20 00:00:00 -0600
 categories: qemu u-boot bootloader

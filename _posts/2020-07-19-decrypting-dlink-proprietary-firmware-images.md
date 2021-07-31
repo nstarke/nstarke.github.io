@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Decrypting DLINK Proprietary Firmware Images"
 date:   2020-07-19 00:00:00 -0600
 categories: dlink firmware cryptography

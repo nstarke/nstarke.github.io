@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Resize Ghidra for High DPI screens"
 date:   2020-01-12 00:00:00 -0600
 categories: ghidra hidpi configuration

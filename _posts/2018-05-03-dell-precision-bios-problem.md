@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Dell Precision 7510 System Failure after Monitor turns off in Ubuntu 16.04 / 17.10 / 18.04"
 date:   2018-05-03 00:00:00 -0600
 categories: dell bios precision-7510

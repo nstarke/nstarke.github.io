@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Enumerating SMI Handlers"
 date:   2021-06-25 00:00:00 -0600
 categories: smi uefi ghidra

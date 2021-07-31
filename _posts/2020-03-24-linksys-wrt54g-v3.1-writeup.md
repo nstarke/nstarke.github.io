@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Linksys WRT54G - v3.1"
 date:   2020-03-24 00:00:00 -0600
 categories: linksys firmware wrt54g exploit command-injection

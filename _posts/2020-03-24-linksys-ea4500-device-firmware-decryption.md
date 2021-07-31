@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Linksys EA4500 v3.0 Firmware Decryption"
 date:   2020-03-24 00:00:00 -0600
 categories: linksys firmware ea4500 cryptography

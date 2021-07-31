@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Car hacking with ScanTool ECUSim 2000"
 date:   2020-02-22 00:00:00 -0600
 categories: car-hacking scantool ecuusim-2000

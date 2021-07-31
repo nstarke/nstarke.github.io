@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Python Find Information Scripts"
 date:   2019-08-29 00:00:00 -0600
 categories: python reverse-engineering

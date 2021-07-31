@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Ghidra-firmware-utils Adventure"
 date:   2021-04-13 00:00:00 -0600
 categories: ghidra firmware uefi windows

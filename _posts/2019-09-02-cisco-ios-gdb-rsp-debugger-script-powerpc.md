@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Cisco IOS GDB RSP Debugger Script for PowerPC-based models"
 date:   2019-09-02 00:00:00 -0600
 categories: cisco-ios gdb debugging powerpc reverse-engineering

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Windows Process Token Bitwise AND To Get Real Value"
 date:   2017-12-31 00:00:00 -0600
 categories: windows kernel

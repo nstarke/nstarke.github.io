@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "A script to grab Iowa House Sessions and concatenate them together"
 date:   2016-03-22 00:00:00 -0600
 categories: iowa ffmpeg

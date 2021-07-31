@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Netgear Signed TLS Cert Private Key Disclosure"
 date:   2020-01-19 00:00:00 -0600
 categories: netgear tls private-key

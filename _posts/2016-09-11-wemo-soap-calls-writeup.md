@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "SOAP Calls for UPnP Services in WeMo Devices"
 date:   2016-09-11 00:00:00 -0600
 categories: soap upnp wemo security

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Extract Netgear .chk Firmware"
 date:   2019-05-12 00:00:00 -0600
 categories: netgear firmware extraction binwalk ubi

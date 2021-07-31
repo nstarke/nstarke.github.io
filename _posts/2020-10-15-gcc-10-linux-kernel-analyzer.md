@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Modifying BIOS Using RU.EFI"
 date:   2020-10-15 00:00:00 -0600
 categories: linux kernel static-analysis gcc

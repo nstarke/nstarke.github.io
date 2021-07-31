@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Kexec and Kdump on Raspberry Pi"
 date:   2021-04-02 00:00:00 -0600
 categories: linux kernel kexec kdump raspberry-pi

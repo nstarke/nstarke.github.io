@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "Python MAC Address Stress Test Script"
 date:   2020-01-16 00:00:00 -0600
 categories: python mac-address stress arp-table

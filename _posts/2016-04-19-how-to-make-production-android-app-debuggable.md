@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title:  "How to make a Release Android App debuggable"
 date:   2016-04-19 00:00:00 -0600
 categories: android reverse-engineering debug debugging
