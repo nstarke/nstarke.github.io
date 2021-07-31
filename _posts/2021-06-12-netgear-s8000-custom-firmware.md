@@ -82,7 +82,7 @@ These values are close to, but not exact, to the firmware checksum. In the end I
 
 Wanting to demonstrate security impact, I chose some to overwrite some JavaScript on the login page.  The payload I chose logs the user-supplied password out to the JavaScript console when the user clicks the `Log In` button.
 
-![Login Page](images/0052/login.PNG "Login Page Screenshot")
+![Login Page](/images/0052/login.PNG "Login Page Screenshot")
 
 By default, the HTML returned for the Login page contains the following JavaScript code:
 
@@ -228,13 +228,13 @@ Now that we have a firmware image, we can test flashing it to the device through
 
 Now, when I was doing this work I repeatedly put my test device in a bad state.  As you can imagine, trying to flash custom firmware can result in the device becoming non-functional.  The way I got around this was I made a backup of the SPI NOR ROM by opening up the switch and attaching a clip to the chip. Using a bus pirate, I was able to dump the SPI ROM to a safe location.  Then, when I messed up the firmware image and rendered the switch useless, I could use the bus pirate to write the original SPI ROM image back to the switch and thereby make it operational again.  
 
-![Chip clip](images/0052/chipclip.png "Chip Clip Photo")
+![Chip clip](/images/0052/chipclip.png "Chip Clip Photo")
 
 After I flash my custom image, I see this when loading the login page:
 
-![Login Payload](images/0052/login-payload.PNG "Login Payload Screenshot")
+![Login Payload](/images/0052/login-payload.PNG "Login Payload Screenshot")
 
-![Login Devtools](images/0052/login-devtools.PNG "Login Devtools Screenshot")
+![Login Devtools](/images/0052/login-devtools.PNG "Login Devtools Screenshot")
 
 ## Other notes
 

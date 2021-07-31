@@ -6,7 +6,7 @@ categories: onn walmart bios pdos
 author: Nicholas Starke
 ---
 
-![ONN Splash](images/0039/0039-onn-splash.png "ONN Splash Screen")
+![ONN Splash](/images/0039/0039-onn-splash.png "ONN Splash Screen")
 
 ## Introduction
 
@@ -40,7 +40,7 @@ Below is a run through of the BIOS Configuration Utility menus.  Note that excep
 
 ## Main Menu
 
-![ONN BIOS Main Menu](images/0039/0039-onn-bios-main-screen.png "ONN BIOS Main Menu")
+![ONN BIOS Main Menu](/images/0039/0039-onn-bios-main-screen.png "ONN BIOS Main Menu")
 
 This is the first screen the user is greeted with upon entering system BIOS. The user can enter the system BIOS by pressing the `Delete` button at the ONN splash screen. It contains version information for the currently install BIOS image.
 
@@ -101,7 +101,7 @@ We will explore these last five menus near the end of this post.
 
 ## Advanced / RC ACPI Settings
 
-![ONN BIOS Advanced / RC ACPI Settings](images/0039/0039-onn-bios-rc-acpi-settings.png "ONN BIOS Advanced / RC ACPI Settings")
+![ONN BIOS Advanced / RC ACPI Settings](/images/0039/0039-onn-bios-rc-acpi-settings.png "ONN BIOS Advanced / RC ACPI Settings")
 
 This seems to be a power management and monitoring subsystem of the chipset. It contains a number of sub-menus:
 
@@ -121,30 +121,30 @@ This seems to be a power management and monitoring subsystem of the chipset. It 
 
 ## Advanced / Connectivty Menu
 
-![ONN BIOS Advanced / Connectivity Menu](images/0039/0039-onn-bios-connectivity-menu.png "ONN BIOS Advanced / Connectivity Menu")
+![ONN BIOS Advanced / Connectivity Menu](/images/0039/0039-onn-bios-connectivity-menu.png "ONN BIOS Advanced / Connectivity Menu")
 
 The Advanced / Connectivity Menu is used to configure onboard chip detection for communications chips, such as Bluetooth and WWAN.
 
 ## Advanced / CPU Configuration Menu
 
-![ONN BIOS Advanced / CPU Configuration Menu](images/0039/0039-onn-bios-cpu-configuration.png "ONN BIOS Advanced / CPU Configuration Menu")
+![ONN BIOS Advanced / CPU Configuration Menu](/images/0039/0039-onn-bios-cpu-configuration.png "ONN BIOS Advanced / CPU Configuration Menu")
 
 The Advanced / CPU Configuration menu details the L1-L4 cache information, as well as the processor ID and speed. Additioanlly, virtualization can be configured through this menu.
 
 ## Advanced / Power & Performance Menu
 
-![0NN BIOS Advanced / Power Management Menu](images/0039/0039-onn-bios-power-menu.png "ONN BIOS Advanced / Power Management Menu")
+![0NN BIOS Advanced / Power Management Menu](/images/0039/0039-onn-bios-power-menu.png "ONN BIOS Advanced / Power Management Menu")
 
 The Power & Performance Menu allows the user to configure CPU and GT power options.
 
 ## Advanced / PCH Menu
 
-![ONN BIOS Advanced / PCH Menu](images/0039/0039-onn-bios-pch-menu.png "ONN BIOS Advanced / PCH Menu")
+![ONN BIOS Advanced / PCH Menu](/images/0039/0039-onn-bios-pch-menu.png "ONN BIOS Advanced / PCH Menu")
 
 The PCH Menu includes information on Intel ME, including version information. It allows various ME options to be set, including ME debug options.
 
 ## Advanced / PCH Menu / ME Debug Settings
-![ONN BIOS Advanced / PCH Menu / ME Debug Settings](images/0039/0039-onn-bios-me-debug-menu.png "ONN BIOS Advanced / PCH Menu / ME Debug Settings")
+![ONN BIOS Advanced / PCH Menu / ME Debug Settings](/images/0039/0039-onn-bios-me-debug-menu.png "ONN BIOS Advanced / PCH Menu / ME Debug Settings")
 
 These are options for debugging Intel Management Engine. They include:
 
@@ -163,13 +163,13 @@ These are options for debugging Intel Management Engine. They include:
 
 ## Advanced / Thermal Configuration Menu
 
-![ONN BIOS Advanced / Thermal Configuration Menu](images/0039/0039-onn-bios-thermal-configuration-menu.png "ONN BIOS Advanced / Thermal Configuration Menu")
+![ONN BIOS Advanced / Thermal Configuration Menu](/images/0039/0039-onn-bios-thermal-configuration-menu.png "ONN BIOS Advanced / Thermal Configuration Menu")
 
 The Advanced / Thermal Configuration Menu allows thermal configuration of CPU, Platform, and DPTF.
 
 ## Advanced / Platform Settings Menu
 
-![ONN BIOS Advanced / Platform Settings Menu](images/0039/0039-onn-bios-platform-settings-menu.png "ONN BIOS Advanced / Platform Settings Menu")
+![ONN BIOS Advanced / Platform Settings Menu](/images/0039/0039-onn-bios-platform-settings-menu.png "ONN BIOS Advanced / Platform Settings Menu")
 
 The Advanced / Platform Settings Menu contains the following options:
 
@@ -191,7 +191,7 @@ The Advanced / Platform Settings Menu contains the following options:
 
 ## Advanced / D3Cold Settings Menu
 
-![ONN BIOS Advanced / D3 Cold Settings Menu](images/0039/0039-onn-bios-acpi-d3-menu.png "ONN BIOS Advanced / D3 Cold Settings Menu")
+![ONN BIOS Advanced / D3 Cold Settings Menu](/images/0039/0039-onn-bios-acpi-d3-menu.png "ONN BIOS Advanced / D3 Cold Settings Menu")
 
 The Advanced / D3 Cold Settings Menu includes the following options:
 
@@ -218,13 +218,13 @@ The Advanced / D3 Cold Settings Menu includes the following options:
 
 ## Advanced / Overclocking Configuration Menu
 
-![ONN BIOS Advanced / Overclocking Menu](images/0039/0039-onn-bios-overclocking-menu.png "ONN BIOS Advanced / Overclocking Menu")
+![ONN BIOS Advanced / Overclocking Menu](/images/0039/0039-onn-bios-overclocking-menu.png "ONN BIOS Advanced / Overclocking Menu")
 
 The Advanced / Overclocking Menu allows the ability to enable/disable overclocking on the platform.
 
 ## Advanced / Intel AMT Menu
 
-![ONN BIOS Advanced / Intel AMT Menu](images/0039/0039-onn-bios-amt-menu.png "ONN BIOS Advanced / Intel AMT Menu")
+![ONN BIOS Advanced / Intel AMT Menu](/images/0039/0039-onn-bios-amt-menu.png "ONN BIOS Advanced / Intel AMT Menu")
 
 The Advanced / Intel AMT Menu contains configuration options for Intel Active Management Technology. We will explore this capability further in the analysis section of this post. 
 
@@ -240,7 +240,7 @@ The configuration options for this menu include:
 
 ## Advanced / Intel ICC Menu
 
-![ONN BIOS Advabced / Intel ICC Menu](images/0039/0039-onn-bios-icc-menu.png "ONN BIOS Advanced / Intel ICC Menu")
+![ONN BIOS Advabced / Intel ICC Menu](/images/0039/0039-onn-bios-icc-menu.png "ONN BIOS Advanced / Intel ICC Menu")
 
 The Advanced / Intel ICC Menu includes the following configuration options:
 
@@ -261,13 +261,13 @@ The following configuration information is also presented:
 
 ## Advanced / ThunderBolt(TM) Menu
 
-![ONN BIOS Advanced / ThunderBolt(TM) Menu](images/0039/0039-onn-bios-thunderbolt-menu.png "ONN BIOS Advanced / ThunderBolt(TM Menu")
+![ONN BIOS Advanced / ThunderBolt(TM) Menu](/images/0039/0039-onn-bios-thunderbolt-menu.png "ONN BIOS Advanced / ThunderBolt(TM Menu")
 
 This menu allows the user to enabled/disable ThunderBolt(TM) support.
 
 ## Advanced / Debug Settings Menu
 
-![ONN BIOS Advanced / Debug Settings Menu](images/0039/0039-onn-bios-debug-menu.png "ONN BIOS Advanced / Debug Settings Menu")
+![ONN BIOS Advanced / Debug Settings Menu](/images/0039/0039-onn-bios-debug-menu.png "ONN BIOS Advanced / Debug Settings Menu")
 
 This menu allows a user to configure Intel DCI, amongst other platform configuration options. The sub options in this menu are:
 
@@ -277,7 +277,7 @@ This menu allows a user to configure Intel DCI, amongst other platform configura
 
 ## Advanced / Debug Settings Menu / Platform Debug Consent:
 
-![ONN BIOS Advanced / Debug Settings Menu / Platform Debug Consent](images/0039/0039-onn-bios-debug-menu.png "ONN BIOS Advanced / Debug Settings Menu / Platform Debug Consent")
+![ONN BIOS Advanced / Debug Settings Menu / Platform Debug Consent](/images/0039/0039-onn-bios-debug-menu.png "ONN BIOS Advanced / Debug Settings Menu / Platform Debug Consent")
 
 The options in this menu include:
 
@@ -292,7 +292,7 @@ I have set this option to `Enabled (DCI OOB)` so we can use DCI to debug the pla
 
 ## Advanced / Debug Settings Menu / Advanced Debug Menu
 
-![ONN BIOS Advanced / Debug Settings Menu / Advanced Debug Menu](images/0039/0039-onn-bios-advanced-debug-menu.png "ONN BIOS Advnaced / Debug Settings Menu / Advanced Debug Menu")
+![ONN BIOS Advanced / Debug Settings Menu / Advanced Debug Menu](/images/0039/0039-onn-bios-advanced-debug-menu.png "ONN BIOS Advnaced / Debug Settings Menu / Advanced Debug Menu")
 
 The Advanced / Debug Settings Menu / Advanced Debug Menu options are:
 
@@ -316,7 +316,7 @@ The Advanced / Debug Settings Menu / Advanced Debug Menu options are:
 
 ## Advanced / Trusted Computing Menu
 
-![ONN BIOS Advanced / Trusted Computing Menu](images/0039/0039-onn-bios-trusted-computing-menu.png "ONN BIOS Advanced / Trusted Computing Menu")
+![ONN BIOS Advanced / Trusted Computing Menu](/images/0039/0039-onn-bios-trusted-computing-menu.png "ONN BIOS Advanced / Trusted Computing Menu")
 
 The Advanced / Trusted Computing Menu contains TPM information as well as the following options:
 
@@ -334,7 +334,7 @@ The Advanced / Trusted Computing Menu contains TPM information as well as the fo
 
 ## Advanced / ACPI Menu
 
-![ONN BIOS Advanced / ACPI Menu](images/0039/0039-onn-bios-acpi-menu.png "ONN BIOS Advanced / ACPI Menu")
+![ONN BIOS Advanced / ACPI Menu](/images/0039/0039-onn-bios-acpi-menu.png "ONN BIOS Advanced / ACPI Menu")
 
 The Advanced / ACPI Menu contains the following configuration options:
 
@@ -346,19 +346,19 @@ The Advanced / ACPI Menu contains the following configuration options:
 
 ## Advanced / S5 Menu
 
-![ONN BIOS Advanced / S5 Menu](images/0039/0039-onn-bios-s5-menu.png "ONN BIOS Advanced / S5 Menu")
+![ONN BIOS Advanced / S5 Menu](/images/0039/0039-onn-bios-s5-menu.png "ONN BIOS Advanced / S5 Menu")
 
 The Advanced / S5 menu allows the user to enable / disable Wake From S5.
 
 ## Advanced / SMART Menu
 
-![ONN BIOS Advanced / SMART Menu](images/0039/0039-onn-bios-smart-menu.png "ONN BIOS Advanced / SMART Menu")
+![ONN BIOS Advanced / SMART Menu](/images/0039/0039-onn-bios-smart-menu.png "ONN BIOS Advanced / SMART Menu")
 
 The Advanced / SMART Menu allows the user to enable / disable SMART.
 
 ## Advanced / Serial Port Console Redirection Menu
 
-![ONN BIOS Advanced / Serial Port Console Redirection Menu](images/0039/0039-onn-bios-serial-console-redirection-menu.png "ONN BIOS Advanced / Serial Port Console Redirection Menu")
+![ONN BIOS Advanced / Serial Port Console Redirection Menu](/images/0039/0039-onn-bios-serial-console-redirection-menu.png "ONN BIOS Advanced / Serial Port Console Redirection Menu")
 
 The Advanced / Serial Port Console Redirection Menu has the following options:
 
@@ -368,29 +368,29 @@ The Advanced / Serial Port Console Redirection Menu has the following options:
 
 ## Advanced / Acoustic Management Configuration
 
-![ONN BIOS Advanced / Acoustic Management Configuration Menu](images/0039/0039-onn-bios-acoustic-menu.png "ONN BIOS Advnaced / Acoustic Mangement Configuration Menu")
+![ONN BIOS Advanced / Acoustic Management Configuration Menu](/images/0039/0039-onn-bios-acoustic-menu.png "ONN BIOS Advnaced / Acoustic Mangement Configuration Menu")
 
 The Advanced / Acoustic Mangement Configuration Menu allows the user to enable / disable acoustic management of a given SATA device.
 
 ## Advanced / Switchable Graphics Menu
 
-![ONN BIOS Advanced / Switchable Graphics Menu](images/0039/0039-onn-bios-switchable-graphics-menu.png "ONN BIOS Advanced / Switchable Graphics Menu")
+![ONN BIOS Advanced / Switchable Graphics Menu](/images/0039/0039-onn-bios-switchable-graphics-menu.png "ONN BIOS Advanced / Switchable Graphics Menu")
 
 ## Advanced / AMT Graphics Menu
 
-![ONN BIOS Advanced / AMT Graphics Menu](images/0039/0039-amt-graphics-menu.png "ONN BIOS Advanced / AMT Graphics Menu")
+![ONN BIOS Advanced / AMT Graphics Menu](/images/0039/0039-amt-graphics-menu.png "ONN BIOS Advanced / AMT Graphics Menu")
 
 The Advanced / AMT Graphics Menu allows the user to set the output for AMT Graphics.
 
 ## Advanced / PCI Settings Menu
 
-![ONN BIOS Advanced / PCI Settings Menu](images/0039/0039-onn-bios-pci-menu.png "ONN BIOS Advanced / PCI Settings Menu")
+![ONN BIOS Advanced / PCI Settings Menu](/images/0039/0039-onn-bios-pci-menu.png "ONN BIOS Advanced / PCI Settings Menu")
 
 The Advanced / PCI Settings Menu allows BME DMA Mitigation to be enabled / disabled.
 
 ## Advanced / USB Settings Menu
 
-![ONN BIOS Advanced / USB Settings Menu](images/0039/0039-onn-bios-usb-menu.png "ONN BIOS Advanced / USB Menu")
+![ONN BIOS Advanced / USB Settings Menu](/images/0039/0039-onn-bios-usb-menu.png "ONN BIOS Advanced / USB Menu")
 
 The Advanced / USB Settings menu contains the following configuration options: 
 
@@ -403,23 +403,23 @@ The Advanced / USB Settings menu contains the following configuration options:
 
 ## Advanced / CSM Menu
 
-![ONN BIOS Advanced / CSM Menu](images/0039/0039-onn-bios-csm-menu.png "ONN BIOS Advanced / CSM Menu")
+![ONN BIOS Advanced / CSM Menu](/images/0039/0039-onn-bios-csm-menu.png "ONN BIOS Advanced / CSM Menu")
 
 ## Advanced / NVMe Menu
 
-![ONN BIOS Advanced / NVMe Menu](images/0039/0039-onn-bios-nvme-menu.png "ONN BIOS Advanced / CSM Menu")
+![ONN BIOS Advanced / NVMe Menu](/images/0039/0039-onn-bios-nvme-menu.png "ONN BIOS Advanced / CSM Menu")
 
 ## Advanced / SDIO Menu
 
-![ONN BIOS Advanced / SDIO Menu](images/0039/0039-onn-bios-sdio-menu.png "ONN BIOS Advanced / SDIO Menu")
+![ONN BIOS Advanced / SDIO Menu](/images/0039/0039-onn-bios-sdio-menu.png "ONN BIOS Advanced / SDIO Menu")
 
 ## Advanced / RAM Disk Menu
 
-![ONN BIOS Advanced / RAM Disk Menu](images/0039/0039-onn-bios-ram-menu.png "ONN BIOS Advanced / RAM Disk Menu")
+![ONN BIOS Advanced / RAM Disk Menu](/images/0039/0039-onn-bios-ram-menu.png "ONN BIOS Advanced / RAM Disk Menu")
 
 ## Advanced / Networking Stack Menu
 
-![ONN BIOS Advanced / Networking Stack Menu](images/0039/0039-onn-bios-networking-stack-menu.png "ONN BIOS Advanced / Networking Stack Menu")
+![ONN BIOS Advanced / Networking Stack Menu](/images/0039/0039-onn-bios-networking-stack-menu.png "ONN BIOS Advanced / Networking Stack Menu")
 
 ## Advanced / Networking Options Menus
 
@@ -427,27 +427,27 @@ These next few networking stack-related options are only visible if networking h
 
 ## Advanced / VLAN Menu
 
-![ONN BIOS Advanced / VLAN Menu](images/0039/0039-onn-bios-vlan-menu.png "ONN BIOS Advanced / VLAN Menu")
+![ONN BIOS Advanced / VLAN Menu](/images/0039/0039-onn-bios-vlan-menu.png "ONN BIOS Advanced / VLAN Menu")
 
 ## Advanced / Ethernet Interface Menu
 
-![ONN BIOS Advanced / Ethernet Interface Menu](images/0039/0039-onn-bios-ethernet-interface-menu.png "ONN BIOS Advanced / Ethernet Interface Menu")
+![ONN BIOS Advanced / Ethernet Interface Menu](/images/0039/0039-onn-bios-ethernet-interface-menu.png "ONN BIOS Advanced / Ethernet Interface Menu")
 
 ## Advanced / UEFI HTTP Boot Menu
 
-![ONN BIOS Advanced / UEFI HTTP Boot Menu](images/0039/0039-onn-bios-uefi-http-boot-menu.png "ONN BIOS Advanced / UEFI HTTP Boot Menu")
+![ONN BIOS Advanced / UEFI HTTP Boot Menu](/images/0039/0039-onn-bios-uefi-http-boot-menu.png "ONN BIOS Advanced / UEFI HTTP Boot Menu")
 
 ## Advanced / Ethernet Menu
 
-![ONN BIOS Advanced / Ethernet Menu](images/0039/0039-onn-bios-ethernet-menu.png "ONN BIOS Advanced / Ethernet Menu")
+![ONN BIOS Advanced / Ethernet Menu](/images/0039/0039-onn-bios-ethernet-menu.png "ONN BIOS Advanced / Ethernet Menu")
 
 ## Advanced / WiFi Menu
 
-![ONN BIOS Advanced / WiFi Menu](images/0039/0039-onn-bios-wifi-menu.png "ONN BIOS Advanced / WiFi Menu")
+![ONN BIOS Advanced / WiFi Menu](/images/0039/0039-onn-bios-wifi-menu.png "ONN BIOS Advanced / WiFi Menu")
 
 ## Chipset Menu
 
-![ONN BIOS Chipset Menu](images/0039/0039-onn-bios-chipset-menu.png "ONN BIOS Chipset Menu")
+![ONN BIOS Chipset Menu](/images/0039/0039-onn-bios-chipset-menu.png "ONN BIOS Chipset Menu")
 
 The chipset menu contains a few additional platform configuration options. The sub-menu's available here are:
 
@@ -458,7 +458,7 @@ The chipset menu contains a few additional platform configuration options. The s
 
 Note that by default, the `Firmware Configuration` is set to `[Test]`. 
 
-![ONN BIOS Firmware Configuration Options](images/0039/0039-onn-bios-chipset-configuration-menu.png "ONN BIOS Firmware Configuration Options Menu")
+![ONN BIOS Firmware Configuration Options](/images/0039/0039-onn-bios-chipset-configuration-menu.png "ONN BIOS Firmware Configuration Options Menu")
 
 Additional options for `Firmware Configuration` include:
 
@@ -468,7 +468,7 @@ Additional options for `Firmware Configuration` include:
 
 ## Chipset / Graphics Configuration
 
-![ONN BIOS Chipset / Primary Display Menu](images/0039/0039-onn-bios-primary-display-menu.png "ONN BIOS Chipset / Primary Display Menu")
+![ONN BIOS Chipset / Primary Display Menu](/images/0039/0039-onn-bios-primary-display-menu.png "ONN BIOS Chipset / Primary Display Menu")
 
 The following options are availabe for primary display:
 
@@ -481,7 +481,7 @@ I set this option to `PCI` to work with my HDMI capture card. By default it is s
 
 ## Security Menu
 
-![ONN BIOS Security Menu](images/0039/0039-onn-bios-security-menu.png "ONN BIOS Security Menu")
+![ONN BIOS Security Menu](/images/0039/0039-onn-bios-security-menu.png "ONN BIOS Security Menu")
 
 The Security menu allows the user to set an `Administrator Password` or a `User Password`. The `Administrator Password` allows access to BIOS Setup, while the `User Password` allows POST and access to BIOS Setup.
 
@@ -489,11 +489,11 @@ Additionally, Secure Boot can be configured in this menu.
 
 ## Security / Secure Boot Menu
 
-![ONN BIOS Security / Secure Boot Menu](images/0039/0039-onn-bios-secure-boot-menu.png)
+![ONN BIOS Security / Secure Boot Menu](/images/0039/0039-onn-bios-secure-boot-menu.png)
 
 There are two options for Secure Boot Mode:
 
-![ONN BIOS Security / Secure Boot Mode Options](images/0039/0039-onn-bios-secure-boot-mode-options.png "ONN BIOS Security / Secure Boot Mode Options")
+![ONN BIOS Security / Secure Boot Mode Options](/images/0039/0039-onn-bios-secure-boot-mode-options.png "ONN BIOS Security / Secure Boot Mode Options")
 
 * Standard
 * Custom

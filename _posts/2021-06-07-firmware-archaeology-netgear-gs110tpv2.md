@@ -61,7 +61,7 @@ Instead, we are going to search for the string `devshell` in Ghidra.
 
 Looking at the `5.4.2.29` image, we can see the string `/base/devshell.html` in the strings menu.  When I go to that URL path in a browser, this is what I see:
 
-![devshell](images/0050/devshell.PNG "devshell screenshot")
+![devshell](/images/0050/devshell.PNG "devshell screenshot")
 
 The weird thing is I definitely have to be authenticated with a valid `SID` cookie in order to load the `/base/devshell.html`.  The POST request that executes a OS command also requires authentication.  So what exactly did the manufacturer change?
 
@@ -327,7 +327,7 @@ Available Commands:
 
 It looks like the only change made was to remove the `help` command handler function along with the help prompt output when an invalid command is supplied.  For example, on version `5.4.2.30` I get the following output when I submit `ifconfig`:
 
-![Devshell ifconfig](images/0050/devshell-ifconfig.PNG "Devshell ifconfig screenshot")
+![Devshell ifconfig](/images/0050/devshell-ifconfig.PNG "Devshell ifconfig screenshot")
 
 ## Cool but what about the latest firmware version?
 
@@ -402,7 +402,7 @@ Indeed, when I run `help` on version `5.4.2.33` I see this no help function outp
 
 Alas the devshell still works in the latest version:
 
-![Devshell uptime](images/0050/devshell-uptime.PNG "Devshell uptime screenshot")
+![Devshell uptime](/images/0050/devshell-uptime.PNG "Devshell uptime screenshot")
 
 ## Conclusion
 

@@ -79,7 +79,7 @@ The original PDF writeup mentions a few clues to help use narrow our search:
 
 We want to search for `https://downloads.dell.com` using UEFI Tool in the `'1 -- 16 BiosConnect Wireless FV v1.19.5.bin'` file. I also searched for `8.8.8.8`.
 
-![UEFITool Search Results](images/0054/uefitool-search-results.PNG "UEFITool Search Results Screenshot")
+![UEFITool Search Results](/images/0054/uefitool-search-results.PNG "UEFITool Search Results Screenshot")
 
 The results for these searches, which were the same for both firmware images, are listed below:
 
@@ -423,8 +423,8 @@ This looks like a function that validates URLs.  A few more interesting details 
 
 The big test is though if this function exists within the `1.7.1` image.  If no corresponding code is found in `1.7.1` then the aforementioned function is more likely to be part of the fix. Using [bindiff](https://www.zynamics.com/bindiff.html), we see that the function at this address is unmatched in version `1.7.1`.
 
-![Bindiff Unmatched](images/0054/bindiff-unmatched.PNG "Bindiff Unmatched Screenshot")
+![Bindiff Unmatched](/images/0054/bindiff-unmatched.PNG "Bindiff Unmatched Screenshot")
 
 I am confident the new function represents the bulk of the verification that fixes this vulnerability.  The new function is called through an intermediary function from the function at `0x80007e9c` (`1.7.1`) and `0x80001be0` (`1.8.1`).  This function exists in both images and changes significantly from `1.7.1` to `1.8.1`.
 
-![Bindiff Matched](images/0054/bindiff-matched.PNG "Bindiff Matched Screenshot")
+![Bindiff Matched](/images/0054/bindiff-matched.PNG "Bindiff Matched Screenshot")

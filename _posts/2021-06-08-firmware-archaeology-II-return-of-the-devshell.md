@@ -217,7 +217,7 @@ Let's execute a few of these commands and see what we can see.
 
 ## debugEwaSessionTableDump
 
-![debugEwaSessionTableDump screenshot](images/0052/debugEwaSessionTableDump.PNG "debugEwaSessionTableDump Screenshot")
+![debugEwaSessionTableDump screenshot](/images/0052/debugEwaSessionTableDump.PNG "debugEwaSessionTableDump Screenshot")
 
 This appears to be the session information for authenticated clients.  It includes the username (in this case `admin`) and the privilege level.  Most importantly, it includes the session identifier that can be used as the value for the `SID` cookie.  With this value, we can masquerade as another user, should they currently be authenticated to the switch.
 

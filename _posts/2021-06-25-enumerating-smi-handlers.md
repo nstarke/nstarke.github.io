@@ -99,7 +99,7 @@ The extension can be built using [gradle](https://gradle.org/releases/) on Linux
 ## Adding Extensions
 Once you have used gradle to compile the two extensions mentioned above, you must add them to the ghidra extension list.  This can be done in the Ghidra Project menu by going to `File->Install Extensions`
 
-![Install Extensions](images/0053/install-extensions.PNG "Install Extensions Screenshot")
+![Install Extensions](/images/0053/install-extensions.PNG "Install Extensions Screenshot")
 
 You will then need to restart Ghidra for these extensions to take effect.
 
@@ -107,7 +107,7 @@ You will then need to restart Ghidra for these extensions to take effect.
 
 Next we will open up the Ghidra CodeBrowser, and import our UEFI image.  When opening the file we downloaded above (`UX360CA-AS.304`), you will be presented with a `Container File` Dialog:
 
-![Container File Dialog](images/0053/container-file.PNG "Container File Dialog Screenshot")
+![Container File Dialog](/images/0053/container-file.PNG "Container File Dialog Screenshot")
 
 Select `File system` from the list of options.  Ghidra-firmware-utils will then import the UEFI filesystem into Ghidra.  
 
@@ -115,15 +115,15 @@ Some firmware images, especially those pulled directly off chip, will require yo
 
 Now you will be presented with a list of files:
 
-![File Browser](images/0053/file-browser.PNG "File Browser Dialog Screenshot")
+![File Browser](/images/0053/file-browser.PNG "File Browser Dialog Screenshot")
 
 Next we need to batch import the PE32 files from the UEFI image to the ghidra project.  Select the Root node on the File Browser dialog and right click on it.  Navigate to `Batch Import` in the context menu.
 
-![Batch Import](images/0053/batch-import.PNG "Batch Import Dialog Screenshot")
+![Batch Import](/images/0053/batch-import.PNG "Batch Import Dialog Screenshot")
 
 Deselect `PCI Option Rom`.  Ghidra can almost never import these for some reason and the failure to import prevents all the other modules from being loaded into ghidra successfully. If you see something like this following image, you have imported the PE32 components of the UEFI image successfully:
 
-![Batch Import Success](images/0053/batch-import-success.PNG "Batch Import Success Dialog Screenshot")
+![Batch Import Success](/images/0053/batch-import-success.PNG "Batch Import Success Dialog Screenshot")
 
 At this point, we need to close out of Ghidra entirely.  We are going to run the headless analyzer over the entire project.
 
@@ -264,19 +264,19 @@ The script takes two pieces of input.  The first is where in the imported direct
 
 **Script Manager**
 
-![Script Manager](images/0053/script-manager.PNG "Script Manager Dialog Screenshot")
+![Script Manager](/images/0053/script-manager.PNG "Script Manager Dialog Screenshot")
 
 **Script Input 1**
 
-![Script Input 1](images/0053/script-input1.PNG "Script Input 1 Screenshot")
+![Script Input 1](/images/0053/script-input1.PNG "Script Input 1 Screenshot")
 
 **Script Input 2**
 
-![Script Input 2](images/0053/script-input2.PNG "Script Input 2 Screenshot")
+![Script Input 2](/images/0053/script-input2.PNG "Script Input 2 Screenshot")
 
 **Script Output**
 
-![Script Output](images/0053/script-output.PNG "Script Output Screenshot")
+![Script Output](/images/0053/script-output.PNG "Script Output Screenshot")
 
 ## Script Output
 
