@@ -12,7 +12,7 @@ The [linux-firmware](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/li
 
 ## Results
 
-This results in an interesting observation: some 8051-based firmware blobs do not have any results when matched against the Keil toolchain, meaning they were most likely compiled with an alternative toolchain.  The list of these 8051 blob files in linux-firmware are:
+This results in an interesting observation: some 8051-based firmware blobs do not have any results when matched against the Keil toolchain, meaning they were most likely compiled with an alternative toolchain.  The list of these 8051 blob files in `linux-firmware` are:
 
 ```
 ./rt3071.bin
