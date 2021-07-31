@@ -1,4 +1,4 @@
---
+---
 layout: posts
 title:  "How to find all strings and comments in source code"
 date:   2016-04-19 00:00:00 -0600
