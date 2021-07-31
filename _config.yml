@@ -28,7 +28,7 @@ twitter_username: nstarke
 github_username:  nstarke
 
 # Build settings
-theme: jekyll-theme-hacker
+theme: jekyll-theme-midnight
 plugins:
   - jekyll-feed
 
