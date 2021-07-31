@@ -1,6 +1,6 @@
 ---
 layout: posts
-title:  "Modifying BIOS Using RU.EFI"
+title:  "Running GCC 10's Static Analyzer Against the Linux Kernel"
 date:   2020-10-15 00:00:00 -0600
 categories: linux kernel static-analysis gcc
 author: Nicholas Starke
