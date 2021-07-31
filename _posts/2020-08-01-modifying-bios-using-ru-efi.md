@@ -34,15 +34,15 @@ ru.efi
 
 The `dir` command is optional.
 
-![UEFI Shell](images/0037/uefi-shell.png "UEFI Shell")
+![UEFI Shell](/images/0037/uefi-shell.png "UEFI Shell")
 
 Once you have done that, you will be shown the initial application welcome message:
 
-![RU EFI Intro](images/0037/0001-ru-efi-intro.PNG "RU EFI Intro")
+![RU EFI Intro](/images/0037/0001-ru-efi-intro.PNG "RU EFI Intro")
 
 After dismissing the welcom screen you will be presented with the application. 
 
-![RU EFI Main](images/0037/0002-ru-efi-main.PNG "RU EFI Main")
+![RU EFI Main](/images/0037/0002-ru-efi-main.PNG "RU EFI Main")
 
 There are seven menus available from the top menu bar:
 
@@ -55,28 +55,28 @@ There are seven menus available from the top menu bar:
 * Quit
 
 ### File Menu
-![RU EFI File Menu](images/0037/0003-ru-efi-file-menu.PNG "RU EFI File Menu")
+![RU EFI File Menu](/images/0037/0003-ru-efi-file-menu.PNG "RU EFI File Menu")
 
 ### Config Menu
-![RU EFI Config Menu](images/0037/0004-ru-efi-config-menu.PNG "RU EFI config Menu")
+![RU EFI Config Menu](/images/0037/0004-ru-efi-config-menu.PNG "RU EFI config Menu")
 
 ### Edit Menu
-![RU EFI Edit Menu](images/0037/0005-ru-efi-edit-menu.PNG "RU EFI Edit Menu")
+![RU EFI Edit Menu](/images/0037/0005-ru-efi-edit-menu.PNG "RU EFI Edit Menu")
 
 ### Tools Menu
-![RU EFI Tools Menu](images/0037/0007-ru-efi-tools-menu.PNG "RU EFI Tooks Menu")
+![RU EFI Tools Menu](/images/0037/0007-ru-efi-tools-menu.PNG "RU EFI Tooks Menu")
 
 ### System Menu
-![RU EFI System Menu](images/0037/0008-ru-efi-system-menu.PNG "RU EFI System Menu")
+![RU EFI System Menu](/images/0037/0008-ru-efi-system-menu.PNG "RU EFI System Menu")
 
 ### Info Menu
-![RU EFI Info Menu](images/0037/0009-ru-efi-system-info.PNG "RU EFI Info Menu")
+![RU EFI Info Menu](/images/0037/0009-ru-efi-system-info.PNG "RU EFI Info Menu")
 
 And then the last menu, `Quit` simply exits the application.  It can be called at any time with `alt`+`q`
 
 Each menu can be accessed via pressing `alt` and the underline character key.  We will mostly be working with the UEFI Variables Menu, which can be accessed via `alt`+`=`.
 
-![UEFI Variable Menu](images/0037/uefi-var-menu.png "UEFI Variable Menu")]
+![UEFI Variable Menu](/images/0037/uefi-var-menu.png "UEFI Variable Menu")]
 
 ## Prerequistes to Enabling DCI
 
@@ -84,9 +84,9 @@ The first step is to dump the system bios from the target machine.  I did this u
 
 Once I had the BIOS as a binary file, I used UEFITool to extract the `Setup` UEFI Variable:
 
-![UEFITool Search](images/0037/uefitool-search.png "UEFITool Search")
+![UEFITool Search](/images/0037/uefitool-search.png "UEFITool Search")
 
-![UEFITool Extract](images/0037/uefitool-setup.png "UEFI Tool Extract Setup")
+![UEFITool Extract](/images/0037/uefitool-setup.png "UEFI Tool Extract Setup")
 
 Next we run the `Universal IFR Extractor` tool on the extracted setup file.  Universal IFR Extractor can be downloaded here: [https://github.com/LongSoft/Universal-IFR-Extractor](https://github.com/LongSoft/Universal-IFR-Extractor).
 
@@ -146,7 +146,7 @@ From this we can come up with a list of `Setup` variable offsets that need to be
 
 We now use RU.EFI's hex editor to modify bytes in the `Setup` variable:
 
-![UEFI Var Setup Edit](images/0037/uefi-setup-var-edit.png "UEFI Var Setup Edit")
+![UEFI Var Setup Edit](/images/0037/uefi-setup-var-edit.png "UEFI Var Setup Edit")
 
 Changes are made by using the arrow keys to select the appropriate offset and then entering the hex value and pressing enter.  To write the value back to BIOS, press `crtl`+`w`. Make all of the aforementioned offset changes, write the values to BIOS, and then exit the application and run `reset` at the UEFI shell.
 
@@ -155,7 +155,7 @@ Next we plug in our target machine to our host machine using a USB3.0 cross over
 
 If we check the USB Tree View, the Target should appear like this:
 
-![USB Treeview](images/0037/usb-treeview.PNG "USB Treeview")
+![USB Treeview](/images/0037/usb-treeview.PNG "USB Treeview")
  
  
  We need Intel System Studio installed on our host machine. Intel System Studio can be downloaded here: [https://software.intel.com/content/www/us/en/develop/tools/system-studio/choose-download.html](https://software.intel.com/content/www/us/en/develop/tools/system-studio/choose-download.html).  Also worth noting is that on the GPD Pocket 2, only the right USB-A port seemed to work with DCI.
@@ -164,4 +164,4 @@ For whatever reason, I was not able to get a debug connection established using 
 
 Interrupting the CPU results in a processor halt on the target and control transfered to the host!
 
-![DCI Halt](images/0037/dci-halt.png "DCI Halt")
+![DCI Halt](/images/0037/dci-halt.png "DCI Halt")

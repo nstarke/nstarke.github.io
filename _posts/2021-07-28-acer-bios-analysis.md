@@ -88,7 +88,7 @@ This will output many lines, most of which are errors. When we are done, we want
 $ find . -type f -name "*.extract.txt" -size +2k
 ```
 
-![UEFI Tool]("images/0055/uefitool.PNG "UEFI Tool Screenshot")
+![UEFI Tool]("/images/0055/uefitool.PNG "UEFI Tool Screenshot")
 
 This lead me to `SetupUtility` which seems to be in UEFI format and can be parsed by `ifrextract`. You can right click on this entry in UEFITool and click `Extract Body` to save the body of the binary to the local filesystem.  Then you can run `ifrextract` against this file you have saved.  
 

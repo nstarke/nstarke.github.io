@@ -33,7 +33,7 @@ $ qemu-img create -f qcow2 armdisk.img 12G
 Download VMLinuz and Initrd.gz for installation:
 
 ```bash
-$ wget -r --no-parent -nH --cut-dirs=9 -R index.html* http://ftp.debian.org/debian/dists/wheezy/main/installer-armel/current/images/versatile/netboot/  
+$ wget -r --no-parent -nH --cut-dirs=9 -R index.html* http://ftp.debian.org/debian/dists/wheezy/main/installer-armel/current//images/versatile/netboot/  
 ```
 
 Boot into install mode:

@@ -97,30 +97,30 @@ Create a new Ghidra Project and import `u-boot.body`.  This will not be recogniz
 
 Next set the language to MIPS Big Endian Default:
 
-![Ghidra Language Set](images/0040/0040-ghidra-language-select.png "Ghidra Language Set")
+![Ghidra Language Set](/images/0040/0040-ghidra-language-select.png "Ghidra Language Set")
 
 After that you will need to set the load address. We know this value from the binwalk output, which parses the U-Boot header for the information.  The correct value here is `0x80010000` - search the binwalk output above for this value if you are confused as to where it came from.
 
-![Ghidra Offset](images/0040/0040-ghidra-offset.png "Ghidra Offset")
+![Ghidra Offset](/images/0040/0040-ghidra-offset.png "Ghidra Offset")
 
 The next thing I did was search for strings.  I had to set the length down to 3 in order to catch the string `tpl`:
 
-![Ghidra String Set](images/0040/0040-ghidra-string-set.png "Ghidra String Set")
+![Ghidra String Set](/images/0040/0040-ghidra-string-set.png "Ghidra String Set")
 
 After that I filtered for `tpl`:
 
-![Ghidra String Filter](images/0040/0040-string-search-result.png "Ghidra Image Filter")
+![Ghidra String Filter](/images/0040/0040-string-search-result.png "Ghidra Image Filter")
 
 Double clicking on the string search result takes me to the location in the disassembler that the string search found the string at.  This is address `0x800256bc`.  We can apply the data type `string` to the `tpl` characters by select the four bytes at this address, right clicking on the green selection, and navigating to `Data->string`.  Afterwards, your selection should look like this:
 
-![Ghidra Stringified](images/0040/0040-ghidra-address-stringified.png "Ghidra Address Stringifed")
+![Ghidra Stringified](/images/0040/0040-ghidra-address-stringified.png "Ghidra Address Stringifed")
 
 Next we right click on `s_tpl_800256bc` and select `References->Show References to s_tpl_800256bc` at the bottom of the context-menu. You should see a screen like this:
 
-![Ghidra References](images/0040/0040-ghidra-references.png "Ghidra References")
+![Ghidra References](/images/0040/0040-ghidra-references.png "Ghidra References")
 
 There should only be one reference, so I double clicked on it and was greeted with the following disassembly:
 
-![Ghidra Disassembly](images/0040/0040-ghidra-disassembly.png "Ghidra Disassembly")
+![Ghidra Disassembly](/images/0040/0040-ghidra-disassembly.png "Ghidra Disassembly")
 
 And with that we have found the location in Ghidra where the "escape sequence" code exists!

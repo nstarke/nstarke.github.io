@@ -26,11 +26,11 @@ Before I begin command injection testing, I want to know whether or not the `tel
 
 Opening up `/usr/sbin/httpd` in Ghidra, we can start to look for command injection vulnerabilities. I start with the `system` function and viewing all instances of this function in the binary:
 
-!["System Calls"](images/0034-system-calls.png "System Calls")
+!["System Calls"](/images/0034-system-calls.png "System Calls")
 
 The first few calls are located in a function called `do_upgrade_post`, which by reading through it we can infer that this is the function that handles the configuration restore feature at the url path `/restore.cgi`.  
 
-!["Command Injection"](images/0034-command-injection.png "Command Injection")
+!["Command Injection"](/images/0034-command-injection.png "Command Injection")
 
 The following code is particularly interesting:
 
