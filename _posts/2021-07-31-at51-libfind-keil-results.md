@@ -6,11 +6,11 @@ categories: 8051 at51 linux-firmware cpu_rec
 author: Nicholas Starke
 ---
 
-# Background
+## Background
 
-The [linux-firmware package](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git) contains a number of binary firmware images that are based on 8051-chipsets. I ran [cpu_rec](https://github.com/airbus-seclab/cpu_rec) against all the binaries in `linux-firmware` and posted a list of results [here](https://gist.github.com/nstarke/771f76801e92e5c46508a9a61888920d).  I took this list and ran [at51 libfind](https://github.com/8051Enthusiast/at51) against the 8051-reported results.  I used the Keil 8051 toolchain files with `at51 libfind` to develop [these results](https://github.com/nstarke/at51-libfind-linux-firmware-results).  
+The [linux-firmware](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git) package contains a number of binary firmware images that are based on 8051-chipsets. I ran [cpu_rec](https://github.com/airbus-seclab/cpu_rec) against all the binaries in `linux-firmware` and posted a list of results [here](https://gist.github.com/nstarke/771f76801e92e5c46508a9a61888920d).  I took this list and ran [at51 libfind](https://github.com/8051Enthusiast/at51) against the 8051-reported results.  I used the Keil 8051 toolchain files with `at51 libfind` to develop [these results](https://github.com/nstarke/at51-libfind-linux-firmware-results).  
 
-# Results
+## Results
 
 This results in an interesting observation: some 8051-based firmware blobs do not have any results when matched against the Keil toolchain, meaning they were most likely compiled with an alternative toolchain.  The list of these 8051 blob files in linux-firmware are:
 
