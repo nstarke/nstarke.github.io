@@ -6,7 +6,7 @@ categories: netgear firmware
 author: Nicholas Starke
 ---
 
-In my [last blog post](0051-firmware-archaeology-netgear-gs110tpv2.html) I went through the GS108Tv2 / GS110TPv2 firwamre images.  These are ProSafe-family switches manufacturered by Netgear.  In this post we will look at the `devshell` we identitifed in the last post in order to determine any security impact of this `devshell` being available in production builds.
+In my [last blog post](/netgear/firmware/2021/06/07/firmware-archaeology-netgear-gs110tpv2.html) I went through the GS108Tv2 / GS110TPv2 firwamre images.  These are ProSafe-family switches manufacturered by Netgear.  In this post we will look at the `devshell` we identitifed in the last post in order to determine any security impact of this `devshell` being available in production builds.
 
 The `devshell` is available through the web interace of the switch at the URL path `/base/devshell.html`.  Both the GET request which retrieves the UI and the POST request which actually executes the supplied command require a valid session identifier in the form of a `SID` cookie.  This effectively means authentication is required to access the `devshell`.
 
