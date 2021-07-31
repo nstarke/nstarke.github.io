@@ -22,6 +22,7 @@ From the Release notes, located [here](https://kb.netgear.com/000038660/GS110TP-
 So it looks like there was a debug html page available pre-auth in `5.4.2.29`, but certain questions remain:
 
 1) Did they remove the `devshell` altogether?
+
 2) Did they just place the `devshell` behind authentication?
 
 Let's take a look at the binary and try to answer these questions by looking at the changes.
