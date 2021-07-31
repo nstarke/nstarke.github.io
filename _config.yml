@@ -28,7 +28,7 @@ twitter_username: nstarke
 github_username:  nstarke
 
 # Build settings
-remote_theme: jekyll-theme-midnight
+theme: jekyll-theme-midnight
 plugins:
   - jekyll-feed
   - jekyll-include-cache
