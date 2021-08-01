@@ -119,7 +119,9 @@ If we subtract 0x20 from 0x593, we get 0x573.  Add 0x4000 for the firmware base 
 
 ## Taking it further
 
-I wonder what would happen if we increased the `ramcodesize` field in the header on a host with one of these cards installed?  Fortunately, at least on Ubuntu, the `/lib/firmware` files are only writable as root:
+I wonder what would happen if we increased the `ramcodesize` field in the header on a host with one of these cards installed?  The symbol `ramcodesize` doesn't occur anywhere else in the Linux Kernel, leading me to believe it's used by the firmware exclusively.  
+
+Fortunately, at least on Ubuntu, the `/lib/firmware` files are only writable as root:
 
 ```
 $ ls -lah /lib/firmware/rtlwifi/rtl8188efw.bin
