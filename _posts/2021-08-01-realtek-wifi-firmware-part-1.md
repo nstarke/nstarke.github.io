@@ -72,7 +72,7 @@ Other field values include:
 * `minute` - 0x56 - 1 Byte
 * `ramcodesize` - 0x2bb0 - 2 Bytes
 * `rsvd2` - 0x0000 - 2 Bytes
-* `svnindex` - 0x04a200000 - 4 Bytes
+* `svnindex` - 0x04a20000 - 4 Bytes
 * `rsvd3` - 0x00000000 - 4 Bytes
 * `rsvd4` - 0x00000000 - 4 Bytes
 * `rsvd5` - 0x00000000 - 4 Bytes
