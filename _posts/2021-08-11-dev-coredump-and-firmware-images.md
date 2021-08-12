@@ -6,7 +6,7 @@ categories: firmware wifi linux kernel
 author: Nicholas Starke
 ---
 
-This blog post will document some research I did recently on WiFi firmware for the QC6174 `ath10k` wifi chipset. Specifically I will discuss how I modified the Linux Kernel to dump out the contents of the internal RAM of this WiFi chipset.  Then we will discuss ways of generating this crash dump, detailing how and where the Linux Kernel stores device coredumps.
+This blog post will document some research I did recently on WiFi firmware for the QCA6174 `ath10k` wifi chipset. Specifically I will discuss how I modified the Linux Kernel to dump out the contents of the internal RAM of this WiFi chipset.  Then we will discuss ways of generating this crash dump, detailing how and where the Linux Kernel stores device coredumps.
 
 First of all, we will need the ability to build the Linux Kernel with custom CONFIG options set.  We want to set the following parameters in `.config`:
 
