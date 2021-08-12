@@ -261,6 +261,6 @@ With the kernel changes, the RAM dump is almost 2 Megabytes in size:
 
 This firmware dump contains several component parts, which are documented here: 
 
-https://github.com/torvalds/linux/blob/v5.11/drivers/net/wireless/ath/ath10k/coredump.c#L876
+[https://github.com/torvalds/linux/blob/v5.11/drivers/net/wireless/ath/ath10k/coredump.c#L876](https://github.com/torvalds/linux/blob/v5.11/drivers/net/wireless/ath/ath10k/coredump.c#L876)
 
 We can use this memory layout to build a Ghidra representation of the data from the device coredump, which I will cover in a subsequent blog post.
