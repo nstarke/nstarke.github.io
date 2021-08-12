@@ -12,7 +12,7 @@ First of all, we will need the ability to build the Linux Kernel with custom CON
 
 * `CONFIG_ATH10K_DEBUG=y`
 * `CONFIG_ATH10K_DEBUGFS=y`
-* `CONFIG_ATH10K_TRACINGy`
+* `CONFIG_ATH10K_TRACING=y`
 
 We also need to modify `drivers/net/wireless/ath/ath10k/coredump.c` file, making the following modifications:
 
