@@ -16,7 +16,7 @@ This blog post is going to cover a little trick I developed recently that might 
 00000040: 2100 0000 0000 0000 0000 0000 0000 0000  !...............
 ```
 
-How does one convert data in this format back to binary?  `xxd -r -p` doesn't handle the address columnn well in many cases, instead interpretting it as hex data into the final binary output.  For example, running `xxd -r -p` over the above content results in a binary in this format (hexdumping the output from `xxd -r -p`):
+How does one convert data in this format back to binary?  `xxd -r -p` doesn't handle the address column well in many cases, instead interpretting it as hex data into the final binary output.  For example, running `xxd -r -p` over the above content results in a binary in this format (hexdumping the output from `xxd -r -p`):
 
 ```
 00000000: 0000 0000 6000 1c00 008e 0800 2222 1221  ....`......."".!
