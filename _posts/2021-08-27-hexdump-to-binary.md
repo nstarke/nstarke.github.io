@@ -28,7 +28,7 @@ How does one convert data in this format back to binary?  `xxd -r -p` doesn't ha
 00000060: 0000 0000                                ....
 ```
 
-## Bash one-liner for converting hexdump to back to binary
+## Bash one-liner for converting hexdump back to binary
 
 I looked extensively at tools that can convert a hexdump back to binary, and I could not find one that worked well.  Then I realized I could easily do this with `awk` and `xxd`.  Here is a one liner to convert hexdump back to binary:
 
