@@ -37,3 +37,12 @@ $ awk -F' ' '{print $2$3$4$5$6$7$8$9}' input.txt | xxd -r -p > output.bin
 ```
 
 The `awk` command splits each line on the space character as a delimiter.  Then it outputs the bytes columnns from `input.txt`.  Lastly, we pipe the output to `xxd -r -p` which can now easily convert the hex-only output back to binary! The output is redirected then to `output.bin`.
+
+## Update
+Jared Brees (https://twitter.com/mejaredbrees) alerted me to a shorter one-liner that also gets the job done:
+
+```
+$ cut -d' ' -f2-9 input.txt | xxd -r -p > output.bin
+```
+
+Thanks Jared!
