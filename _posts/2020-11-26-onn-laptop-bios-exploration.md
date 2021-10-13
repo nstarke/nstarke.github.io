@@ -507,3 +507,7 @@ The Boot Menu presents the user with options as to boot device order.
 ## Save & Exit Menu
 
 The Save & Exit Menu presents the user with options to save BIOS configuration settings as well as to override the boot settings
+
+# Update 10/13/2021
+
+[@RockerFernando](https://twitter.com/RockerFernando) reached out to me with some additional details.  Apparently there are Gateway-branded laptops that have the same BIOS as the ONN-branded laptop.  Like me, he had bricked his laptop by setting the same BIOS option.  I was pretty sure that by resetting the NVRAM we could restore our laptops to a usable state, and [@RockerFernando](https://twitter.com/RockerFernando) went and figured out how to do this.  If you open the chassis and disconnect the battery, or simply wait a few months until the battery is totally dead, and then hold down the power button for about a minute, you should be able to reset NVRAM thus clearing the faulty configuration value.  Thanks [@RockerFernando](https://twitter.com/RockerFernando) for the tip!
