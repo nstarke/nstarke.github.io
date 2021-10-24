@@ -6,6 +6,8 @@ categories: uefi binary ghidra
 author: Nicholas Starke
 ---
 
+The class in reference in this post is OpenSecurityTraining2's Arch4001.  I will update this post with a link once the class is public.
+
 I recently took a class on the x86 reset vector, and one of the things I learned was that the CPU starts executing at `0xfffffff0`, which is the last 16 bytes of the 32-bit address space.  The class I took recommended using a Dell Optiplex 7010, so I purchased that model of PC with Windows 10 built into it.  I dumped the firmware using Chipsec, and loaded the dumped binary file into UEFITool. The firmware version was `A29`, which is the latest as of this writing.  I wanted to see where in the UEFI image the reset vector code was located.  I found it as the last item after expanding the PEI phase modules. 
 
 ![UEFITool Reset Vector Code](/images/10242021/uefitool-sec.PNG "UEFITool Reset Vector Code")
