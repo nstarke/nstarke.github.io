@@ -12,7 +12,7 @@ I recently took a class on the x86 reset vector, and one of the things I learned
 
 ![UEFITool Reset Vector Code](/images/10242021/uefitool-sec.PNG "UEFITool Reset Vector Code")
 
-Note the `Image Base` value of `0xffffffc0` in the image.
+Note the `Data Address` value of `0xffffffc0` in the image.
 
 There are two components here:
 
