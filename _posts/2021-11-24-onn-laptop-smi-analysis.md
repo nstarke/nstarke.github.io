@@ -49,10 +49,6 @@ The `SbRunSmm` Software SMI Handler that can be triggered by writing `0xbb` as t
 
 The first field of the RuntimeServices table is a [header](https://github.com/tianocore/edk2/blob/master/MdePkg/Include/Uefi/UefiSpec.h#L1824).  The [first field](https://github.com/tianocore/edk2/blob/master/MdePkg/Include/Uefi/UefiMultiPhase.h#L151) in this header is a signature defined as an 8-byte field.  [The signature](https://github.com/tianocore/edk2/blob/master/MdePkg/Include/Uefi/UefiSpec.h#L1814) for RuntimeServices is `RUNTSERV` as byte values.  [SmmExploit searches](https://github.com/tandasat/SmmExploit/blob/main/Demo/Demo/FindSystemManagementServiceTable.cpp#L199) for the signature `cmms`; while this is a 32-bit value, I think the code could be adjusted easily to search for the 64-bit RuntimeServices header signature.  I don't think even the [search range](https://github.com/tandasat/SmmExploit/blob/main/Demo/Demo/FindSystemManagementServiceTable.cpp#L128) would need to be adjusted as the `FindSmmCorePrivateData` function in SmmExploit already searches over the RuntimeServices range [pulled out of the registry](https://github.com/tandasat/SmmExploit/blob/main/Demo/Demo/FindSystemManagementServiceTable.cpp#L138). Once we've found the header of the RuntimeServices table we can calculate the offset to the `GetVariable` function pointer and overwite that memory location with a function pointer to shellcode.  SmmExploit handles this nicely and it should be possible to modify it to suit such needs.
 
-## Mitigations
-
-Chipsec reports that SMM_Code_Chk_En is enabled and locked down (from Appendix C), meaning it shouldn't be possible to execute code outside SMRR while in System Management Mode. There are some counter measures that can be employed to bypass this restriction.  See [this synacktiv blog post](https://www.synacktiv.com/publications/code-checkmate-in-smm.html) for more information.
-
 ```cpp
     smi_handler_code = 0xbb;
     sw_smi_handler_efi_handle = (EFI_HANDLE)0x0;
@@ -70,6 +66,11 @@ EVar3 = (*gRT->GetVariable)((CHAR16 *)u_MeSetup_80004d08,(EFI_GUID *)&DAT_800040
                               local_1338,local_1328);
 ```
 
+## Mitigations
+
+Chipsec reports that SMM_Code_Chk_En is enabled and locked down (from Appendix C), meaning it shouldn't be possible to execute code outside SMRR while in System Management Mode. There are some counter measures that can be employed to bypass this restriction.  See [this synacktiv blog post](https://www.synacktiv.com/publications/code-checkmate-in-smm.html) for more information.
+
+
 ## How did I find this?
 
 Utilizing the SMI Handler enumeration technique I detailed in [this blog post](https://nstarke.github.io/smi/uefi/ghidra/2021/06/25/enumerating-smi-handlers.html), I built a list of all the `swSmiHandlers` in the firmware image and then just started going through them one by one.  You will notice that `SbRunSmm` is the first SMM module after `NbSmi`.  `NbSmi` seems to be the context switcher for transitioning into System Management Mode and storing the existing register values.  In any event, the SMI Handler in `NbSmi` does not immediately seem vulnerable to callouts or confused deputy attacks, so after it I immediately moved on to the three `swSmiHandlers` in `SbRunSmm`.  
@@ -78,7 +79,8 @@ This is all a long way of saying the actualy analysis was a manual process, and 
 
 ## Appendix A: SMI Handlers
 
-```FindContainsFunction.java> Running...
+```
+FindContainsFunction.java> Running...
 FindContainsFunction.java> found swSmiHandler17 in /onn-laptop-bios.bin/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 003 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 184 - NbSmi/PE32 Image Section
 FindContainsFunction.java> found swSmiHandler16 in /onn-laptop-bios.bin/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 003 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 186 - SbRunSmm/PE32 Image Section
 FindContainsFunction.java> found swSmiHandler18 in /onn-laptop-bios.bin/Volume 002 - 4f1c52d3-d824-4d2a-a2f0-ec40c23c5916/File 003 - 9e21fd93-9c72-4c15-8c4b-e77f1db2d792/GUID-Defined Section - LzmaCustomDecompressGuid/Firmware Volume Image Section/Volume 000 - 5c60f367-a505-419a-859e-2a4ff6ca6fe5/File 186 - SbRunSmm/PE32 Image Section
