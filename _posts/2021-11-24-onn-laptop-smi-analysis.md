@@ -66,6 +66,79 @@ EVar3 = (*gRT->GetVariable)((CHAR16 *)u_MeSetup_80004d08,(EFI_GUID *)&DAT_800040
                               local_1338,local_1328);
 ```
 
+**Update**
+
+[Assaf Carlsbad](https://twitter.com/assaf_carlsbad) was kind enough to reach out and ask if the `SbRunSmm` module utilized the `EFI_SMM_RUNTIME_SERVICES_TABLE_GUID`.  He pointed out that SMM modules often remap the RuntimeServices from the SystemTable to the SMM-specific RuntimeServices table.  I did not search the SMM module for this GUID during my original analysis, and it turns out the module does utilize this GUID and it does remap the standard RuntimeServices table to the SMM RuntimeServices table.  Observe:
+
+```cpp
+EFI_STATUS remap_runtime_services(EFI_HANDLE ImageHandle67, EFI_SYSTEM_TABLE *SystemTable)
+{
+  EFI_STATUS EVar1;
+  EFI_RUNTIME_SERVICES *smm_runtime_table_handle;
+  BOOLEAN local_res18 [16];
+  
+  if (gST == (EFI_SYSTEM_TABLE *)0x0) {
+    gBS = SystemTable->BootServices;
+    gRT = (EFI_RUNTIME_SERVICES *)SystemTable->RuntimeServices;
+    gST = SystemTable;
+    gImageHandle = ImageHandle67;
+  }
+  local_res18[0] = '\0';
+  if (gST == (EFI_SYSTEM_TABLE *)0x0) {
+    gBS = SystemTable->BootServices;
+    gRT = (EFI_RUNTIME_SERVICES *)SystemTable->RuntimeServices;
+    gST = SystemTable;
+    gImageHandle = ImageHandle67;
+  }
+  EVar1 = (*gBS->LocateProtocol)(&EfiSmmBase2ProtocolGuid,(void *)0x0,&gEFI_SMM_BASE2_PROTOCOL_15);
+  if (((-1 < (longlong)EVar1) &&
+      ((*gEFI_SMM_BASE2_PROTOCOL_15->InSmm)(gEFI_SMM_BASE2_PROTOCOL_15,local_res18),
+      local_res18[0] != '\0')) &&
+     (EVar1 = (*gEFI_SMM_BASE2_PROTOCOL_15->GetSmstLocation)(gEFI_SMM_BASE2_PROTOCOL_15,&gSmst6),
+     -1 < (longlong)EVar1)) {
+    smm_runtime_table_handle = (EFI_RUNTIME_SERVICES *)find_smm_runtime_services_table();
+    DAT_800052e4 = 1;
+    DAT_800052e2 = 0;
+    if (smm_runtime_table_handle != (EFI_RUNTIME_SERVICES *)0x0) {
+      gRT = smm_runtime_table_handle;
+    }
+    FUN_80001d34();
+    FUN_80001e30();
+    DAT_800052e2 = 1;
+    EVar1 = FUN_80001448();
+  }
+  return EVar1;
+}
+```
+
+And the `find_smm_runtime_services_table` function:
+
+```cpp
+EFI_HANDLE find_smm_runtime_services_table(void)
+{
+  longlong lVar1;
+  EFI_CONFIGURATION_TABLE *smm_config_table;
+  UINTN UVar2;
+  
+  if (gSmst6 != (EFI_SMM_SYSTEM_TABLE2 *)0x0) {
+    smm_config_table = gSmst6->SmmConfigurationTable;
+    for (UVar2 = gSmst6->NumberOfTableEntries; UVar2 != 0; UVar2 = UVar2 - 1) {
+      lVar1 = FUN_80001f6c((longlong *)smm_config_table,
+                           (longlong *)&EFI_SMM_RUNTIME_SERVICES_TABLE_GUID);
+      if (lVar1 == 0) {
+        return smm_config_table->VendorTable;
+      }
+      smm_config_table = smm_config_table + 1;
+    }
+  }
+  return (EFI_HANDLE)0x0;
+}
+```
+
+What this means is that since the RuntimeServices table points to a structure in SMM, it is not possible to overwrite the `GetVariable` function pointer from CPL == 0 (ring zero). So it turns out this module is **not vulnerable** to a callout vulnerability.
+
+Thanks [Assaf Carlsbad](https://twitter.com/assaf_carlsbad)!
+
 ## Mitigations
 
 Chipsec reports that SMM_Code_Chk_En is enabled and locked down (from Appendix C), meaning it shouldn't be possible to execute code outside SMRR while in System Management Mode. There are some counter measures that can be employed to bypass this restriction.  See [this synacktiv blog post](https://www.synacktiv.com/publications/code-checkmate-in-smm.html) for more information.
