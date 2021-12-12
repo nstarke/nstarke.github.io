@@ -38,7 +38,7 @@ Entropy Analysis for `pieeprom-2021-11-22.bin`
 
 These images look similar enough to suggest there are no enormous structural differences between the two images.  Specifically what I was concerned about was whether or not some of or all of the firmware files were encrypted.  For reference, this is what random data (output from `/dev/urandom`) looks like from an entropy analysis perspective:
 
-![test.bin](/images/12122021/test.png "test.bin random data entropy analysis")
+![test.bin.png](/images/12122021/test.bin.png "test.bin random data entropy analysis")
 
 ## Setting up UART
 
