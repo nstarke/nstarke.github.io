@@ -36,6 +36,8 @@ for module in binwalk.scan(sys.argv[1], signature=True, quiet=True, extract=True
 
             parser = uefi_firmware.AutoParser(lzma_file[0x10:])
             parsed_lzma_file = parser.parse()
+            if parsed_lzma_file is None:
+                continue
             parsed_lzma_file.dump()
             print("[+] Success! Extracted DXE files should be in directory 'volume-0'")
             os.rmdir(module.extractor.directory)
