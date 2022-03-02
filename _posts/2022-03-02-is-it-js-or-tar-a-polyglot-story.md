@@ -6,6 +6,8 @@ categories: javascript tar polyglot
 author: Nicholas Starke
 ---
 
+![Polyglot](images/03022022/polyglot.PNG "Polyglot screenshot")
+
 I've been taking a break from firmware hacking for a bit, and so as part of that I figured out how to make a polyglot file that is both a valid, executable JavaScript file and a GNU Tar Archive. Basically I did this by abusing multiline JavaScript strings. In JavaScript, everything that is not executable appears as a multiline strings.  These multiline strings can be divided up: there is a first multiline string, then the executable payload, then the second multiline string.
 
 This small shell script will take a path to a JavaScript file as a payload as a first argument, and then a file path for output as the second argument.
