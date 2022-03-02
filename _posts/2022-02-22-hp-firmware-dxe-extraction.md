@@ -2,7 +2,7 @@
 layout: posts
 title:  "HP Firmware DXE Extraction"
 date:   2022-02-22 00:00:00 -0600
-categories: hp firnmware dxe extractopm
+categories: hp firnmware dxe extraction
 author: Nicholas Starke
 ---
 
