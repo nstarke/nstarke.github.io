@@ -8,7 +8,7 @@ author: Nicholas Starke
 
 I was recently working on assessing a product's UEFI firmware and I learned something new that didn't seem well documented on the internet.  
 
-Many times, when a Software SMI Handler (SwSmiHandler) is registered in an SMM module, the function **SmmRegisterProtocolNotify** is also called, which registers a function to a Protocol GUID. efiSeek labeled the registered function as a SmiHandler, but I wanted to find out if functions registered with **SmmRegisterProtocolNotify** are called when the swSmiHandler is called.  With some help from [@vincentzimmer](https://twitter.com/vincentzimmer) I was able to trace through the EDK2 source code to pin point how the functions in question are invoked.
+Many times, when a Software SMI Handler (SwSmiHandler) is registered in an SMM module, the function **SmmRegisterProtocolNotify** is also called, which registers a function to a Protocol GUID. [efiXplorer](https://github.com/binarly-io/efiXplorer) labeled the registered function as a SmiHandler, but I wanted to find out if functions registered with **SmmRegisterProtocolNotify** are called when the swSmiHandler is called.  With some help from [@vincentzimmer](https://twitter.com/vincentzimmer) I was able to trace through the EDK2 source code to pin point how the functions in question are invoked.
 
 For reference, this is what a normal SwSmiHandler registration looks like (in Ghidra, with efiSeek):
 
@@ -57,3 +57,5 @@ This is what a typical **SmmRegisterProtocolNotify** looks like:
 When you see **SmmInstallProtocolInterface** within an SwSmiHandler and if **notify_6ea0f71c** has references to **gBS** or **gRS** (but not the SMM Runtime Services!) then there may be SMM Callout Vulnerabilities!
 
 Thanks to [@vincentzimmer](https://twitter.com/vincentzimmer) and [@hackingthings](https://twitter.com/hackingthings) for answering questions and otherwise just generally being helpful.
+
+Additionally, it seems efiXplorer recently added support for this feature! See [https://github.com/binarly-io/efiXplorer/commit/3c357c94269977f95ead6ded126ec9b567caf06a](https://github.com/binarly-io/efiXplorer/commit/3c357c94269977f95ead6ded126ec9b567caf06a).
