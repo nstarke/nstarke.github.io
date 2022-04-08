@@ -59,3 +59,10 @@ When you see **SmmInstallProtocolInterface** within an SwSmiHandler and if **not
 Thanks to [@vincentzimmer](https://twitter.com/vincentzimmer) and [@hackingthings](https://twitter.com/hackingthings) for answering questions and otherwise just generally being helpful.
 
 Additionally, it seems efiXplorer recently added support for this feature! See [https://github.com/binarly-io/efiXplorer/commit/3c357c94269977f95ead6ded126ec9b567caf06a](https://github.com/binarly-io/efiXplorer/commit/3c357c94269977f95ead6ded126ec9b567caf06a).
+
+See these advisories for actual examples of this type of bug:
+
+[https://www.binarly.io/advisories/BRLY-2021-017)](https://www.binarly.io/advisories/BRLY-2021-017)
+[https://binarly.io/advisories/BRLY-2021-019](https://binarly.io/advisories/BRLY-2021-019)
+
+I apologize to [@matrosov](https://twitter.com/matrosov) for forgetting to include his work on the original edition of this blog.  It was an honest mistake.  [@matrosov](https://twitter.com/matrosov) was kind enough to answer questions for me as well.
