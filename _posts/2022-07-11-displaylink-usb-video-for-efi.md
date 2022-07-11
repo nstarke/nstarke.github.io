@@ -24,7 +24,7 @@ The very important part of this statement is `DisplayLink DL-6xxx chip or newer`
 
 ## GOP Driver
 
-Now you can build the DisplayLinkPkg DXE GOP Driver using edk2 with edk2-stdlib.  Successful compilation results in **DisplayLinkGop.efi** outputted to the **BUILD** directory.  This driver can be loaded from an EFI shell like this:
+Now you can build the DisplayLinkPkg DXE GOP Driver using edk2 with edk2-stdlib.  Successful compilation results in **DisplayLinkGop.efi** outputted to the **BUILD** directory.  The resultant EFI driver is 18-19KB in size (depending on whether or not your build type is DEBUG or RELEASE). This driver can be loaded from an EFI shell like this:
 
 ```
 load DisplayLinkGop.efi
