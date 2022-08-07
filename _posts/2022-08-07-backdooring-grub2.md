@@ -23,7 +23,9 @@ I made a copy of the existing TCP/IP stack contained within Grub2 sources and mo
 There are three operations that the LUKS module must complete in order to obscond with the LUKS password:
 
 1) Find the NIC
+
 2) Obtain a IP Address from a DHCP server
+
 3) Make the web request with the password hex encoded in the HTTP request query string.
 
 ## Attack Scenarios
