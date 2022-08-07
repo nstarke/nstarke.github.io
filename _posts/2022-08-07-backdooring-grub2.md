@@ -8,7 +8,7 @@ author: Nicholas Starke
 
 Earlier this year I worked on a project involving backdooring Grub2.  What I wanted to accomplish was to send the cleartext LUKS password to a remote server when the password is entered as part of the Grub2 boot process.  In the end I was able to make the desired modifications and have it function as intended.  
 
-I commit my backdoor-enabled code here:
+I committed my backdoor-enabled code here:
 
 [https://github.com/nstarke/backdoored-grub2/commit/fa6c5aa77d1909b1e62eb04ce257e27f290c3499](https://github.com/nstarke/backdoored-grub2/commit/fa6c5aa77d1909b1e62eb04ce257e27f290c3499)
 
