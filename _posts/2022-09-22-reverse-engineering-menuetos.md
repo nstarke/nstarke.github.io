@@ -400,7 +400,7 @@ After the stack pointers are initialized, the primary code stub (**_start**) cal
 Referring to the comments we identified within the legacy grub code, we can understand what each one of these bytes means:
 
 | Register | Value (Hex) | | Value (Decimal) | Meaning |
-| -------------- | ----------------- | --------------------- | ------------------------------------------------------------- |
+| --- | ------ | --- | ------------------------------------------------------------- |
 | %ah | 0x2 | 2 | INT 13 Function Id |
 | %al | 0xe | 14 | Number of Sectors to Read |
 | %bx | 0xa000 | 40960 | Memory segment offset for writing data from disk sectors to |
@@ -522,6 +522,7 @@ Argument descriptions:
     -   if: mark the drive as a floppy drive
     -   format: needs to be raw so that disk writes to block 0 can
         occur. Skipping this argument results in an errors like this:
+
 ```
 WARNING: Image format was not specified for 'M6414490.IMG' and probing guessed raw.
 
@@ -529,6 +530,7 @@ Automatically detecting the format is dangerous for raw images, write operations
 
 Specify the 'raw' format explicitly to remove the restrictions.
 ```
+
 -   -boot: sets the boot device to the floppy drive (a)
 -   -m: specifies 1G of RAM
 -   -gdb: expose GDB stub on TCP port 1234.
