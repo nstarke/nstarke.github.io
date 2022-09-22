@@ -152,13 +152,13 @@ Static Analysis
 
 To perform static analysis of this section of code, we need to analyze it in 16-bit Intel x86 Real Mode. In Ghidra, we import PBL.BIN as a Raw binary using the LanguageID x86:LE:16:Real:Mode:default.
 
-![](/images/09222022/image1.png){width="6.5in" height="4.569444444444445in"}
+![](/images/09222022/image1.png)
 
 *Figure 5: Selecting the appropriate LanguageID within Ghidra's Import Binary workflow.*
 
 After selecting the LanguageID, we need to set the base address. As noted before, this is the default MBR load address, which is 0x7c00.
 
-![](/images/09222022/image4.png){width="6.5in" height="1.9722222222222223in"}
+![](/images/09222022/image4.png)
 
 *Figure 6: Setting the proper Base Address within Ghidra's Import Binary
 workflow.*
@@ -465,7 +465,7 @@ $ dd if=M6414490.IMG of=M6414490.HALF.IMG bs=737280 count=1
 
 Now let's see what happens when we try to run the first half of the image:
 
-![](/images/09222022/image5.png){width="6.5in" height="4.125in"}
+![](/images/09222022/image5.png)
 *Figure 16: QEMU Video output of error state*
 
 Likewise, if we have a debugger attach at this point and we send an interrupt signal by pressing **CTRL+C** at the gdb prompt, we will see that the CPU is in the tight loop that is the last instruction of the PBL:
@@ -600,7 +600,7 @@ eflags 0x202 [ IOPL=0 IF ]
 
 When gdb breaks at 0x7c00, we can analyze the state of the VM before it has executed any instructions contained in **M6414490.IMG**. We can then step through each instruction (stepi) and examine how the registers and stack change. At this point, the video output looks like this:
 
-![](/images/09222022/image3.png){width="6.5in" height="4.166666666666667in"}
+![](/images/09222022/image3.png)
 
 *Figure 22: QEMU Video output before any MenuetOS 64-specific instructions have been executed.*
 
@@ -612,7 +612,7 @@ Let's try setting a breakpoint after this line of code executes, at memory addre
 
 If we let execution continue to this break point, the video output changes to look like this:
 
-![](/images/09222022/image2.png){width="6.5in" height="4.152777777777778in"}
+![](/images/09222022/image2.png)
 
 *Figure 23: QEMU Video Output after the rest of the MenuetOS 64 image is loaded from floppy into memory.*
 
