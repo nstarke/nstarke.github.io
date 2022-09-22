@@ -399,15 +399,15 @@ After the stack pointers are initialized, the primary code stub (**_start**) cal
 
 Referring to the comments we identified within the legacy grub code, we can understand what each one of these bytes means:
 
-  | Register | Value (Hex) | | Value (Decimal) | Meaning
-   | -------------- | ----------------- | --------------------- | ------------------------------------------------------------- |
-  | %ah | 0x2 | 2 | INT 13 Function Id |
-  | %al | 0xe | 14 | Number of Sectors to Read |
-  | %bx | 0xa000 | 40960 | Memory segment offset for writing data from disk sectors to |
-  | %ch | 0x0 | 0 | Cylinder to read from |
-  | %cl | 0x2 | 2 | Sector to read from |
-  | %dh | 0x1 | 1 | Head to read from |
-  | %dl | 0x0 | 0 | Drive (0x0 for floppy, 0x80 for hard disk) |
+| Register | Value (Hex) | | Value (Decimal) | Meaning |
+| -------------- | ----------------- | --------------------- | ------------------------------------------------------------- |
+| %ah | 0x2 | 2 | INT 13 Function Id |
+| %al | 0xe | 14 | Number of Sectors to Read |
+| %bx | 0xa000 | 40960 | Memory segment offset for writing data from disk sectors to |
+| %ch | 0x0 | 0 | Cylinder to read from |
+| %cl | 0x2 | 2 | Sector to read from |
+| %dh | 0x1 | 1 | Head to read from |
+| %dl | 0x0 | 0 | Drive (0x0 for floppy, 0x80 for hard disk) |
 
 Stated otherwise, this piece of code will read 14 floppy disk sectors starting at sector 2 (offset **0:0x0400**) and load the data from that location into the memory region beginning with address **0xa000**.
 
