@@ -21,7 +21,7 @@ Getting the Image
 =================
 
 Head over to
-[[http://www.menuetos.net/download.htm]{.underline}](http://www.menuetos.net/download.htm) and download the 64-bit version. The latest as of this writing was v1.44. Also I want to make it clear that the 64-bit version of the project is closed source. With regards to the analysis that is provided below, I have written this blog post for educational purposes and made my research freely available to all.
+[http://www.menuetos.net/download.htm](http://www.menuetos.net/download.htm) and download the 64-bit version. The latest as of this writing was v1.44. Also I want to make it clear that the 64-bit version of the project is closed source. With regards to the analysis that is provided below, I have written this blog post for educational purposes and made my research freely available to all.
 
 Analysis
 ========
@@ -87,7 +87,7 @@ Background: BIOS Interrupt Functions
 
 Before we begin reverse engineering the MenuetOS 64 primary bootloader, there is a small amount of prerequisite background that will help us in understanding how the PBL works. The BIOS implementation exposes several functions through semi-standardized software interrupts. The implementation of these interrupts is specific to the BIOS vendor, and in our case the BIOS is provided by the QEMU virtualization software - so we needn't concern ourselves with the implementation except to understand the API we can utilize to send data to the BIOS to pass along to hardware devices.
 
-The BIOS that QEMU comes bundled with for Intel processor types is called "Seabios". If you are interested in learning more about SeaBios, head over to [[https://seabios.org/]{.underline}](https://seabios.org/) or browse the project source code at [[https://review.coreboot.org/plugins/gitiles/seabios/+/refs/tags/rel-1.16.0]{.underline}](https://review.coreboot.org/plugins/gitiles/seabios/+/refs/tags/rel-1.16.0).
+The BIOS that QEMU comes bundled with for Intel processor types is called "Seabios". If you are interested in learning more about SeaBios, head over to [https://seabios.org/](https://seabios.org/) or browse the project source code at [https://review.coreboot.org/plugins/gitiles/seabios/+/refs/tags/rel-1.16.0](https://review.coreboot.org/plugins/gitiles/seabios/+/refs/tags/rel-1.16.0).
 
 Memory Segmentation
 -------------------
@@ -123,7 +123,7 @@ There is a great description of the BIOS interrupt handlers in the legacy grub i
 source code*
 
 *Source:*
-[[https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S\#L325]{.underline}](https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S#L325)
+[https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S\#L325](https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S#L325)
 
 BIOS Interrupt II: Printing to Video Out
 ----------------------------------------
@@ -141,11 +141,11 @@ The second interrupt we need to be aware of (int 0x10) writes a given ASCII char
 grub-legacy source code*
 
 *Source:*
-[[https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S\#L415]{.underline}](https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S#L415)
+[https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S\#L415](https://salsa.debian.org/grub-team/grub-legacy/-/blob/debian/0.97-80/stage1/stage1.S#L415)
 
 If you are interested in learning more about other BIOS-based
 interrupts, there is a comprehensive x86 BIOS Interrupt List on the web:
-[[http://www.cs.cmu.edu/\~ralf/files.html]{.underline}](http://www.cs.cmu.edu/~ralf/files.html).
+[http://www.cs.cmu.edu/~ralf/files.html](http://www.cs.cmu.edu/~ralf/files.html).
 
 Static Analysis
 ===============
