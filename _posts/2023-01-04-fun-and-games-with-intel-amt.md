@@ -37,7 +37,7 @@ As of AMT version 11.6+, Intel AMT allows administrators to upload arbitrary fil
 
 ![](/images/01042023/logon.png)
 
-_Figure N - Initial Log On web page for AMT Webserver presented in a browser_
+_Figure 1 - Initial Log On web page for AMT Webserver presented in a browser_
 
 The bad news is that to upload a custom webpage that does these naughty things, we have to be an administrator.  Fortunately for us, an administrator can create other administrator accounts.  So it is possible for there to be more than one Admin on an Intel AMT Webserver. As such, an "admin versus admin" attack is useful in this context.  
 
@@ -47,25 +47,25 @@ I mentioned MeshCommander earlier as a project aimed at replacing the default AM
 
 ![](/images/01042023/mc-storage.png)
 
-_Figure N - MeshCommander Storage UI_
+_Figure 2 - MeshCommander Storage UI_
 
 The storage UI allows an administrator to upload arbitrary files to be served off the AMT webserver.
 
 ![](/images/01042023/mc-upload.png)
 
-_Figure N - MeshCommander Storage Upload Modal_
+_Figure 3 - MeshCommander Storage Upload Modal_
 
 Notice in this screenshot that there are `vendor` and `application name` fields that can be filled out.  The AMT webserver prohibits using `Intel` as the vendor name, but you might try something like `lntel` if you're feeling frisky.  These two fields are used in specifying the URL Path to the uploaded file.
 
 ![](/images/01042023/mc-uploaded.png)
 
-_Figure N - MeshCommander Storage Upload UI after successful Storage Write_
+_Figure 4 - MeshCommander Storage Upload UI after successful Storage Write_
 
 Then, over in the default AMT install (**NOT MeshCommander**), checkout the `Web Application Links` menu.
 
 ![](/images/01042023/links.png)
 
-_Figure N - AMT Default Web UI Web Applications Links showing newly uploaded file_
+_Figure 5 - AMT Default Web UI Web Applications Links showing newly uploaded file_
 
 The newly uploaded `default.htm` is accessible on the AMT webserver at URL Path `/amt-storage/Vendor/App/default.htm`. Setting the `Vendor` or `Application Name` during upload in MeshCommander will change this link.
 
@@ -75,7 +75,7 @@ Back in MeshCommander, we can look at the `Audit Log` and see that it logs out w
 
 ![](/images/01042023/audit-log.png)
 
-_Figure N - MeshCommander Audit Log Showing entries for newly created admin users_
+_Figure 6 - MeshCommander Audit Log Showing entries for newly created admin users_
 
 We want to avoid our username showing up in this audit log, which is the whole point of this article.
 
@@ -83,19 +83,19 @@ We want to avoid our username showing up in this audit log, which is the whole p
 
 ![](/images/01042023/authenticate.png)
 
-_Figure N - Browser prompt for Authentication credentials to AMT Webserver_
+_Figure 7 - Browser prompt for Authentication credentials to AMT Webserver_
 
 There are two attacks I created using this technique.  The first attack will be executed when the victim administrator loads the crafted HTML document in the browser.  The browser will prompt the administrator to authenticate if the session has expired. 
 
 ![](/images/01042023/authenticated.png)
 
-_Figure N - Default home page after successful authentication to AMT Webserver_
+_Figure 8 - Default home page after successful authentication to AMT Webserver_
 
 After successful authentication, the browser will load the HTML document for display to the victim administrator.  The custom page looks like this:
 
 ![](/images/01042023/custom-page.png)
 
-_Figure N - Custom Page presented in a browser_
+_Figure 9 - Custom Page presented in a browser_
 
 The first thing to notice is this page uses the same CSS and HTML layout as the other pages on the AMT Webserver.  The only custom addition is the **Reauthentication Form**, which we will cover in the second attack.  
 
@@ -105,7 +105,7 @@ One of the first things that happens when the inline JavaScript starts executing
 
 ![](/images/01042023/new-admin-cli.png)
 
-_Figure N - WebSocket Server (ws-server.mjs) output on new admin created_
+_Figure 10 - WebSocket Server (ws-server.mjs) output on new admin created_
 
 It is worth noting that after the initial authentication request, the browser does not prompt the victim administrator to enter credentials necessary to perform the operation.  That means that the browser is reusing the authentication token granted in the initial authentication request to perform additional authenticated requests against the AMT webserver.
 
@@ -115,7 +115,7 @@ In addition to creating a new administrator account, there is a second attack I 
 
 ![](/images/01042023/reauth-cli.png)
 
-_Figure N - WebSocket server (ws-server.mjs) output on reauthentication attempt_
+_Figure 11 - WebSocket server (ws-server.mjs) output on reauthentication attempt_
 
 ## HTML File (default.htm)
 
