@@ -6,7 +6,7 @@ categories: eeprom nic
 author: Nicholas Starke
 ---
 
-My new friend [Gundiuc Oleg](https://twitter.com/GundiucO) reached out to me regarding [an older blog post I wrote](https://nstarke.github.io/networking/mac-address/ethtool/2019/09/21/ethtool-change-mac-address-permanently.html) about permanently changing MAC addresses on NICs.  Gundiuc was targeting the AX88772B chipset on USB ethernet adapters.  If you're interested in following along, I used [this USB Ethernet adapter](https://www.amazon.com/gp/product/B00MYT481C) for testing (no affiliate link - I don't make any money if you buy one).
+My new friend [Gundiuc Oleg](https://twitter.com/GundiucO) reached out to me regarding [an older blog post I wrote](/networking/mac-address/ethtool/2019/09/21/ethtool-change-mac-address-permanently.html) about permanently changing MAC addresses on NICs.  Gundiuc was targeting the AX88772B chipset on USB ethernet adapters.  If you're interested in following along, I used [this USB Ethernet adapter](https://www.amazon.com/gp/product/B00MYT481C) for testing (no affiliate link - I don't make any money if you buy one).
 
 The purpose of this article is to demonstrate some techniques for permanently changing MAC addresses on this chipset in more detail than the previous post.  
 

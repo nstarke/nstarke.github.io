@@ -2,7 +2,7 @@
 
 Last year around this time I took a look at the Walmart-branded Onn 14" laptop. I decided to revisit reverse engineering the UEFI implementation on this laptop recently and decided to focus on the SMI Handlers contained therein.  I will discuss potential vulnerabilities that I think are present in the firmware. I will not move to the exploitation phase for this laptop because my test version of this laptop is effectively ruined at this point and I have no ability to test anything I write for it. 
 
-Also, I have not seen anything on the internet to suggest that the manufacturer supplies firmware updates for this laptop, so it seems as though any bugs or vulnerabilities in this laptop are forever.  I think many of the problems documented in the [last blog post](https://nstarke.github.io/onn/walmart/bios/pdos/2020/11/26/onn-laptop-bios-exploration.html) already spell out that this laptop should not be used for security intensive data or operations, so I don't really feel bad about publishing this information. Plus today is Thanksgiving in the US and I am thankful for, amongst many other things, vulnerable firmware.
+Also, I have not seen anything on the internet to suggest that the manufacturer supplies firmware updates for this laptop, so it seems as though any bugs or vulnerabilities in this laptop are forever.  I think many of the problems documented in the [last blog post](/onn/walmart/bios/pdos/2020/11/26/onn-laptop-bios-exploration.html) already spell out that this laptop should not be used for security intensive data or operations, so I don't really feel bad about publishing this information. Plus today is Thanksgiving in the US and I am thankful for, amongst many other things, vulnerable firmware.
 
 ## SmmExploit / Aptiocalypsis
 
@@ -146,7 +146,7 @@ Chipsec reports that SMM_Code_Chk_En is enabled and locked down (from Appendix C
 
 ## How did I find this?
 
-Utilizing the SMI Handler enumeration technique I detailed in [this blog post](https://nstarke.github.io/smi/uefi/ghidra/2021/06/25/enumerating-smi-handlers.html), I built a list of all the `swSmiHandlers` in the firmware image and then just started going through them one by one.  You will notice that `SbRunSmm` is the first SMM module after `NbSmi`.  `NbSmi` seems to be the context switcher for transitioning into System Management Mode and storing the existing register values.  In any event, the SMI Handler in `NbSmi` does not immediately seem vulnerable to callouts or confused deputy attacks, so after it I immediately moved on to the three `swSmiHandlers` in `SbRunSmm`.  
+Utilizing the SMI Handler enumeration technique I detailed in [this blog post](/smi/uefi/ghidra/2021/06/25/enumerating-smi-handlers.html), I built a list of all the `swSmiHandlers` in the firmware image and then just started going through them one by one.  You will notice that `SbRunSmm` is the first SMM module after `NbSmi`.  `NbSmi` seems to be the context switcher for transitioning into System Management Mode and storing the existing register values.  In any event, the SMI Handler in `NbSmi` does not immediately seem vulnerable to callouts or confused deputy attacks, so after it I immediately moved on to the three `swSmiHandlers` in `SbRunSmm`.  
 
 This is all a long way of saying the actualy analysis was a manual process, and I didn't even get very far in the `swSmiHandler` list before I found something.  I will continue exploring this firmware image for interesting things and write additional blog posts should I find anything else fun.
 
