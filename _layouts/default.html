@@ -36,8 +36,6 @@
           <hr>
           <span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
         </div>
-        <h1>StarkeBlog</h1>
-
         {% for post in site.posts %}
         <article>
              <time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_long_string }}</time>
