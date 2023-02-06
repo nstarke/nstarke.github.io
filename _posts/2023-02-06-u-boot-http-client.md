@@ -63,6 +63,8 @@ The HTTP client is a very recently implemented feature and has not to my knowled
 
 ## Methodology
 
+All testing was completed against the master branch at commit revision `f147aa80f52989c7455022ca1ab959e8545feccc`.  This was the latest commit when I pulled the source.
+
 I followed the instructions I wrote up [here](/qemu/u-boot/bootloader/2021/01/20/qemu-system-execute-raw-binary-u-boot-image.html) and then attached a GDB-multiarch instance to the VM process by adding `-s -S` to the qemu-system command.  So in full, my qemu-system command looked like this:
 
 ```
