@@ -53,7 +53,7 @@ If you can control any part of the network, since the traffic is over HTTP you c
 
 ## Analysis
 
-If you want to consider this a vulnerability, writing an exploit that will work **at all**, let alone across device models, is going to be difficult.  In a virtualized environment, a successful exploit is going to depend noy only on the amount of system memory, but more importantly, the `$loadaddr` parameter value passed into the `wget` command within the U-Boot CLI.  Since that can vary at runtime, trying to build an exploit is going to be difficult. 
+If you want to consider this a vulnerability, writing an exploit that will work **at all**, let alone across device models, is going to be difficult.  In a virtualized environment, a successful exploit is going to depend not only on the amount of system memory, but more importantly, the `$loadaddr` parameter value passed into the `wget` command within the U-Boot CLI.  Since that can vary at runtime, trying to build an exploit is going to be difficult. 
 
 I don't consider this a vulnerability because of its recent implementation and the slow adoption of new U-Boot versions. No one uses this feature yet.
 
