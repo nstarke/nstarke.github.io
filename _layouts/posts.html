@@ -39,8 +39,12 @@
           <h1><a href="/">{{ site.title | default: site.github.repository_name }}</a></h1>
           <p>{{ site.description | default: site.github.project_tagline }}</p>
           <hr>
-          <span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
-          <span class="credits right">Got a topic you'd like me to write on? Let me know <a href="https://github.com/nstarke/nstarke.github.io/issues/new">here</a></span>
+          <span class="credits left"> 
+            <a href="{{ site.github.owner_url }}">Project</a> run by <a href="https://twitter.com/nstarke">Nicholas Starke</a>
+          </span>
+          <span class="credits right">
+            <a href="https://nstarke.bandcamp.com/">Music I have written</a>
+          </span>
         </div>
         <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date_to_long_string }}</time>
         <h1>{{ page.title }}</h1>
