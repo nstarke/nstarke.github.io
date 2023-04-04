@@ -98,7 +98,7 @@ play 480 262 1 262 1 0 1 262 1 0 1 196 1 262 1 0 1 349 1 0 1 329 1 0 1 294 1 0 1
 
 An audio sample sounds like this:
 
-![](/images/04042023/grubcore.wav)
+{% include embed-audio.html src="/images/04042023/grubcore.wav" %}
 
 _Note that while I instructed ChatGPT to use the original Super Mario Brothers Theme Song as the source material, the resulting melody sounds nothing like that particular song_
 
