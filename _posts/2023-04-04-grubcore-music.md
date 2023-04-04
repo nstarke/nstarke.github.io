@@ -112,6 +112,6 @@ I used OBS Studio to record the audio out of the process as a video and then str
 
 Beyond the virtualized instances, these techniques can be used on bare metal.  For example, [this YouTube video](https://www.youtube.com/watch?v=srPqJc9B6Ts) demonstrates making music using Grub2 on bare metal.  Note that if you are going to go this way, the audio tones are emitted from the PC Speaker and not the Audio Out / Headphone jack, so you will need a microphone to capture the sound.
 
-{% include embed-youtube.html src="https://www.youtube.com/watch?v=srPqJc9B6Ts" %}
+{% include embed-youtube.html src="https://www.youtube.com/embed/srPqJc9B6Ts" %}
 
 All of this I believe opens up some interesting musical potential.  While trying to integrate a Grub2-based melody into a DAW setup is probably not possible, sampling the results could really be interesting approach. Both the bare metal and the virtualized versions offer new creative approaches for writing music. 
