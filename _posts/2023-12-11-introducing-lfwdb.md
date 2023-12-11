@@ -1,7 +1,7 @@
 ---
 layout: posts
 title: "Introducing Linux Firmware DB"
-date: 2023-12-15 00:00:00 -0600
+date: 2023-12-11 00:00:00 -0600
 categories: lfwdb
 author: Nicholas Starke
 ---
