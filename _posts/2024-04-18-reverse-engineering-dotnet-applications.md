@@ -70,7 +70,27 @@ Now we need to `cd ReverseEngineeringTestApp1\bin\Debug` and then run `dir` in t
 In text, here is the input/output from the above image.
 
 ```
-C:\Users\stark\source\repos\ReverseEngineeringTestApp1>dir                                                               Volume in drive C has no label.                                                                                         Volume Serial Number is B4A2-59E4                                                                                                                                                                                                               Directory of C:\Users\stark\source\repos\ReverseEngineeringTestApp1                                                                                                                                                                            04/18/2024  07:53 AM    <DIR>          .                                                                                04/14/2024  07:32 AM    <DIR>          ..                                                                               04/18/2024  07:40 AM    <DIR>          ReverseEngineeringTestApp1                                                       04/14/2024  07:32 AM             1,184 ReverseEngineeringTestApp1.sln                                                                  1 File(s)          1,184 bytes                                                                                          3 Dir(s)  98,341,535,744 bytes free                                                                                                                                                                                              C:\Users\stark\source\repos\ReverseEngineeringTestApp1>cd ReverseEngineeringTestApp1\bin\Debug                                                                                                                                                  C:\Users\stark\source\repos\ReverseEngineeringTestApp1\ReverseEngineeringTestApp1\bin\Debug>dir                          Volume in drive C has no label.                                                                                         Volume Serial Number is B4A2-59E4                                                                                                                                                                                                               Directory of C:\Users\stark\source\repos\ReverseEngineeringTestApp1\ReverseEngineeringTestApp1\bin\Debug                                                                                                                                       04/18/2024  07:43 AM    <DIR>          .                                                                                04/14/2024  07:32 AM    <DIR>          ..                                                                               04/18/2024  07:43 AM             5,120 ReverseEngineeringTestApp1.exe                                                   04/14/2024  07:32 AM               187 ReverseEngineeringTestApp1.exe.config                                            04/14/2024  07:45 AM             6,184 ReverseEngineeringTestApp1.il                                                    04/18/2024  07:43 AM            22,016 ReverseEngineeringTestApp1.pdb                                                   04/14/2024  07:41 AM             1,528 ReverseEngineeringTestApp1.res                                                   04/14/2024  07:46 AM             3,072 test.exe                                                                                        6 File(s)         38,107 bytes                                                                                          2 Dir(s)  98,324,807,680 bytes free                                                                                                             
+C:\Users\stark\source\repos\ReverseEngineeringTestApp1>dir
+
+Directory of C:\Users\stark\source\repos\ReverseEngineeringTestApp1                                                          04/18/2024  07:53 AM
+<DIR>          .    04/14/2024  07:32 AM    
+<DIR>          ..   04/18/2024  07:40 AM    
+<DIR>          ReverseEngineeringTestApp1   04/14/2024  07:32 AM
+               1,184 ReverseEngineeringTestApp1.sln
+               1 File(s) 1,184 bytes
+               3 Dir(s)  98,341,535,744 bytes free
+
+C:\Users\stark\source\repos\ReverseEngineeringTestApp1>cd ReverseEngineeringTestApp1\bin\Debug
+
+C:\Users\stark\source\repos\ReverseEngineeringTestApp1\ReverseEngineeringTestApp1\bin\Debug> Directory of C:\Users\stark\source\repos\ReverseEngineeringTestApp1\ReverseEngineeringTestApp1\bin\Debug
+
+04/18/2024  07:43 AM    <DIR>          .    04/14/2024  07:32 AM
+                        <DIR>          ..   04/18/2024  07:43 AM
+                        5,120 ReverseEngineeringTestApp1.exe 04/14/2024  07:32 AM
+                        187 ReverseEngineeringTestApp1.exe.config   04/14/2024  07:45 AM
+                        6,184 ReverseEngineeringTestApp1.il 04/18/2024  07:43 AM
+                        22,016 ReverseEngineeringTestApp1.pdb 04/14/2024  07:41 AM
+                        1,528 ReverseEngineeringTestApp1.res 04/14/2024  07:46 AM
 ```
 
 ## Disassembly
