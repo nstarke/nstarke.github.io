@@ -278,6 +278,20 @@ C:\Users\stark\source\repos\ReverseEngineeringTestApp1\ReverseEngineeringTestApp
 You Win!
 ```
 
+## Decompiler
+
+Now, let's look at our original and modified `.exe` files using a decompiler such as `ILSpy`
+
+Original:
+
+![](/images/04182024/ilspy-original.png)
+
+Modified:
+
+![](/images/04182024/ilspy-modified.png)
+
+As you can see, we have modified the logic of the program according to [ILSpy](https://github.com/icsharpcode/ILSpy)
+
 # Conclusion
 
 In this Blog Post I showed the basic tooling and process necessary for reverse engineering and modify in binary form a .NET application.  It should be noted this same flow will work for `C#` and `VB.NET`as they both compile down to MSIL.  
