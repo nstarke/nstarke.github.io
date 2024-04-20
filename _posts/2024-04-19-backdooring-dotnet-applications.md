@@ -272,7 +272,9 @@ The `CheckInsecurePassword` method is located in the `DotNetNuke.dll` file. In C
 I chose the end of the `CheckInsecurePassword` function to insert the method invocation to my `CustomFunction` for a few reaqsons:
 
 1) This method does not return a value (return type `void` in C#)
+
 2) It is called on every successful authentication check as far as I can tell.
+
 3) It has the data I want to steal as argument parameters.
 
 ## Disassembling the Original DLL
