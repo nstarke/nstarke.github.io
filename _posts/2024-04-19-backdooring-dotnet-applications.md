@@ -12,7 +12,7 @@ This blog post presents a very manual approach to modifying application code.  I
 
 ## Background
 
-In my previous blog post ([previous blog post](/reverse-engineering/dotnet/2024/04/18/reverse-engineering-dotnet-applications.html)) I went through the tooling required for reverse engineering dotnet applications.  I recommend reading through that blog post before tackling this one, especially if you are unfamiliar with `ilasm` and `ildasm`.
+In my [previous blog post](/reverse-engineering/dotnet/2024/04/18/reverse-engineering-dotnet-applications.html) I went through the tooling required for reverse engineering dotnet applications.  I recommend reading through that blog post before tackling this one, especially if you are unfamiliar with `ilasm` and `ildasm`.
 
 ## Introduction
 
