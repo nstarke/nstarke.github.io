@@ -8,7 +8,7 @@ author: Nicholas Starke
 
 ## Background
 
-In my previous blog post ([/reverse-engineering/dotnet/2024/04/18/reverse-engineering-dotnet-applications.html](/reverse-engineering/dotnet/2024/04/18/reverse-engineering-dotnet-applications.html)) I went through the tooling required for reverse engineering dotnet applications.  I recommend reading through that blog post before tackling this one, especially if you are unfamiliar with `ilasm` and `ildasm`.
+In my previous blog post ([previous blog post](/reverse-engineering/dotnet/2024/04/18/reverse-engineering-dotnet-applications.html)) I went through the tooling required for reverse engineering dotnet applications.  I recommend reading through that blog post before tackling this one, especially if you are unfamiliar with `ilasm` and `ildasm`.
 
 ## Introduction
 
@@ -323,7 +323,7 @@ So I could call the `CustomFunction` externally if necessary.  It ended up not b
 
 That takes care of inserting the `CustomFunction` method.  How about calling it now?
 
-I wanted to add the invocation at the end of the function, so I chose to add it after the disassembly would normall end:
+I wanted to add the invocation at the end of the function, so I chose to add it after the disassembly would normally end:
 
 ```
 IL_004f:  brfalse.s  IL_0054
