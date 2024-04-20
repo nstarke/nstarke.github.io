@@ -1,3 +1,11 @@
+---
+layout: posts
+title: "Onn Laptop SMI Analysis"
+date: 2021-11-24 00:00:00 -0600
+categories: smm reverse-engineering
+author: Nicholas Starke
+---
+
 ## Overview
 
 Last year around this time I took a look at the Walmart-branded Onn 14" laptop. I decided to revisit reverse engineering the UEFI implementation on this laptop recently and decided to focus on the SMI Handlers contained therein.  I will discuss potential vulnerabilities that I think are present in the firmware. I will not move to the exploitation phase for this laptop because my test version of this laptop is effectively ruined at this point and I have no ability to test anything I write for it. 
