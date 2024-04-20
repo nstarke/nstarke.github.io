@@ -6,6 +6,10 @@ categories: backdooring dotnet
 author: Nicholas Starke
 ---
 
+## tl;dr
+
+This blog post presents a very manual approach to modifying application code.  If you don't have time to read and learn, I direct you to: [DnSpyEx](https://github.com/dnSpyEx/dnSpy).  Happy Hacking!
+
 ## Background
 
 In my previous blog post ([previous blog post](/reverse-engineering/dotnet/2024/04/18/reverse-engineering-dotnet-applications.html)) I went through the tooling required for reverse engineering dotnet applications.  I recommend reading through that blog post before tackling this one, especially if you are unfamiliar with `ilasm` and `ildasm`.
