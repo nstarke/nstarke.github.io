@@ -125,7 +125,7 @@ The rest of this task will require Ghidra!
 
 We can open Ghidra and import the iOS application binary into it.  After analysis, I searched for `BinaryPatching` and found a symbol location for `iGoat_Swift/BinaryPatchingVC.swift`.  This took me to a function called `_$s11iGoat_Swift16BinaryPatchingVCC16loginItemPressedyyF`.  In this function, I located the hard coded string `root` in the disassembly view.
 
-![](/images/05242024/ghidra-root-patch.png)
+![](/images/05242024/ghidra-root.png)
 
 I then navigate to the location of the `root` string within the binary
 
