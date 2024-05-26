@@ -148,7 +148,7 @@ Then in Ghidra, I choose `File->Export` and export the program as raw bytes.  We
 After that, on a Mac computer, we need to resign the `iGoat-Swift.app` directory for it to run properly with our modifications in the iOS Simulator.  We can do this by running the following command on the Mac developer host:
 
 ```
-codesign -s "Apple Development: Nicholas Starke" -f --preserve-metadata --generate-entitlement-dev iGoat-Swift.app
+codesign -s "Apple Development: Nicholas Starke" -f --preserve-metadata --generate-entitlement-der iGoat-Swift.app
 ```
 
 Note that this requires an apple developer provisioning profile, which can be provisioned in Xcode.
