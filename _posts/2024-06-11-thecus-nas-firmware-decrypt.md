@@ -9,7 +9,7 @@ author: Nicholas Starke
 
 ## tl;dr
 
-The password I've seen consistently used across a few different firmware images is `N16000`. The cipher is DES-CBC using the MIT Kerberos `DES_to_string_key` function fpr key derivation.
+The password I've seen consistently used across a few different firmware images is `N16000`. The cipher is DES-CBC using the MIT Kerberos `DES_to_string_key` function for key derivation.
 
 ## Introduction
 
