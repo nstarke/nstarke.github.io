@@ -47,4 +47,6 @@ OPENSSL_CONF=openssl_legacy.cnf openssl des-cbc -d -in Thecus_x86_64_FW.2.06.03.
 
 I haven't looked at or thought about this research in 6 years and it was fun to revisit.  I can't really remember how I figured all of this out originally, but it was fun to formalize the research into a git repository instead of gists.
 
+Lastly, I want to credit pyro_phoenix for reaching out and putting this back on my radar!
+
 If you find anything cool in the firmware images, give me a shout out!
