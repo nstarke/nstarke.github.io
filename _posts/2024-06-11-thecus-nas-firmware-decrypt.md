@@ -1,6 +1,6 @@
 ---
 layout: posts
-title: "Thecus NAS Firwmare Decryption"
+title: "Thecus NAS Firmware Decryption"
 date: 2024-06-11 00:00:00 -0600
 categories: cryptography firmware
 author: Nicholas Starke
