@@ -39,6 +39,7 @@ The example `openssl_legacy.cnf` file provided in the repo can be used to enable
 **Example**
 
 ```
+sudo apt install libssl-dev
 gcc -o string2key string2key.c -lssl -lcrypto
 OPENSSL_CONF=openssl_legacy.cnf openssl des-cbc -d -in Thecus_x86_64_FW.2.06.03.cdv_build9857_N2800_N4510U_N4800_N5550_N7510.rom -out Thecus_x86_64_FW.2.06.03.cdv_build9857_N2800_N4510U_N4800_N5550_N7510.rom.decrypted.bin -iv 00000000000000000 -K $(./string2key N16000) -nopad -nosalt
 ```
