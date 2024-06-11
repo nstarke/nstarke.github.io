@@ -20,7 +20,6 @@ Flash forward to earlier this week, its been six years since I looked at this re
 It turns out DES-CBC is deprecated and the `openssl` cli will no longer allow the user to use DEC-CBC or DES-ECB by default.  We can work around this by using a custom `openssl.cnf` file that enables legacy ciphers.  Thanks again to pyro_phoenix for pointing out how to make the `openssl` cli command work for DES-CBC.  This is an example of the `openssl` cli output when trying to use `DES-CBC` as the cipher:
 
 ```
-(./string2key N16000) -nopad -nosalt
 hex string is too long, ignoring excess
 Error setting cipher DES-CBC
 4097B607E1750000:error:0308010C:digital envelope routines:inner_evp_generic_fetch:unsupported:../crypto/evp/evp_fetch.c:386:Global default library context, Algorithm (DES-CBC : 8), Properties ()
