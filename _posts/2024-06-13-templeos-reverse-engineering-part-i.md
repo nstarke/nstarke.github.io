@@ -12,6 +12,8 @@ TempleOS ([https://www.templeos.org/](https://www.templeos.org/)) is an operatin
 
 A side note: millions of people every year suffer from severe mental illness.  You can make an impact by donating to a cause such as [NAMI](https://www.nami.org/), or other such organizations in your part of the world.
 
+Terry presented some of the source code online here: [https://github.com/cia-foundation/TempleOS](https://github.com/cia-foundation/TempleOS).  Note the repository does not include source code for the kernel, bootloader, or boot sector.
+
 You can read more about Terry and the history of TempleOS on [Wikipedia](https://en.wikipedia.org/wiki/TempleOS)
 
 ![](/images/06132024/templeos-vm.png)
