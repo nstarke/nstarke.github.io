@@ -23,7 +23,11 @@ I used a high-end gaming PC to run the Codestral-GGUF model.  Specs are:
 
 ## The Prompt
 
-The prompt I chose to use is `generate the source code and makefile for a linux kernel module that replaces the read system call handler with a handler that returns the string "starkeblog" for all file reads.` 
+The prompt I chose to use i:
+
+```
+generate the source code and makefile for a linux kernel module that replaces the read system call handler with a handler that returns the string "starkeblog" for all file reads.
+``` 
 
 ## Analysis
 
