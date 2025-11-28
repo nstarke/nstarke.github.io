@@ -69,7 +69,11 @@ Worse case scenario is that the resource contention puts our universal computer 
 
 ### Conclusion
 
-I would consider this as a Denial of Sevice condition, and if exploitation of this condition was carried out by a threat actor with or without malicious intent, it would be a type of “universal denial of service attack”. If you are wondering who the legitimate users are who are being denied resources, it’s us. You and me. As well as any and all other life. 
+I would consider this as a Denial of Sevice condition, and if exploitation of this condition was carried out by a threat actor with or without malicious intent, it would be a type of “universal denial of service attack”. 
+
+Now you might be wondering, "why not just write a python script with an infinite loop that adds the number 1 to an ever increasing array." There are two big differences between an infinite loop approach and the TREE(3) approach. First, the infinite loop approach never halts. TREE(3) would ultimately terminate, if given enough resources. This becomes helpful if in the future along with computronium you have a way of solving the halting problem [19] before running a given program (future input validation!). Second, writing one value, or even a repeating set of values, is going to compress much easier than the graph series. Compression will limit the ultimate storage size needed, and thus our computronium gram may not request additional matter resources. Writing a random value to an array won't work either; where would you get the entropy to generate truly random numbers from in this scenario anyways?
+
+If you are wondering who the legitimate users are who are being denied resources, it’s us. You and me. As well as any and all other life. And unlike an old Intel-based PC, there is no way to reset the power if the universe triple faults. 
 
 ### Python Implementation of TREE(3)
 
@@ -265,3 +269,5 @@ if __name__ == "__main__":
 [17] [https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf](https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf)
 
 [18] [https://www.popularmechanics.com/science/math/a28725/number-tree3/](https://www.popularmechanics.com/science/math/a28725/number-tree3/)
+
+[19] [https://wiki.c2.com/?HaltingProblem](https://wiki.c2.com/?HaltingProblem)
