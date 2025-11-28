@@ -226,6 +226,7 @@ if __name__ == "__main__":
 
     print(f"Computing TREE({n}) (conceptual only, will not terminate)...")
     result = TREE(n)
+    # this code will never be reached for n > 1
     print(f"TREE({n}) = {result}")
 ```
 
