@@ -73,7 +73,7 @@ I would consider this as a Denial of Sevice condition, and if exploitation of th
 
 ### Python Implementation of TREE(3)
 
-If you are interested in seeing how to calculate TREE(3) for educational purposes okly (please do not destroy the universe), here is a small pythn script. 
+If you are interested in seeing how to calculate TREE(3) for educational purposes only (please do not destroy the universe), here is a small pythn script. 
 
 ```python
 from __future__ import annotations
