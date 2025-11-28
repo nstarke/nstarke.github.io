@@ -69,7 +69,7 @@ Worse case scenario is that the resource contention puts our universal computer 
 
 ### Conclusion
 
-I would consider this as a Denial of Sevice condition, and if exploitation of this condition was carried out by a threat actor with or without malicious intent, it would be a type of “universal denial of service attack”. If you are wondering who the legitimate users are who are being denied resources, it’s us. You and me. 
+I would consider this as a Denial of Sevice condition, and if exploitation of this condition was carried out by a threat actor with or without malicious intent, it would be a type of “universal denial of service attack”. If you are wondering who the legitimate users are who are being denied resources, it’s us. You and me. As well as any and all other life. 
 
 ### Python Implementation of TREE(3)
 
