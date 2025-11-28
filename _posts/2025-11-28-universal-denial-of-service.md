@@ -16,11 +16,14 @@ If this post produces any sort of conversation or just gets people thinking, it 
 
 ## Universal Denial of Service
 
+### Computable Matter
 Computronium [1] is a general term used to describe highly efficient computable matter. Now this does not exist at present time in any capacity, so we are starting at a point of pure speculation. The idea is to use atoms or sub-atomic particles as computation “devices”.  These devices can theoretically calculate anything a classical computer can compute, and there have been extensions of the idea proposed to handle quantum computing as well. 
 
 Let’s say we use some advanced technology (maybe nanotechnology) to convert a gram of matter into computronium. We can then use the computronium to perform computable calculations. We can write programs that can execute on the gram of computronium and return to us a result. 
 
-But what if the program we write requires more compute resources than are available in the gram of matter? It is not a huge leap to say that if we can create a gram of Computronium, we can create another gram. This might even be an automated process carried out by the Computronium itself. For the sake of this idea, we are going to assume our gram of Computronium has the property of being able to produce arbitrary amounts of new Computronium from surrounding ordinary matter. 
+But what if the program we write requires more compute resources than are available in the gram of matter? It is not a huge leap to say that if we can create a gram of Computronium, we can create another gram. This might even be an automated process carried out by the Computronium itself. For the sake of this idea, we are going to assume our gram of Computronium has the property of being able to produce arbitrary amounts of new Computronium from surrounding ordinary matter to meet the resource needs for the currently running program. 
+
+### Denial of Service
 
 In computer security, a denial of service (DoS) condition occurs when legitimate users cannot access resources they need to fulfill a task due to the actions of another user. When these conditions are created purposefully, they are considered a Denial of Service attack. Usually these attacks are some form of resource exhaustion; whether it be network bandwidth as is common with botnets in a Distributed Denial of Service (DDoS) attack. In these types of attacks, large amounts of hijacked, network-connected computers target one specific network-connected computer or sub network and send as much unique traffic as they can to that location. The result is that the target becomes inaccessible for legitimate users of the target system. 
 
@@ -32,6 +35,8 @@ These sorts of attacks are generally done purposefully by a threat actor, but on
 
 How do denial of service attacks relate to Computronium? Can a computer made of matter operating at the atomic or subatomic level be used to create a denial of service against legitimate users? What would that even look like? How could such a condition occur? If it can occur at all, could a threat actor purposefully exploit that condition?
 
+### Big Numbers
+
 Let’s take a break from the topic of computer security to talk about numbers; specifically large numbers. Most people have heard of the term googol [9], and probably even googolplex [10]; nerds like me may even be familiar with numbers like Graham’s number [11], which is a number that requires special notation created specifically for this number to express because it is physically impossible to express using any pre-existing conventional notation. Graham’s number is so enormous it cannot be expressed in conventional form because even if we use atoms to write out the number, there are not enough atoms in the universe to write it out. Not even close. 
 
 However, since the discovery of Graham’s number in 1971 [12], mathematicians and logicians have found even larger numbers.  For example, one is Rayos’ Number [13] (denoted “R(100)”). These numbers involve self-referential and meta-modifying definitions - and those do not translate well into computational tasks. As such, it would be hard for anyone to write a computer program to calculate Rayos’ number. 
@@ -42,11 +47,15 @@ First, the problem that TREE(3) is a result of is simple to describe using a set
 
 Why is the computable nature of TREE(3) interesting? It can be modeled as a computer program easily. So let’s say someone having a really bad day writes a computer program to solve TREE(3) and runs it on our gram of Computronium. Now remember, our gram of Computronium has the automated ability to increase its computational resources by converting more surrounding regular matter to Computronium. 
 
+### Bringing it all Together (To End the World)
+
 Now perhaps you see where this is going. In an effort to solve this problem, our Computronium is going to attempt to convert all of the matter in the entire universe into computational matter in an attempt to run our TREE(3) program. Perhaps this would not be such a big deal if in the process of doing so it “virtualized” the physical universe or otherwise at least sufficiently preserved life, but since this program has been tasked to solve this enormous math problem, all of the Computronium is going to be working towards that result.
 
 Imagine the entire universe working to solve a single math problem. Even this might not be so bad, if it was a short lived computer program and sentient life was still somehow sufficiently preserved. However that would not be the case with TREE(3). The program calculating the result for TREE(3) would be running still at whatever end the universe has, still trying to calculate the result. 
 
 And it isn’t just compute processing resources that would be utilized; the TREE(3) problem involves creating a series of unique graphs that have the property that each new graph in the series does not contain as a subgraph any preceding graphs. In a practical computational implementation of TREE(3), there would be vast data storage requirements as each graph is created would need to be stored to be checked against new graphs in the series. All new graphs would need to query the existing data set of graphs to make sure the new graph does not contain any of the other graphs in the series.  
+
+### Data and IO
 
 This query would have to check all previous graphs generated so far, so in addition to data storage constraints, there would also be IO (input/output) resource exhaustion as the series grows larger. Every time a new graph is compared to all preceding graphs the preceding graphs would have to be retrieved from storage and loaded piecemeal into the Computronium’s equivalent of a CPU register for the comparison operation to complete. Even if we are not using some sort of equivalent to persistent storage and the preceding graphs are stored in an equivalent to main memory, there is a time cost that becomes enormous as the series grows. 
 
@@ -58,9 +67,11 @@ In any event, some aspect of the computational process - whether it be CPU cycle
 
 Worse case scenario is that the resource contention puts our universal computer in an undefined state. Think of a OS hang in such a computer, or a halt and catch fire type bug (like the Intel f00f opcode bug). Who knows what the result might be in that case? Perhaps all of our Computronium ceases to execute any further instructions, resulting in a universe full of non functional computational matter. 
 
+### Conclusion
+
 I would consider this as a Denial of Sevice condition, and if exploitation of this condition was carried out by a threat actor with or without malicious intent, it would be a type of “universal denial of service attack”. If you are wondering who the legitimate users are who are being denied resources, it’s us. You and me. 
 
-## Python Implementation of TREE(3)
+### Python Implementation of TREE(3)
 
 If you are interested in seeing how to calculate TREE(3) for educational purposes okly (please do not destroy the universe), here is a small pythn script. 
 
