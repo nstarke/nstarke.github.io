@@ -25,23 +25,23 @@ But what if the program we write requires more compute resources than are availa
 
 ### Denial of Service
 
-In computer security, a denial of service (DoS) condition occurs when legitimate users cannot access resources they need to fulfill a task due to the actions of another user. When these conditions are created purposefully, they are considered a Denial of Service attack. Usually these attacks are some form of resource exhaustion; whether it be network bandwidth as is common with botnets [2] in a Distributed Denial of Service (DDoS) attack. In these types of attacks, large amounts of hijacked, network-connected computers target one specific network-connected computer or sub network and send as much unique traffic as they can to that location. The result is that the target becomes inaccessible for legitimate users of the target system. 
+In computer security, a denial of service (DoS) condition occurs when legitimate users cannot access resources they need to fulfill a task due to the actions of another user. When these conditions are created purposefully, they are considered a Denial of Service attack. Usually these attacks are some form of resource exhaustion; whether it be network bandwidth, as is common with botnets [2] in a Distributed Denial of Service (DDoS) attack, or CPU processing as in the case of a Regular Expression Denial of Service (ReDoS) [3]. In DDoS types of attacks, large amounts of hijacked, network-connected computers target one specific network-connected computer or sub network and send as much unique traffic as they can to that location. The result is that the target becomes inaccessible for legitimate users of the target system. In a ReDoS attack [4], malicious regular expressions are used to cause excessive cpu usage. 
 
-A denial of service vulnerability is some type of computer hardware or software flaw that can be exploited to deny legitimate users access to needed resources. This can take many forms; severe examples are memory corruption vulnerabilities that do not result in arbitrary code execution , but do result in a process crashing. This is particularly severe when the vulnerability can be exploited over the network. Double that severity if there is no way for the operating system to restart the process from a good state. Double it again if the memory corruption vulnerability occurs in the operating system itself [3] resulting in the operating system panicking (I have personally discovered remotely exploitable kernel memory corruption vulnerabilities that resulted in the target host OS panicking and not being able to even reboot, so I know they do exist even though they are rare). 
+A denial of service vulnerability is some type of computer hardware or software flaw that can be exploited to deny legitimate users access to needed resources. This can take many forms; severe examples are memory corruption vulnerabilities that do not result in arbitrary code execution, but do result in a process crashing. This is particularly severe when the vulnerability can be exploited over the network. Double that severity if there is no way for the operating system to restart the process from a good state. Double it again if the memory corruption vulnerability occurs in the operating system itself [5] resulting in the operating system panicking (I have personally discovered remotely exploitable kernel memory corruption vulnerabilities that resulted in the target host OS panicking and not being able to even reboot, so I know they do exist even though they are rare). 
 
-I would argue the class of most severe denial of service vulnerability is that of the “halt and catch fire” bug. For example, many years ago there was a processor opcode (f00f) in certain Intel processors [4] that when executed resulted in the CPU locking up and failing to execute any additional instructions until the power was reset on the computer [5]. When the CPU attempted to execute the faulty CPU instruction, the computer entered into an undefined state which it could not recover from without physical intervention by a user. 
+I would argue the class of most severe denial of service vulnerability is that of the “halt and catch fire” bug. For example, many years ago there was a processor opcode (f00f) in certain Intel processors [6] that when executed resulted in the CPU locking up and failing to execute any additional instructions until the power was reset on the computer [7]. When the CPU attempted to execute the faulty CPU instruction, the computer entered into an undefined state which it could not recover from without physical intervention by a user. 
 
-These sorts of attacks are generally done purposefully by a threat actor, but one could argue denial of service conditions can be triggered by accident. Take any of the major cloud service provider outages [6] [7] [8] [9] in the last few years; legitimate users were not able to access network and computer resources not because of the malicious actions of some threat actor, but because of some internal cascading error that took down a cloud provider data center somewhere. 
+These sorts of attacks are generally done purposefully by a threat actor, but one could argue denial of service conditions can be triggered by accident. Take any of the major cloud service provider outages [8] [9] [10] [11] in the last few years; legitimate users were not able to access network and computer resources not because of the malicious actions of some threat actor, but because of some internal cascading error that took down a cloud provider data center somewhere. 
 
 How do denial of service attacks relate to Computronium? Can a computer made of matter operating at the atomic or subatomic level be used to create a denial of service against legitimate users? What would that even look like? How could such a condition occur? If it can occur at all, could a threat actor purposefully exploit that condition?
 
 ### Big Numbers
 
-Let’s take a break from the topic of computer security to talk about numbers; specifically large numbers. Most people have heard of the term googol [10], and probably even googolplex [11]; nerds like me may even be familiar with numbers like Graham’s number [12], which is a number that requires special notation created specifically for this number to express because it is physically impossible to express using any pre-existing conventional notation. Graham’s number is so enormous it cannot be expressed in conventional form because even if we use atoms to write out the number, there are not enough atoms in the universe to write it out. Not even close. 
+Let’s take a break from the topic of computer security to talk about numbers; specifically large numbers. Most people have heard of the term googol [12], and probably even googolplex [13]; nerds like me may even be familiar with numbers like Graham’s number [14], which is a number that requires special notation created specifically for this number to express because it is physically impossible to express using any pre-existing conventional notation. Graham’s number is so enormous it cannot be expressed in conventional form because even if we use atoms to write out the number, there are not enough atoms in the universe to write it out. Not even close. 
 
-However, since the discovery of Graham’s number in 1971 [13], mathematicians and logicians have found even larger numbers.  For example, one is Rayos’ Number [14] (denoted “R(100)”). These numbers involve self-referential and meta-modifying definitions - and those do not translate well into computational tasks. As such, it would be hard for anyone to write a computer program to calculate Rayos’ number. 
+However, since the discovery of Graham’s number in 1971 [15], mathematicians and logicians have found even larger numbers.  For example, one is Rayos’ Number [16] (denoted “R(100)”). These numbers involve self-referential and meta-modifying definitions - and those do not translate well into computational tasks. As such, it would be hard for anyone to write a computer program to calculate Rayos’ number. 
 
-Enter TREE(3) [15]. TREE(3) is based on a paper from 1960, and a good summary can be found here [16]. TREE(3) is a solution to a problem in graph theory that results in an enormous number, and it’s basically the largest number used in a serious mathematical sense that has been discovered to date by people. It has a few very interesting properties as it relates to computers. 
+Enter TREE(3) [17]. TREE(3) is based on a paper from 1960, and a good summary can be found here [18]. TREE(3) is a solution to a problem in graph theory that results in an enormous number, and it’s basically the largest number used in a serious mathematical sense that has been discovered to date by people. It has a few very interesting properties as it relates to computers. 
 
 First, the problem that TREE(3) is a result of is simple to describe using a set of instructions; there are only two or three rules involved in the problem and three or four variables altogether. These rules can be modeled with a computer as a software program. As such TREE(3) is computable - in theory at least. Like Graham’s number, there is no way to compute it in our physical reality - even if the entire universe consisted of nothing but Computronium composed of sub-atomic particles running and running for an indescribable multitude of eons longer than any scientifically reasonable anticipated life time of our universe, even with a googolplex margin of error. 
 
@@ -233,30 +233,34 @@ if __name__ == "__main__":
 
 [2] [https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/](https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/)
 
-[3] [https://nvd.nist.gov/vuln/detail/cve-2019-11477](https://nvd.nist.gov/vuln/detail/cve-2019-11477)
+[3] [https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS)
 
-[4] [https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm](https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm)
+[4] [https://medium.com/node-security/minimatch-redos-vulnerability-590da24e6d3c](https://medium.com/node-security/minimatch-redos-vulnerability-590da24e6d3c)
 
-[5] [https://nvd.nist.gov/vuln/detail/CVE-1999-1476](https://nvd.nist.gov/vuln/detail/CVE-1999-1476)
+[5] [https://nvd.nist.gov/vuln/detail/cve-2019-11477](https://nvd.nist.gov/vuln/detail/cve-2019-11477)
 
-[6] [https://blog.cloudflare.com/18-november-2025-outage/](https://blog.cloudflare.com/18-november-2025-outage/)
+[6] [https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm](https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm)
 
-[7] [https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/](https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/)
+[7] [https://nvd.nist.gov/vuln/detail/CVE-1999-1476](https://nvd.nist.gov/vuln/detail/CVE-1999-1476)
 
-[8] [https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html](https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html)
+[8] [https://blog.cloudflare.com/18-november-2025-outage/](https://blog.cloudflare.com/18-november-2025-outage/)
 
-[9] [https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708](https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708)
+[9] [https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/](https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/)
 
-[10] [https://mathworld.wolfram.com/Googol.html](https://mathworld.wolfram.com/Googol.html)
+[10] [https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html](https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html)
 
-[11] [https://mathworld.wolfram.com/Googolplex.html](https://mathworld.wolfram.com/Googolplex.html)
+[11] [https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708](https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708)
 
-[12] [https://mathworld.wolfram.com/GrahamsNumber.html]
+[12] [https://mathworld.wolfram.com/Googol.html](https://mathworld.wolfram.com/Googol.html)
 
-[13] [https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html]
+[13] [https://mathworld.wolfram.com/Googolplex.html](https://mathworld.wolfram.com/Googolplex.html)
 
-[14] [https://web.mit.edu/arayo/www/bignums.html](https://web.mit.edu/arayo/www/bignums.html)
+[14] [https://mathworld.wolfram.com/GrahamsNumber.html]
 
-[15] [https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf](https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf)
+[15] [https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html]
 
-[16] [https://www.popularmechanics.com/science/math/a28725/number-tree3/](https://www.popularmechanics.com/science/math/a28725/number-tree3/)
+[16] [https://web.mit.edu/arayo/www/bignums.html](https://web.mit.edu/arayo/www/bignums.html)
+
+[17] [https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf](https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf)
+
+[18] [https://www.popularmechanics.com/science/math/a28725/number-tree3/](https://www.popularmechanics.com/science/math/a28725/number-tree3/)
