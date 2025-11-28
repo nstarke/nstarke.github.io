@@ -45,7 +45,7 @@ Enter TREE(3) [17]. TREE(3) is based on a paper from 1960, and a good summary ca
 
 First, the problem that TREE(3) is a result of is simple to describe using a set of instructions; there are only two or three rules involved in the problem and three or four variables altogether. These rules can be modeled with a computer as a software program. As such TREE(3) is computable - in theory at least. Like Graham’s number, there is no way to compute it in our physical reality - even if the entire universe consisted of nothing but Computronium composed of sub-atomic particles running and running for an indescribable multitude of eons longer than any scientifically reasonable anticipated life time of our universe, even with a googolplex margin of error. 
 
-Why is the computable nature of TREE(3) interesting? It can be modeled as a computer program easily. So let’s say someone having a really bad day writes a computer program to solve TREE(3) and runs it on our gram of Computronium. Now remember, our gram of Computronium has the automated ability to increase its computational resources by converting more surrounding regular matter to Computronium. 
+Why is the computable nature of TREE(3) interesting? It can be modeled as a computer program easily. So let’s say someone having a really bad day writes a computer program to solve TREE(3) and runs it on our gram of Computronium. Now remember, our gram of Computronium has the automated ability to increase its computational resources by converting more surrounding regular matter to Computronium to meet the resource needs of the currently running program. 
 
 ### Bringing it all Together (To End the World)
 
