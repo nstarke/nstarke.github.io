@@ -53,7 +53,7 @@ Now perhaps you see where this is going. In an effort to solve this problem, our
 
 Imagine the entire universe working to solve a single math problem. Even this might not be so bad, if it was a short lived computer program and sentient life was still somehow sufficiently preserved. However that would not be the case with TREE(3). The program calculating the result for TREE(3) would be running still at whatever end the universe has, still trying to calculate the result. 
 
-And it isn’t just compute processing resources that would be utilized; the TREE(3) problem involves creating a series of unique graphs that have the property that each new graph in the series does not contain as a subgraph any preceding graphs. In a practical computational implementation of TREE(3), there would be vast data storage requirements as each graph is created would need to be stored to be checked against new graphs in the series. All new graphs would need to query the existing data set of graphs to make sure the new graph does not contain any of the other graphs in the series.  
+And it isn’t just compute processing resources that would be utilized; the TREE(3) problem involves creating a series of unique graphs that have the property that each new graph in the series does not contain as a subgraph any preceding graphs. In a practical computational implementation of TREE(3), there would be vast data storage requirements as each graph that is created would need to be stored to be checked against new graphs in the series. All new graphs would need to query the existing data set of graphs to make sure the new graph does not contain any of the other graphs in the series.  
 
 ### Data and IO
 
