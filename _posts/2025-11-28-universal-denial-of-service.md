@@ -25,7 +25,7 @@ But what if the program we write requires more compute resources than are availa
 
 ### Denial of Service
 
-In computer security, a denial of service (DoS) condition occurs when legitimate users cannot access resources they need to fulfill a task due to the actions of another user. When these conditions are created purposefully, they are considered a Denial of Service attack. Usually these attacks are some form of resource exhaustion; whether it be network bandwidth as is common with botnets in a Distributed Denial of Service (DDoS) attack. In these types of attacks, large amounts of hijacked, network-connected computers target one specific network-connected computer or sub network and send as much unique traffic as they can to that location. The result is that the target becomes inaccessible for legitimate users of the target system. 
+In computer security, a denial of service (DoS) condition occurs when legitimate users cannot access resources they need to fulfill a task due to the actions of another user. When these conditions are created purposefully, they are considered a Denial of Service attack. Usually these attacks are some form of resource exhaustion; whether it be network bandwidth as is common with botnets [2] in a Distributed Denial of Service (DDoS) attack. In these types of attacks, large amounts of hijacked, network-connected computers target one specific network-connected computer or sub network and send as much unique traffic as they can to that location. The result is that the target becomes inaccessible for legitimate users of the target system. 
 
 A denial of service vulnerability is some type of computer hardware or software flaw that can be exploited to deny legitimate users access to needed resources. This can take many forms; severe examples are memory corruption vulnerabilities that do not result in arbitrary code execution , but do result in a process crashing. This is particularly severe when the vulnerability can be exploited over the network. Double that severity if there is no way for the operating system to restart the process from a good state. Double it again if the memory corruption vulnerability occurs in the operating system itself [2] resulting in the operating system panicking (I have personally discovered remotely exploitable kernel memory corruption vulnerabilities that resulted in the target host OS panicking and not being able to even reboot, so I know they do exist even though they are rare). 
 
@@ -231,30 +231,32 @@ if __name__ == "__main__":
 
 [1] [https://web.archive.org/web/20100420013420/http://singinst.org/upload/CFAI/info/glossary.html#gloss_computronium](https://web.archive.org/web/20100420013420/http://singinst.org/upload/CFAI/info/glossary.html#gloss_computronium)
 
-[2] [https://nvd.nist.gov/vuln/detail/cve-2019-11477](https://nvd.nist.gov/vuln/detail/cve-2019-11477)
+[2] [https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/](https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/)
 
-[3] [https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm](https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm)
+[3] [https://nvd.nist.gov/vuln/detail/cve-2019-11477](https://nvd.nist.gov/vuln/detail/cve-2019-11477)
 
-[4] [https://nvd.nist.gov/vuln/detail/CVE-1999-1476](https://nvd.nist.gov/vuln/detail/CVE-1999-1476)
+[4] [https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm](https://web.archive.org/web/20030803125206/http://support.intel.com/support/processors/pentium/ppiie/index.htm)
 
-[5] [https://blog.cloudflare.com/18-november-2025-outage/](https://blog.cloudflare.com/18-november-2025-outage/)
+[5] [https://nvd.nist.gov/vuln/detail/CVE-1999-1476](https://nvd.nist.gov/vuln/detail/CVE-1999-1476)
 
-[6] [https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/](https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/)
+[6] [https://blog.cloudflare.com/18-november-2025-outage/](https://blog.cloudflare.com/18-november-2025-outage/)
 
-[7] [https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html](https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html)
+[7] [https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/](https://arstechnica.com/gadgets/2025/10/a-single-point-of-failure-triggered-the-amazon-outage-affecting-millions/)
 
-[8] [https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708](https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708)
+[8] [https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html](https://www.cnbc.com/amp/2025/10/29/microsoft-hit-with-azure-365-outage-ahead-of-quarterly-earnings.html)
 
-[9] [https://mathworld.wolfram.com/Googol.html](https://mathworld.wolfram.com/Googol.html)
+[9] [https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708](https://www.newsweek.com/over-1000-users-report-facebook-outage-2083708)
 
-[10] [https://mathworld.wolfram.com/Googolplex.html](https://mathworld.wolfram.com/Googolplex.html)
+[10] [https://mathworld.wolfram.com/Googol.html](https://mathworld.wolfram.com/Googol.html)
 
-[11] [https://mathworld.wolfram.com/GrahamsNumber.html]
+[11] [https://mathworld.wolfram.com/Googolplex.html](https://mathworld.wolfram.com/Googolplex.html)
 
-[12] [https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html]
+[12] [https://mathworld.wolfram.com/GrahamsNumber.html]
 
-[13] [https://web.mit.edu/arayo/www/bignums.html](https://web.mit.edu/arayo/www/bignums.html)
+[13] [https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html]
 
-[14] [https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf](https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf)
+[14] [https://web.mit.edu/arayo/www/bignums.html](https://web.mit.edu/arayo/www/bignums.html)
 
-[15] [https://www.popularmechanics.com/science/math/a28725/number-tree3/](https://www.popularmechanics.com/science/math/a28725/number-tree3/)
+[15] [https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf](https://www.ams.org/journals/tran/1960-095-02/S0002-9947-1960-0111704-1/S0002-9947-1960-0111704-1.pdf)
+
+[16] [https://www.popularmechanics.com/science/math/a28725/number-tree3/](https://www.popularmechanics.com/science/math/a28725/number-tree3/)
