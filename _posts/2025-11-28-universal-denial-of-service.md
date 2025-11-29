@@ -249,10 +249,7 @@ if __name__ == "__main__":
     print(f"TREE({n}) = {result}")
 ```
 
-### JavaScript Implementation
-
-I also created a JavaScript implementation that is hosted [here](/tree3.js/)
-[1] [https://web.archive.org/web/20100420013420/http://singinst.org/upload/CFAI/info/glossary.html#gloss_computronium](https://web.archive.org/web/20100420013420/http://singinst.org/upload/CFAI/info/glossary.html#gloss_computronium)
+[1] [https://web.archive.org/web/20100420013420/http://singinst.org/upload/CFAI/info/glossary.html#gloss_computronium](https://web.archive.org//20100420013420/http://singinst.org/upload/CFAI/info/glossary.html#gloss_computronium)
 
 [2] [https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/](https://www.cloudflare.com/learning/ddos/glossary/mirai-botnet/)
 
