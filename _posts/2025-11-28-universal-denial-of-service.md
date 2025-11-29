@@ -85,7 +85,11 @@ from dataclasses import dataclass
 from functools import lru_cache
 from itertools import product
 from typing import Iterable, List, Tuple
+from concurrent.futures import ProcessPoolExecutor
+
 import sys
+
+_executor = ProcessPoolExecutor() 
 
 # ---------------------------------------------------------------------
 # Tree definition
@@ -189,7 +193,18 @@ def compositions(total: int) -> Iterable[Tuple[int, ...]]:
 # ---------------------------------------------------------------------
 
 def is_valid_extension(seq: List[Tree], t: Tree) -> bool:
-    return all(not embeds(prev, t) for prev in seq)
+    if not seq:
+        return True
+
+    futures = [
+        _executor.submit(embeds, prev, t)
+        for prev in seq
+    ]
+
+    for f in futures:
+        if f.result():
+            return False
+    return True
 
 
 def TREE(n: int) -> int:
