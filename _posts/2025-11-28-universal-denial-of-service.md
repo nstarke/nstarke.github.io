@@ -275,9 +275,9 @@ if __name__ == "__main__":
 
 [13] [https://mathworld.wolfram.com/Googolplex.html](https://mathworld.wolfram.com/Googolplex.html)
 
-[14] [https://mathworld.wolfram.com/GrahamsNumber.html]
+[14] [https://mathworld.wolfram.com/GrahamsNumber.html](https://mathworld.wolfram.com/GrahamsNumber.html)
 
-[15] [https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html]
+[15] [https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html](https://isu.indstate.edu/~gexoo/GEOMETRY/cubes.html)
 
 [16] [https://web.mit.edu/arayo/www/bignums.html](https://web.mit.edu/arayo/www/bignums.html)
 
